@@ -1,15 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import PersonIcon from "@mui/icons-material/Person";
-import CodeIcon from "@mui/icons-material/Code";
-import StorageIcon from "@mui/icons-material/Storage";
-import SpeedIcon from "@mui/icons-material/Speed";
-import SecurityIcon from "@mui/icons-material/Security";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LifeJourneyTimeline from "../components/ReactBits/LifeJourneyTimeline";
-import { stats } from "../content/page";
+import { STATS, FOCUS_AREAS, PERSONAL_INFO } from "../constants";
+import { SectionHeader, AmbientBackground, StatCard } from "../components/common";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 25 },
@@ -24,57 +21,22 @@ const cardVariants = {
   },
 };
 
-const FOCUS_AREAS = [
-  {
-    icon: <CodeIcon className="text-blue-400" />,
-    title: "Full-Stack Development",
-    desc: "Architecting responsive, high-performance web applications using React.js, Next.js, and modern CSS systems.",
-  },
-  {
-    icon: <StorageIcon className="text-emerald-400" />,
-    title: "Database Modeling",
-    desc: "Designing scalable MongoDB collections, PostgreSQL schemas, indexing strategies, and aggregation pipelines.",
-  },
-  {
-    icon: <SpeedIcon className="text-amber-400" />,
-    title: "REST API Microservices",
-    desc: "Engineering Node.js and Express servers with JWT authentication, role-based access, and rate limiting.",
-  },
-  {
-    icon: <SecurityIcon className="text-purple-400" />,
-    title: "Web Security & Auditing",
-    desc: "Implementing Helmet security headers, Nodemailer webhooks, input sanitization, and automated threat tests.",
-  },
-];
-
 function About() {
   return (
     <section className="relative bg-primary text-primary min-h-screen pt-28 sm:pt-36 pb-20 px-6 sm:px-12 lg:px-8 overflow-hidden">
       {/* Background Radial Orbs */}
-      <div className="absolute top-[12%] left-[-15%] w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-full bg-highlight/5 blur-[120px] pointer-events-none" />
-      <div className="absolute top-[45%] right-[-15%] w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full bg-purple-500/5 blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[-10%] w-[300px] h-[300px] rounded-full bg-emerald-500/5 blur-[100px] pointer-events-none" />
+      <AmbientBackground />
 
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center text-center mb-14"
-        >
-          <div className="p-3 rounded-2xl bg-highlight/10 border border-highlight/20 mb-3.5 shadow-md">
-            <PersonIcon className="text-highlight" sx={{ fontSize: 32 }} />
-          </div>
-          <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none mb-3">
-            Full-Stack Engineer Profile
-          </span>
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight">
-            About <span className="text-highlight font-extrabold">Myself</span>
-          </h1>
-          <div className="h-1 w-16 bg-highlight rounded-full mt-4 shadow-md shadow-highlight/45" />
-        </motion.div>
+        <SectionHeader
+          as="h1"
+          icon={<PersonIcon sx={{ fontSize: 32 }} />}
+          badge="Full-Stack Engineer Profile"
+          title="About"
+          highlight="Myself"
+        />
 
         {/* Biography & Quick Metrics Card */}
         <motion.div
@@ -86,37 +48,17 @@ function About() {
           <div className="flex flex-col lg:flex-row items-start justify-between gap-10">
             <div className="flex-1 space-y-6 text-third leading-relaxed text-base md:text-lg">
               <h2 className="text-3xl font-extrabold text-primary tracking-tight">
-                Hi, I'm <span className="text-highlight">Utsav Vachhani</span> 👋
+                {PERSONAL_INFO.bioGreeting}
               </h2>
 
-              <p>
-                I am an ambitious{" "}
-                <span className="text-highlight font-bold bg-highlight/15 px-2.5 py-0.5 rounded-lg">
-                  Full-Stack Developer (MERN)
-                </span>{" "}
-                and an IT undergraduate student at{" "}
-                <span className="text-primary font-bold">
-                  Sarvajanik College of Engineering & Technology (SCET), Surat
-                </span>
-                .
-              </p>
-
-              <p>
-                My engineering expertise spans the entire development lifecycle, with a heavy emphasis on building scalable, real-time web products utilizing the{" "}
-                <span className="text-primary font-semibold underline decoration-highlight/40 decoration-2 underline-offset-4">
-                  MERN stack
-                </span>{" "}
-                (MongoDB, Express.js, React.js, Node.js). I thrive on creating clean, intuitive user interfaces and highly performant backend microservices.
-              </p>
-
-              <p>
-                What started as simple web experiments has grown into a dedicated software engineering career. I'm continuously expanding my technical knowledge, optimizing production bottlenecks, and building high-impact web products.
-              </p>
+              {PERSONAL_INFO.bioParagraphs.map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
 
               {/* Action Buttons using dedicated button design tokens */}
               <div className="flex flex-wrap items-center gap-3 pt-4">
                 <a
-                  href="https://drive.google.com/file/d/1zGjqP97eWmsi4EpYrL9FZXMl4KveP65P/view?usp=drive_link"
+                  href={PERSONAL_INFO.cvLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary px-6 py-3 rounded-xl font-bold text-xs shadow-md flex items-center gap-2"
@@ -125,7 +67,7 @@ function About() {
                   <span>Download / View CV</span>
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/vachhani-utsav-21ut75/"
+                  href={PERSONAL_INFO.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-secondary px-6 py-3 rounded-xl font-bold text-xs border border-divider/10 flex items-center gap-2 shadow-sm"
@@ -134,7 +76,7 @@ function About() {
                   <span>LinkedIn Profile</span>
                 </a>
                 <a
-                  href="https://github.com/utsavvachhani"
+                  href={PERSONAL_INFO.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-secondary px-6 py-3 rounded-xl font-bold text-xs border border-divider/10 flex items-center gap-2 shadow-sm"
@@ -148,19 +90,13 @@ function About() {
 
           {/* Quick Metrics Banner */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-10 border-t border-divider/10">
-            {stats.map((stat, i) => (
-              <motion.div
+            {STATS.map((stat, i) => (
+              <StatCard
                 key={i}
-                whileHover={{ y: -4 }}
-                className="p-5 rounded-2xl bg-secondary/40 hover:bg-secondary/70 transition-all duration-300 text-center shadow-sm"
-              >
-                <div className="text-2xl md:text-3xl font-black text-highlight mb-1 tracking-tight">
-                  {stat.value}
-                </div>
-                <div className="text-xs text-third font-medium tracking-wider uppercase">
-                  {stat.label}
-                </div>
-              </motion.div>
+                value={stat.value}
+                label={stat.label}
+                delay={i * 0.08}
+              />
             ))}
           </div>
         </motion.div>
@@ -173,14 +109,11 @@ function About() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <div className="text-center mb-10">
-            <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none">
-              Core Competencies
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-primary mt-3">
-              Technical <span className="text-highlight">Focus Areas</span>
-            </h2>
-          </div>
+          <SectionHeader
+            badge="Core Competencies"
+            title="Technical"
+            highlight="Focus Areas"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {FOCUS_AREAS.map((item, idx) => (
@@ -213,15 +146,11 @@ function About() {
           transition={{ duration: 0.6 }}
           className="relative"
         >
-          <div className="flex flex-col items-center text-center mb-10">
-            <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none">
-              Academic & Professional Milestone
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-primary mt-3 tracking-tight">
-              Life Journey <span className="text-highlight">Timeline</span>
-            </h2>
-            <div className="h-1 w-16 bg-highlight rounded-full mt-3 shadow-md shadow-highlight/45" />
-          </div>
+          <SectionHeader
+            badge="Academic & Professional Milestones"
+            title="Life Journey"
+            highlight="Timeline"
+          />
 
           <LifeJourneyTimeline />
         </motion.div>

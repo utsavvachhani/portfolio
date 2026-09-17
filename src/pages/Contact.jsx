@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { socialLinks } from "../content/page";
+import { SOCIAL_LINKS, PERSONAL_INFO } from "../constants";
+import { SectionHeader, AmbientBackground } from "../components/common";
 import EmailIcon from "@mui/icons-material/Email";
 import SendIcon from "@mui/icons-material/Send";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -11,9 +12,9 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 const cardVariants = {
@@ -24,9 +25,9 @@ const cardVariants = {
     transition: {
       type: "spring",
       stiffness: 100,
-      damping: 15
-    }
-  }
+      damping: 15,
+    },
+  },
 };
 
 function Contact() {
@@ -35,7 +36,7 @@ function Contact() {
   const handleCopyEmail = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    navigator.clipboard.writeText("vachhaniutsav2@gmail.com");
+    navigator.clipboard.writeText(PERSONAL_INFO.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
@@ -44,28 +45,19 @@ function Contact() {
     <section className="relative bg-primary text-primary min-h-screen pt-28 sm:pt-36 pb-20 px-6 sm:px-12 lg:px-8 overflow-hidden">
       
       {/* Background Ambient Glowing Nodes */}
-      <div className="absolute top-[10%] left-[-15%] w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-full bg-highlight/5 blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[10%] right-[-10%] w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full bg-purple-500/5 blur-[110px] pointer-events-none"></div>
+      <AmbientBackground />
 
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Animated Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center text-center mb-14"
-        >
-          <div className="p-3 rounded-2xl bg-highlight/10 border border-highlight/20 mb-3.5 shadow-md">
-            <SendIcon className="text-highlight" sx={{ fontSize: 32 }} />
-          </div>
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight">
-            Let's <span className="text-highlight font-extrabold">Connect</span>
-          </h1>
-          <p className="text-third text-sm md:text-base mt-4 max-w-xl leading-relaxed">
-            Have a project in mind, looking for a developer, or just want to chat about code? Feel free to drop a message or connect via social networks!
-          </p>
-        </motion.div>
+        <SectionHeader
+          as="h1"
+          icon={<SendIcon sx={{ fontSize: 32 }} />}
+          badge="Direct Outreach"
+          title="Let's"
+          highlight="Connect"
+          subtitle="Have a project in mind, looking for a developer, or just want to chat about code? Feel free to drop a message or connect via social networks!"
+        />
 
         {/* Primary Email Glass Card */}
         <motion.div
@@ -82,11 +74,11 @@ function Contact() {
             </div>
 
             <p className="text-xl font-black text-primary tracking-wide mb-1">Direct Email</p>
-            <p className="text-sm text-third font-mono font-semibold select-all mb-6">vachhaniutsav2@gmail.com</p>
+            <p className="text-sm text-third font-mono font-semibold select-all mb-6">{PERSONAL_INFO.email}</p>
 
             <div className="flex items-center justify-center gap-3">
               <a
-                href="mailto:vachhaniutsav2@gmail.com?subject=Hello%20Utsav,%20I%20just%20Wanted%20to%20Connect&body=I%20wanted%20to%20connect%20with%20you!"
+                href={`mailto:${PERSONAL_INFO.email}?subject=Hello%20Utsav,%20I%20just%20Wanted%20to%20Connect&body=I%20wanted%20to%20connect%20with%20you!`}
                 className="btn-primary px-5 py-2.5 rounded-xl font-black text-xs shadow-md flex items-center gap-2"
               >
                 <span>Send Email</span>
@@ -115,15 +107,11 @@ function Contact() {
         </motion.div>
 
         {/* Social Cards Section Header */}
-        <div className="flex flex-col items-center text-center mb-10">
-          <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none">
-            Online Presence
-          </span>
-          <h2 className="text-2xl md:text-3xl font-bold text-primary mt-3">
-            Social Networks
-          </h2>
-          <div className="h-1 w-16 bg-highlight rounded-full mt-3 shadow-md shadow-highlight/45"></div>
-        </div>
+        <SectionHeader
+          badge="Online Presence"
+          title="Social"
+          highlight="Networks"
+        />
 
         {/* Social Cards Stagger Grid */}
         <motion.div 
@@ -132,7 +120,7 @@ function Contact() {
           animate="visible"
           className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-4xl mx-auto"
         >
-          {socialLinks.map(({ href, icon, label, textColor }, index) => (
+          {SOCIAL_LINKS.map(({ href, icon, label, textColor }, index) => (
             <motion.a
               key={index}
               variants={cardVariants}

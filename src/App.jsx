@@ -7,10 +7,12 @@ import Project from './pages/Project.jsx';
 import Contact from './pages/Contact.jsx';
 import Skills from './pages/Skills.jsx';
 import LiveChatWidget from './components/LiveChat/LiveChatWidget.jsx';
+import { ScrollToTop } from './components/common';
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AppBar />
       <Routes>
         <Route path="/" element={<Home />} />

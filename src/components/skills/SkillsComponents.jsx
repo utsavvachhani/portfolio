@@ -31,7 +31,7 @@ function SkillsComponents({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Filter skills (e.g. React, MongoDB, JWT, Git)..."
-          className="w-full pl-12 pr-4 py-3 rounded-2xl bg-secondary/30 text-primary text-xs border border-divider/15 focus:border-highlight focus:outline-none transition-colors backdrop-blur-xl shadow-md"
+          className="w-full pl-12 pr-4 py-3 rounded-2xl text-xs transition-all shadow-md backdrop-blur-xl"
         />
         {searchQuery && (
           <button

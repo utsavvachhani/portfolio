@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { projects, projectCategories } from "../../content/page.jsx";
+import { PROJECTS, PROJECT_CATEGORIES } from "../../constants";
+import { SectionHeader } from "../common";
 import SearchIcon from "@mui/icons-material/Search";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
@@ -18,7 +19,7 @@ const FeaturedProjects = ({ limit = 6 }) => {
 
   // Filter projects dynamically linked with projectCategories and techStack array
   const filteredProjects = useMemo(() => {
-    return projects.filter((project) => {
+    return PROJECTS.filter((project) => {
       const query = searchQuery.toLowerCase().trim();
       const matchesSearch =
         !query ||
@@ -78,45 +79,23 @@ const FeaturedProjects = ({ limit = 6 }) => {
   }, [filteredProjects, limit]);
 
   return (
-    <section id="featured-projects" className="relative z-10 pt-28 md:pt-36 pb-20 px-6 sm:px-12 lg:px-8 bg-primary border-t border-divider/5">
+    <section id="featured-projects" className="relative z-10 pt-24 md:pt-32 pb-20 px-6 sm:px-12 lg:px-8 bg-primary border-t border-divider/10">
       <div className="max-w-7xl mx-auto">
         
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-xs uppercase tracking-widest text-highlight font-black px-4 py-1.5 rounded-full bg-highlight/10 border border-highlight/20 select-none inline-block mb-3"
-          >
-            Software Showcase
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-black text-primary tracking-tight mb-4"
-          >
-            Featured Engineering <span className="text-highlight">Projects</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-third text-sm sm:text-base max-w-2xl mx-auto leading-relaxed"
-          >
-            Explore full-stack MERN applications, security systems, RESTful microservices, and client UI dashboards built by Utsav Vachhani.
-          </motion.p>
-        </div>
+        {/* Reusable Section Header Sub-Component */}
+        <SectionHeader
+          badge="Software Showcase"
+          title="Featured Engineering"
+          highlight="Projects"
+          subtitle="Explore full-stack MERN applications, security systems, RESTful microservices, and client UI dashboards built by Utsav Vachhani."
+        />
 
         {/* Clean Borderless Glass Filter & Search Bar */}
-        <div className="mb-10 flex flex-col md:flex-row items-center justify-between gap-6 bg-secondary/40 backdrop-blur-2xl p-4 sm:p-5 rounded-3xl border border-white/5 shadow-[0_15px_40px_rgba(0,0,0,0.35)]">
+        <div className="mb-10 flex flex-col md:flex-row items-center justify-between gap-6 bg-secondary/40 backdrop-blur-2xl p-4 sm:p-5 rounded-3xl border border-divider/10 shadow-[0_15px_40px_rgba(0,0,0,0.35)]">
           
           {/* Category Filter Pills */}
           <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-            {projectCategories.map((cat) => {
+            {PROJECT_CATEGORIES.map((cat) => {
               const isActive = selectedCategory === cat.id;
 
               return (
@@ -143,7 +122,7 @@ const FeaturedProjects = ({ limit = 6 }) => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search stack or title..."
-              className="w-full pl-10 pr-8 py-2.5 rounded-xl bg-primary/70 text-primary text-xs border border-white/5 focus:border-highlight/50 focus:outline-none transition-colors shadow-inner"
+              className="w-full pl-10 pr-8 py-2.5 rounded-xl text-xs transition-all shadow-inner"
             />
             {searchQuery && (
               <button
@@ -159,7 +138,7 @@ const FeaturedProjects = ({ limit = 6 }) => {
         {/* Project Results Count Indicator */}
         <div className="mb-6 flex items-center justify-between text-xs text-third font-medium px-2">
           <span>
-            Showing <strong className="text-highlight font-black">{displayedProjects.length}</strong> of <strong className="text-primary font-bold">{projects.length}</strong> project{projects.length === 1 ? "" : "s"}
+            Showing <strong className="text-highlight font-black">{displayedProjects.length}</strong> of <strong className="text-primary font-bold">{PROJECTS.length}</strong> project{PROJECTS.length === 1 ? "" : "s"}
           </span>
           <span className="flex items-center gap-1">
             <FilterListIcon sx={{ fontSize: 14 }} className="text-highlight" />
@@ -183,7 +162,7 @@ const FeaturedProjects = ({ limit = 6 }) => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35, delay: index * 0.05 }}
-                  className="group glass-card rounded-3xl overflow-hidden hover-lift flex flex-col justify-between border border-white/5 hover:border-highlight/30 transition-all duration-300 shadow-xl relative"
+                  className="group glass-card rounded-3xl overflow-hidden hover-lift flex flex-col justify-between border border-divider/10 hover:border-highlight/30 transition-all duration-300 shadow-xl relative"
                 >
                   {/* Top Image Banner */}
                   <div className="relative overflow-hidden h-52 bg-black/40">
@@ -285,7 +264,7 @@ const FeaturedProjects = ({ limit = 6 }) => {
                       </div>
                     )}
 
-                    {/* Action Links - Dynamic 4-state validation */}
+                    {/* Action Links */}
                     {(hasRepo || hasLive) && (
                       <div className="flex items-center gap-3 pt-3 border-t border-divider/10 mt-auto">
                         {hasRepo && (
@@ -328,7 +307,7 @@ const FeaturedProjects = ({ limit = 6 }) => {
 
         {/* Empty Search State */}
         {filteredProjects.length === 0 && (
-          <div className="text-center py-16 bg-secondary/20 rounded-3xl border border-white/5">
+          <div className="text-center py-16 bg-secondary/20 rounded-3xl border border-divider/10">
             <p className="text-third text-sm">No projects matching your current search or category filter.</p>
             <button
               onClick={() => {
@@ -342,7 +321,7 @@ const FeaturedProjects = ({ limit = 6 }) => {
           </div>
         )}
 
-        {/* "Explore All Projects" CTA Button for Home Page */}
+        {/* "Explore All Projects" CTA Button */}
         {limit && filteredProjects.length > limit && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -354,7 +333,7 @@ const FeaturedProjects = ({ limit = 6 }) => {
               to="/projects"
               className="btn-primary inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl font-black text-sm shadow-xl hover:scale-105 transition-all duration-300 group"
             >
-              <span>Explore All ({projects.length}) Repositories & Demos</span>
+              <span>Explore All ({PROJECTS.length}) Repositories & Demos</span>
               <ArrowForwardIcon sx={{ fontSize: 18 }} className="group-hover:translate-x-1.5 transition-transform duration-300" />
             </Link>
           </motion.div>

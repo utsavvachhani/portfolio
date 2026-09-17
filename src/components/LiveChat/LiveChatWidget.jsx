@@ -5,23 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import PersonIcon from "@mui/icons-material/Person";
-
-const QUICK_OPTIONS = [
-  { id: "projects", label: "💻 Featured Projects" },
-  { id: "about", label: "👤 About Utsav" },
-  { id: "skills", label: "🛠️ Technical Skills" },
-  { id: "contact", label: "📬 Contact & Resume" },
-];
-
-const INITIAL_MESSAGES = [
-  {
-    id: 1,
-    sender: "bot",
-    text: "👋 Hi there! Welcome to Utsav Vachhani's Portfolio Assistant.\nHow can I help you today? Select an option below or type a message!",
-    time: "Just now",
-    options: QUICK_OPTIONS,
-  },
-];
+import { INITIAL_MESSAGES, getBotResponse, PERSONAL_INFO } from "../../constants";
 
 const LiveChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,39 +41,7 @@ const LiveChatWidget = () => {
     setIsTyping(true);
 
     setTimeout(() => {
-      const lower = userText.toLowerCase();
-      let botText = "";
-      let followUpOptions = QUICK_OPTIONS;
-
-      if (lower.includes("hi") || lower.includes("hello") || lower.includes("hey")) {
-        botText = "Hello! 👋 Great to meet you! I can help you learn more about Utsav's engineering projects, MERN stack skills, or contact info. What would you like to explore?";
-      } else if (lower.includes("project") || lower.includes("work") || lower.includes("repo") || lower.includes("converse") || lower.includes("cybershield")) {
-        botText = "🚀 Utsav has built flagship full-stack products:\n• Converse2K25: MERN college fest registration platform\n• Cyber Shield: Email awareness & threat analytics system\n• WhatsApp Automation Tool: Node.js & WebSockets service\n• Finance Dashboard: React & Framer Motion telemetry UI";
-        followUpOptions = [
-          { id: "skills", label: "🛠️ View Tech Stack" },
-          { id: "contact", label: "📬 Contact Utsav" },
-        ];
-      } else if (lower.includes("about") || lower.includes("who") || lower.includes("background") || lower.includes("education")) {
-        botText = "👤 Utsav Vachhani is a Full-Stack MERN Developer and IT Undergraduate student at Sarvajanik College of Engineering & Technology (SCET), Surat. He specializes in building scalable backend REST APIs, MongoDB schemas, and responsive React/Next.js interfaces.";
-        followUpOptions = [
-          { id: "projects", label: "💻 View Projects" },
-          { id: "skills", label: "🛠️ Technical Skills" },
-        ];
-      } else if (lower.includes("skill") || lower.includes("mern") || lower.includes("stack") || lower.includes("react") || lower.includes("node")) {
-        botText = "🛠️ Utsav's Technical Core:\n• Frontend: React.js, Next.js, JavaScript (ES6+), Tailwind CSS, Material UI\n• Backend: Node.js, Express.js, JWT, bcrypt, RESTful APIs\n• Databases: MongoDB, Mongoose ORM, PostgreSQL\n• Tools & Cloud: Git, GitHub, Firebase, Vercel";
-        followUpOptions = [
-          { id: "projects", label: "💻 View Projects" },
-          { id: "contact", label: "📬 Get in Touch" },
-        ];
-      } else if (lower.includes("contact") || lower.includes("hire") || lower.includes("email") || lower.includes("linkedin") || lower.includes("resume") || lower.includes("cv")) {
-        botText = "📬 You can get in touch with Utsav directly:\n• LinkedIn: linkedin.com/in/vachhani-utsav-21ut75\n• GitHub: github.com/utsavvachhani\n• Email: Leave your message or contact email right here!";
-        followUpOptions = [
-          { id: "about", label: "👤 About Utsav" },
-          { id: "projects", label: "💻 View Projects" },
-        ];
-      } else {
-        botText = "Thanks for your message! Utsav is open for software engineering internships and full-stack projects. Feel free to leave your contact details or choose an option below:";
-      }
+      const { botText, followUpOptions } = getBotResponse(userText);
 
       const botMsg = {
         id: Date.now() + 1,
@@ -101,7 +53,7 @@ const LiveChatWidget = () => {
 
       setMessages((prev) => [...prev, botMsg]);
       setIsTyping(false);
-    }, 800);
+    }, 700);
   };
 
   const handleOptionClick = (option) => {
@@ -126,7 +78,7 @@ const LiveChatWidget = () => {
             exit={{ opacity: 0, scale: 0.8, y: 10 }}
             className="mb-2 bg-secondary/95 text-primary text-xs font-extrabold px-3.5 py-2 rounded-2xl border border-divider/10 shadow-xl pointer-events-auto flex items-center gap-2"
           >
-            <span>💬 Ask Utsav AI Anything!</span>
+            <span>💬 Ask {PERSONAL_INFO.name.split(" ")[0]} AI Anything!</span>
             <button
               onClick={() => setShowTooltip(false)}
               className="text-third hover:text-primary text-[10px] ml-1 cursor-pointer"
@@ -158,7 +110,7 @@ const LiveChatWidget = () => {
                 </div>
                 <div>
                   <h3 className="text-sm font-black text-primary tracking-wide">
-                    Utsav AI Assistant
+                    {PERSONAL_INFO.name.split(" ")[0]} AI Assistant
                   </h3>
                   <span className="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider block">
                     Online • Interactive Assistant
@@ -269,7 +221,7 @@ const LiveChatWidget = () => {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Ask a question or select an option..."
-                className="flex-1 px-3.5 py-2.5 rounded-xl bg-secondary/70 text-primary text-xs border border-divider/10 focus:border-highlight focus:outline-none transition-colors"
+                className="flex-1 px-3.5 py-2.5 rounded-xl text-xs transition-all"
               />
               <button
                 type="submit"
