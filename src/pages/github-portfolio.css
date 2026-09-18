@@ -1249,6 +1249,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 5px;
+  padding-top: 10px;
 }
 
 .gh-live-stats strong {
@@ -1376,7 +1377,8 @@
 .gh-repo-count {
   color: #7f90a2;
   font-size: 10px;
-  margin: 13px 0 8px;
+  margin: 16px 0 8px;
+  padding-top: 10px;
 }
 
 .gh-repo {

@@ -143,16 +143,6 @@ export const PROJECTS = [
     ],
   },
   {
-    id: "react-js-study",
-    title: "React JS Architecture Lab",
-    repo: "https://github.com/utsavvachhani/react-js-study",
-    live: "",
-    description:
-      "Comprehensive React.js deep-dive repository showcasing custom hooks, Context API, state patterns, and optimizations.",
-    image: ReactJSStudt,
-    techStack: ["React.js", "Context API", "React Hooks", "CSS Modules"],
-  },
-  {
     id: "software-engineering",
     title: "URKJ Fitness House (Gym Management)",
     repo: "https://github.com/utsavvachhani/Software-Engineering",
@@ -162,46 +152,16 @@ export const PROJECTS = [
     image: SoftwareEngineering,
     techStack: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL"],
   },
-  {
-    id: "js-study",
-    title: "Modern JavaScript Algorithms",
-    repo: "https://github.com/utsavvachhani/js-studey",
-    live: "",
-    description:
-      "In-depth collection of JavaScript practice routines, ES6+ features, algorithmic solutions, and DOM manipulations.",
-    image: JSLOGO,
-    techStack: [
-      "JavaScript (ES6+)",
-      "Algorithms",
-      "DOM Operations",
-      "Interactive UI",
-    ],
-  },
-  {
-    id: "wt-lab",
-    title: "Web Technologies Lab Suite",
-    repo: "https://github.com/utsavvachhani/WT_Lab",
-    live: "https://utsavvachhani.github.io/WT_Lab/",
-    description:
-      "Academic lab suite covering client-server architectures, XML schema validation, and responsive frontends.",
-    image: WT_LAB,
-    techStack: ["HTML5", "CSS3", "JavaScript", "XML Schemas", "Java Servlets"],
-  },
-  {
-    id: "linked-list",
-    title: "Data Structures - Linked List in C",
-    repo: "https://github.com/utsavvachhani/LinkedList_uv",
-    live: "",
-    description:
-      "Comprehensive implementation of singly and doubly linked lists in C with dynamic memory management algorithms.",
-    image: linkedlist,
-    techStack: [
-      "C Programming",
-      "Pointers",
-      "Data Structures",
-      "Memory Management",
-    ],
-  },
+  // {
+  //   id: "wt-lab",
+  //   title: "Web Technologies Lab Suite",
+  //   repo: "https://github.com/utsavvachhani/WT_Lab",
+  //   live: "https://utsavvachhani.github.io/WT_Lab/",
+  //   description:
+  //     "Academic lab suite covering client-server architectures, XML schema validation, and responsive frontends.",
+  //   image: WT_LAB,
+  //   techStack: ["HTML5", "CSS3", "JavaScript", "XML Schemas", "Java Servlets"],
+  // },
   {
     id: "codsoft-portfolio",
     title: "CodSoft Portfolio Showcase",
@@ -218,20 +178,20 @@ export const PROJECTS = [
       "Micro-Animations",
     ],
   },
-  {
-    id: "codsoft-landing",
-    title: "CodSoft Landing Page",
-    repo: "https://github.com/utsavvachhani/CODSOFT_LANDING-PAGE",
-    live: "https://utsavvachhani.github.io/CODSOFT_LANDING-PAGE/",
-    description:
-      "High-converting modern product landing page built with semantic HTML5, Flexbox, and CSS Grid layouts.",
-    image: landingC,
-    techStack: [
-      "HTML5",
-      "CSS3",
-      "Flexbox Grid",
-      "Transitions",
-      "Interactive Elements",
-    ],
-  },
+  // {
+  //   id: "codsoft-landing",
+  //   title: "CodSoft Landing Page",
+  //   repo: "https://github.com/utsavvachhani/CODSOFT_LANDING-PAGE",
+  //   live: "https://utsavvachhani.github.io/CODSOFT_LANDING-PAGE/",
+  //   description:
+  //     "High-converting modern product landing page built with semantic HTML5, Flexbox, and CSS Grid layouts.",
+  //   image: landingC,
+  //   techStack: [
+  //     "HTML5",
+  //     "CSS3",
+  //     "Flexbox Grid",
+  //     "Transitions",
+  //     "Interactive Elements",
+  //   ],
+  // },
 ];
