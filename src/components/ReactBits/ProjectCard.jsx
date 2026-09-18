@@ -27,7 +27,8 @@ const ProjectCard = ({
       <div className="relative overflow-hidden h-52 bg-black/40">
         <img
           src={
-            image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80"
+            image ||
+            "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80"
           }
           alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"

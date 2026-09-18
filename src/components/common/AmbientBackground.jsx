@@ -2,7 +2,10 @@ import React from "react";
 
 export const AmbientBackground = ({ variant = "default" }) => {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+    <div
+      className="absolute inset-0 overflow-hidden pointer-events-none z-0"
+      aria-hidden="true"
+    >
       {/* Top Left Radial Glow */}
       <div className="absolute top-[8%] left-[-12%] w-[320px] h-[320px] md:w-[480px] md:h-[480px] rounded-full bg-highlight/5 blur-[120px] pointer-events-none" />
 

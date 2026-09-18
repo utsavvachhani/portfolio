@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import uvPhoto from "../../assets/uvPhoto.jpg";
+import uvPhoto from "../../assets/optimized/uvPhoto.webp";
 import CircularText from "../ReactBits/CircularText.jsx";
 import GradientText from "../ReactBits/GradientText.jsx";
 import Hero3DCanvas from "./Hero3DCanvas.jsx";
@@ -47,7 +47,6 @@ function HeroComp() {
 
       {/* Hero Content Overlay */}
       <div className="max-w-7xl w-full mx-auto px-6 sm:px-12 lg:px-8 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 items-center gap-12 relative z-10 pointer-events-none">
-        
         {/* Left Side: Developer Hook & Actions */}
         <motion.div
           initial={{ opacity: 0, x: -35 }}
@@ -77,11 +76,17 @@ function HeroComp() {
           </div>
 
           <p className="mt-1 text-xl sm:text-2xl font-extrabold text-primary">
-            Full Stack Developer <span className="text-highlight font-black">(MERN)</span>
+            Full Stack Developer{" "}
+            <span className="text-highlight font-black">(MERN)</span>
           </p>
 
           <p className="text-sm sm:text-base text-third mt-4 leading-relaxed max-w-xl">
-            IT Undergraduate at <span className="text-primary font-bold">{PERSONAL_INFO.college}</span>. I build scalable full-stack web applications, REST API servers, database architectures, and responsive 3D web interfaces.
+            IT Undergraduate at{" "}
+            <span className="text-primary font-bold">
+              {PERSONAL_INFO.college}
+            </span>
+            . I build scalable full-stack web applications, REST API servers,
+            database architectures, and responsive 3D web interfaces.
           </p>
 
           {/* Core Tech Stack Chips with Interactive Glow */}
@@ -123,7 +128,6 @@ function HeroComp() {
         >
           <ProfileAvatar />
         </motion.div>
-
       </div>
     </section>
   );

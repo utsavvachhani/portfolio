@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { NAV_PAGES, SOCIAL_LINKS, PERSONAL_INFO } from "../../constants";
-import uvPhoto from "../../assets/uvPhoto.jpg";
+import uvPhoto from "../../assets/optimized/uvPhoto.webp";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import EmailIcon from "@mui/icons-material/Email";
@@ -28,7 +28,10 @@ function AppFooter() {
                 />
               </div>
               <div>
-                <Typography variant="h6" className="font-black text-primary text-lg sm:text-xl tracking-tight mb-1">
+                <Typography
+                  variant="h6"
+                  className="font-black text-primary text-lg sm:text-xl tracking-tight mb-1"
+                >
                   {PERSONAL_INFO.name}
                 </Typography>
                 <div className="flex flex-col space-y-1.5 mt-2">
@@ -45,7 +48,10 @@ function AppFooter() {
 
           {/* Quick Links */}
           <div className="flex flex-col items-center md:items-start">
-            <Typography variant="h6" className="font-extrabold text-primary text-base tracking-wider uppercase mb-5">
+            <Typography
+              variant="h6"
+              className="font-extrabold text-primary text-base tracking-wider uppercase mb-5"
+            >
               Quick Links
             </Typography>
             <div className="grid grid-cols-2 gap-x-6 gap-y-3.5 w-full max-w-[280px] md:max-w-none justify-items-center md:justify-items-start">
@@ -66,14 +72,20 @@ function AppFooter() {
 
           {/* Contact & Social */}
           <div className="flex flex-col items-center md:items-start">
-            <Typography variant="h6" className="font-extrabold text-primary text-base tracking-wider uppercase mb-5">
+            <Typography
+              variant="h6"
+              className="font-extrabold text-primary text-base tracking-wider uppercase mb-5"
+            >
               Get in Touch
             </Typography>
 
             {/* Contact Info */}
             <div className="space-y-3.5 mb-5 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start space-x-2.5 group">
-                <LocalPhoneIcon className="text-highlight group-hover:scale-110 transition-transform" sx={{ fontSize: 18 }} />
+                <LocalPhoneIcon
+                  className="text-highlight group-hover:scale-110 transition-transform"
+                  sx={{ fontSize: 18 }}
+                />
                 <a
                   href={`tel:${PERSONAL_INFO.phone}`}
                   className="text-sm text-third hover:text-highlight transition-colors duration-300 font-semibold"
@@ -82,7 +94,10 @@ function AppFooter() {
                 </a>
               </div>
               <div className="flex items-center justify-center md:justify-start space-x-2.5 group">
-                <EmailIcon className="text-highlight group-hover:scale-110 transition-transform" sx={{ fontSize: 18 }} />
+                <EmailIcon
+                  className="text-highlight group-hover:scale-110 transition-transform"
+                  sx={{ fontSize: 18 }}
+                />
                 <a
                   href={`mailto:${PERSONAL_INFO.email}`}
                   className="text-sm text-third hover:text-highlight transition-colors duration-300 font-semibold break-all"
@@ -103,7 +118,9 @@ function AppFooter() {
                   title={label}
                   className="group p-2.5 rounded-xl text-third bg-secondary/50 hover:bg-secondary/80 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center cursor-pointer border border-transparent hover:border-divider/20"
                 >
-                  <span className={`transition-all duration-300 ${textColor} flex items-center justify-center`}>
+                  <span
+                    className={`transition-all duration-300 ${textColor} flex items-center justify-center`}
+                  >
                     {icon}
                   </span>
                 </a>
@@ -119,7 +136,8 @@ function AppFooter() {
         <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 text-sm text-third">
           {/* Copyright */}
           <div className="text-center sm:text-left font-medium">
-            © {new Date().getFullYear()} {PERSONAL_INFO.name}. All rights reserved.
+            © {new Date().getFullYear()} {PERSONAL_INFO.name}. All rights
+            reserved.
           </div>
 
           {/* Made with Love */}
@@ -130,14 +148,13 @@ function AppFooter() {
               sx={{ fontSize: 16 }}
             />
             <span>in</span>
-            <span className="font-bold text-primary">
-              India
-            </span>
+            <span className="font-bold text-primary">India</span>
           </div>
 
           {/* Tech Stack */}
           <div className="text-center sm:text-right font-medium">
-            Built with <span className="text-highlight">React</span> & <span className="text-highlight">Tailwind CSS</span>
+            Built with <span className="text-highlight">React</span> &{" "}
+            <span className="text-highlight">Tailwind CSS</span>
           </div>
         </div>
       </div>

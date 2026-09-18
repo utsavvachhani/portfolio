@@ -77,7 +77,10 @@ const FeaturedProjectCard = ({
                   rel="noopener noreferrer"
                   className="btn-secondary flex items-center gap-2 px-6 py-3 rounded-xl border border-divider/10 font-bold text-xs shadow-md group/btn"
                 >
-                  <GitHubIcon sx={{ fontSize: 16 }} className="group-hover/btn:rotate-12 transition-transform" />
+                  <GitHubIcon
+                    sx={{ fontSize: 16 }}
+                    className="group-hover/btn:rotate-12 transition-transform"
+                  />
                   <span>GitHub Repository</span>
                 </a>
               )}
@@ -88,7 +91,10 @@ const FeaturedProjectCard = ({
                   rel="noopener noreferrer"
                   className="btn-primary flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs shadow-lg group/btn"
                 >
-                  <LaunchIcon sx={{ fontSize: 15 }} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                  <LaunchIcon
+                    sx={{ fontSize: 15 }}
+                    className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform"
+                  />
                   <span>Live Demo</span>
                 </a>
               )}

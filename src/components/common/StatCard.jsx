@@ -1,12 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export const StatCard = ({
-  value,
-  label,
-  delay = 0,
-  className = "",
-}) => {
+export const StatCard = ({ value, label, delay = 0, className = "" }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

@@ -1,0 +1,650 @@
+/* Profile appearance dropdown; scoped to the GitHub homepage only. */
+.gh-profile-menu-wrap {
+  position: relative;
+  display: flex;
+  flex: none;
+}
+
+.gh-profile-menu-wrap .gh-header-avatar {
+  appearance: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.gh-profile-menu {
+  position: absolute;
+  z-index: 120;
+  top: calc(100% + 12px);
+  right: 0;
+  width: min(304px, calc(100vw - 24px));
+  padding: 10px;
+  border: 1px solid var(--gh-border);
+  border-radius: 10px;
+  box-shadow: 0 18px 48px #01040970;
+  color: var(--gh-copy);
+  background: var(--gh-surface);
+}
+
+.gh-profile-menu-user {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 6px 6px 10px;
+}
+
+.gh-profile-menu-user img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.gh-profile-menu-user span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.gh-profile-menu-user strong {
+  color: var(--gh-white);
+  font-size: 13px;
+}
+
+.gh-profile-menu-user small {
+  color: var(--gh-muted);
+  font-size: 11px;
+}
+
+.gh-profile-menu-divider {
+  height: 1px;
+  margin: 5px -10px;
+  background: var(--gh-border);
+}
+
+.gh-profile-menu-title {
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--gh-muted);
+  margin: 10px 6px 7px !important;
+}
+
+.gh-theme-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.gh-theme-switch button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 39px;
+  border-radius: 7px;
+  padding: 7px 5px;
+  background: var(--gh-raised);
+  color: var(--gh-copy);
+  border: 1px solid var(--gh-border);
+  font-size: 12px;
+}
+
+.gh-theme-switch button.gh-theme-active {
+  border-color: var(--gh-blue);
+  background: color-mix(in srgb, var(--gh-blue) 12%, var(--gh-surface));
+  color: var(--gh-white);
+}
+
+.gh-theme-switch button:hover,
+.gh-profile-menu>a:hover {
+  border-color: var(--gh-blue);
+}
+
+.gh-profile-menu>a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 7px;
+  border-radius: 6px;
+  color: var(--gh-copy);
+  font-size: 12px;
+}
+
+.gh-profile-menu>a svg:last-child {
+  margin-left: auto;
+}
+
+.gh-mobile-theme {
+  padding: 9px 11px 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--gh-border);
+}
+
+.gh-mobile-theme>span {
+  width: 100%;
+  color: var(--gh-muted);
+  font-size: 11px;
+}
+
+.gh-mobile-theme button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--gh-raised);
+  border: 1px solid var(--gh-border);
+  border-radius: 6px;
+  color: var(--gh-copy);
+  padding: 7px 11px;
+  font-size: 12px;
+}
+
+.gh-mobile-theme button[aria-pressed="true"] {
+  color: var(--gh-blue);
+  border-color: var(--gh-blue);
+}
+
+@media (max-width: 670px) {
+  .gh-page .gh-profile-menu-wrap {
+    display: flex;
+  }
+
+  .gh-page .gh-header-avatar {
+    display: block;
+    width: 29px;
+    height: 29px;
+  }
+
+  .gh-page .gh-header-right {
+    gap: 8px;
+  }
+}
+
+/* Light theme: same homepage layout, accessible GitHub-inspired light surfaces. */
+.gh-page[data-theme="light"] {
+  --gh-bg: #ffffff;
+  --gh-surface: #ffffff;
+  --gh-raised: #f6f8fa;
+  --gh-header: #f6f8fa;
+  --gh-border: #d0d7de;
+  --gh-muted: #57606a;
+  --gh-copy: #24292f;
+  --gh-white: #1f2328;
+  --gh-blue: #0969da;
+  --gh-green: #1a7f37;
+  --gh-yellow: #9a6700;
+  --gh-violet: #8250df;
+  background: #fff;
+  color: var(--gh-copy);
+  color-scheme: light;
+}
+
+.gh-page[data-theme="light"] .gh-header,
+.gh-page[data-theme="light"] .gh-tabs {
+  background: #f6f8fa;
+  border-color: var(--gh-border);
+}
+
+.gh-page[data-theme="light"] .gh-brand-mark {
+  background: #eaeef2;
+  color: #24292f;
+  border-color: #afb8c1;
+}
+
+.gh-page[data-theme="light"] .gh-global-search,
+.gh-page[data-theme="light"] .gh-repo-search {
+  background: #fff;
+  color: #57606a;
+  border-color: #afb8c1;
+}
+
+.gh-page[data-theme="light"] .gh-global-search input,
+.gh-page[data-theme="light"] .gh-repo-search input {
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-header-link,
+.gh-page[data-theme="light"] .gh-tab,
+.gh-page[data-theme="light"] .gh-side-link {
+  color: #424a53 !important;
+}
+
+.gh-page[data-theme="light"] .gh-tab:hover {
+  color: #1f2328 !important;
+  background: #eaeef2;
+}
+
+.gh-page[data-theme="light"] .gh-tab-active {
+  color: #1f2328 !important;
+}
+
+.gh-page[data-theme="light"] .gh-count,
+.gh-page[data-theme="light"] .gh-global-search kbd {
+  color: #424a53;
+  background: #eaeef2;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-header-avatar {
+  border-color: #afb8c1;
+}
+
+.gh-page[data-theme="light"] .gh-mobile-menu {
+  background: #fff;
+  border-color: var(--gh-border);
+}
+
+.gh-page[data-theme="light"] .gh-mobile-menu a {
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-profile-status {
+  background: #fff;
+}
+
+.gh-page[data-theme="light"] .gh-profile-role,
+.gh-page[data-theme="light"] .gh-profile-bio,
+.gh-page[data-theme="light"] .gh-followers,
+.gh-page[data-theme="light"] .gh-side-caption {
+  color: #57606a;
+}
+
+.gh-page[data-theme="light"] .gh-followers strong {
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-follow-button,
+.gh-page[data-theme="light"] .gh-button-muted {
+  background: #f6f8fa;
+  border-color: #d0d7de;
+  color: #24292f !important;
+}
+
+.gh-page[data-theme="light"] .gh-follow-button:hover,
+.gh-page[data-theme="light"] .gh-button-muted:hover {
+  background: #eaeef2;
+}
+
+.gh-page[data-theme="light"] .gh-panel,
+.gh-page[data-theme="light"] .gh-pinned-card,
+.gh-page[data-theme="light"] .gh-stat,
+.gh-page[data-theme="light"] .gh-contribution-panel,
+.gh-page[data-theme="light"] .gh-about-grid,
+.gh-page[data-theme="light"] .gh-contact {
+  background: #fff;
+  border-color: var(--gh-border);
+}
+
+.gh-page[data-theme="light"] .gh-pinned-card:hover {
+  background: #f6f8fa;
+}
+
+.gh-page[data-theme="light"] .gh-readme-file,
+.gh-page[data-theme="light"] .gh-readme-file strong,
+.gh-page[data-theme="light"] .gh-intro>p,
+.gh-page[data-theme="light"] .gh-intro-aside p,
+.gh-page[data-theme="light"] .gh-intro-aside>span:not(.gh-aside-quote),
+.gh-page[data-theme="light"] .gh-pinned-card>p,
+.gh-page[data-theme="light"] .gh-pin-footer,
+.gh-page[data-theme="light"] .gh-about-copy p,
+.gh-page[data-theme="light"] .gh-timeline-item p,
+.gh-page[data-theme="light"] .gh-contact p,
+.gh-page[data-theme="light"] .gh-repo-main>p,
+.gh-page[data-theme="light"] .gh-repo-meta,
+.gh-page[data-theme="light"] .gh-repo-count {
+  color: #57606a;
+}
+
+.gh-page[data-theme="light"] .gh-kicker {
+  color: #1a7f37;
+}
+
+.gh-page[data-theme="light"] .gh-section-heading h2,
+.gh-page[data-theme="light"] .gh-stat>strong,
+.gh-page[data-theme="light"] .gh-stat>span,
+.gh-page[data-theme="light"] .gh-contribution-title strong,
+.gh-page[data-theme="light"] .gh-coverage-row b,
+.gh-page[data-theme="light"] .gh-live-stats strong,
+.gh-page[data-theme="light"] .gh-timeline-item h4,
+.gh-page[data-theme="light"] .gh-contact h2,
+.gh-page[data-theme="light"] .gh-no-results strong {
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-section-heading h2 svg,
+.gh-page[data-theme="light"] .gh-tab svg {
+  color: #57606a;
+}
+
+.gh-page[data-theme="light"] .gh-social-pill,
+.gh-page[data-theme="light"] .gh-skill,
+.gh-page[data-theme="light"] .gh-repo-detail,
+.gh-page[data-theme="light"] .gh-repo-external,
+.gh-page[data-theme="light"] .gh-no-results button {
+  color: #24292f !important;
+  background: #f6f8fa;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-social-pill:hover,
+.gh-page[data-theme="light"] .gh-repo-detail:hover,
+.gh-page[data-theme="light"] .gh-repo-external:hover {
+  background: #eaeef2;
+}
+
+.gh-page[data-theme="light"] .gh-social-pill>svg:first-child {
+  color: #57606a;
+}
+
+.gh-page[data-theme="light"] .gh-skill-symbol {
+  color: #0969da;
+}
+
+.gh-page[data-theme="light"] .gh-pin-public,
+.gh-page[data-theme="light"] .gh-repo-public {
+  color: #57606a;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-pin-title>span,
+.gh-page[data-theme="light"] .gh-contribution-title span,
+.gh-page[data-theme="light"] .gh-stat>small,
+.gh-page[data-theme="light"] .gh-coverage-row,
+.gh-page[data-theme="light"] .gh-live-stats {
+  color: #57606a;
+}
+
+.gh-page[data-theme="light"] .gh-coverage-track {
+  background: #eaeef2;
+}
+
+.gh-page[data-theme="light"] .gh-select-wrap select {
+  background: #f6f8fa;
+  color: #24292f;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-filter {
+  color: #57606a;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-filter:hover {
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-filter-active {
+  background: #0969da;
+  border-color: #0969da;
+  color: #fff;
+}
+
+.gh-page[data-theme="light"] .gh-pin-title button,
+.gh-page[data-theme="light"] .gh-repo-name,
+.gh-page[data-theme="light"] .gh-profile-details a {
+  color: #0969da;
+}
+
+.gh-page[data-theme="light"] .gh-contribution-footer {
+  border-color: var(--gh-border);
+}
+
+.gh-page[data-theme="light"] .gh-timeline {
+  border-color: var(--gh-border);
+}
+
+.gh-page[data-theme="light"] .gh-timeline-mark {
+  border-color: #fff;
+}
+
+.gh-page[data-theme="light"] .gh-profile-menu {
+  box-shadow: 0 16px 36px #1f232833;
+}
+
+.gh-page[data-theme="light"] .gh-search-results {
+  background: #fff;
+  border-color: #d0d7de;
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-search-result {
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-search-result:hover,
+.gh-page[data-theme="light"] .gh-search-result-active {
+  background: #ddf4ff;
+}
+
+.gh-page[data-theme="light"] .gh-search-result small,
+.gh-page[data-theme="light"] .gh-search-hint {
+  color: #57606a;
+}
+
+/* Native dialog is a top-layer element, but still inherits its ancestor theme. */
+.gh-page[data-theme="light"] .gh-modal {
+  color: #24292f;
+  background: #fff;
+  color-scheme: light;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-modal-top {
+  background: #f6f8fa;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-modal-top>div,
+.gh-page[data-theme="light"] .gh-modal-heading p,
+.gh-page[data-theme="light"] .gh-modal-heading>p,
+.gh-page[data-theme="light"] .gh-modal-body p,
+.gh-page[data-theme="light"] .gh-modal-body li,
+.gh-page[data-theme="light"] .gh-modal-bottom {
+  color: #57606a;
+}
+
+.gh-page[data-theme="light"] .gh-modal-breadcrumb-owner {
+  color: #0969da;
+}
+
+.gh-page[data-theme="light"] .gh-modal-breadcrumb-owner:hover {
+  color: #0550ae;
+}
+
+.gh-page[data-theme="light"] .gh-modal-breadcrumb-separator {
+  color: #8c959f;
+}
+
+.gh-page[data-theme="light"] .gh-modal-breadcrumb-repo {
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-modal-category-badge {
+  background: rgba(9, 105, 218, 0.1);
+  color: #0969da;
+  border-color: rgba(9, 105, 218, 0.25);
+}
+
+.gh-page[data-theme="light"] .gh-modal-project-counter,
+.gh-page[data-theme="light"] .gh-modal-description {
+  color: #57606a;
+}
+
+.gh-page[data-theme="light"] .gh-modal-counter-slash {
+  color: #8c959f;
+}
+
+.gh-page[data-theme="light"] .gh-fullscreen-modal .gh-modal-heading {
+  background: #ffffff;
+  border-bottom-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-modal-heading-links .gh-button-muted {
+  background: #f6f8fa;
+  color: #24292f !important;
+  border-color: #d0d7de;
+  box-shadow: 0 1px 2px rgba(27, 31, 36, 0.04);
+}
+
+.gh-page[data-theme="light"] .gh-modal-heading-links .gh-button-muted:hover {
+  background: #f3f4f6;
+  border-color: #afb8c1;
+  color: #0969da !important;
+}
+
+.gh-page[data-theme="light"] .gh-modal-heading h2,
+.gh-page[data-theme="light"] .gh-modal-body h3 {
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-modal-top button,
+.gh-page[data-theme="light"] .gh-modal-bottom button,
+.gh-page[data-theme="light"] .gh-modal-tablist button {
+  color: #24292f;
+  background: #f6f8fa;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-modal-tablist button[aria-selected="true"] {
+  border-color: #0969da;
+  color: #0969da;
+}
+
+.gh-page[data-theme="light"] .gh-modal-tablist,
+.gh-page[data-theme="light"] .gh-modal-bottom {
+  background: #fff;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-modal-tags span {
+  background: #ddf4ff;
+  color: #0550ae;
+  border-color: #b6e3ff;
+}
+
+.gh-page[data-theme="light"] .gh-modal-image {
+  background: #f6f8fa;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-code-panel,
+.gh-page[data-theme="light"] .gh-file-tree,
+.gh-page[data-theme="light"] .gh-code-toolbar,
+.gh-page[data-theme="light"] .gh-file-tree-title,
+.gh-page[data-theme="light"] .gh-tree-github,
+.gh-page[data-theme="light"] .gh-file-preview {
+  background: #fff;
+  border-color: #d0d7de;
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-tree-item {
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-tree-item:hover,
+.gh-page[data-theme="light"] .gh-tree-selected {
+  background: #ddf4ff;
+}
+
+.gh-page[data-theme="light"] .gh-code-line-content,
+.gh-page[data-theme="light"] .gh-code-line-number,
+.gh-page[data-theme="light"] .gh-readme-text {
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-assistant-placeholder {
+  color: #57606a;
+}
+
+.gh-page[data-theme="light"] .assistant-panel,
+.gh-page[data-theme="light"] .assistant-head,
+.gh-page[data-theme="light"] .assistant-messages,
+.gh-page[data-theme="light"] .assistant-compose {
+  background: #fff;
+  color: #24292f;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .assistant-message:not(.assistant-user),
+.gh-page[data-theme="light"] .assistant-suggestions,
+.gh-page[data-theme="light"] .assistant-suggestions button,
+.gh-page[data-theme="light"] .assistant-options button {
+  background: #f6f8fa;
+  color: #24292f;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .assistant-message.assistant-user {
+  background: #ddf4ff;
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .assistant-compose textarea {
+  background: #fff;
+  color: #24292f;
+  border-color: #afb8c1;
+}
+
+.gh-page[data-theme="light"] .assistant-compose textarea::placeholder {
+  color: #57606a;
+}
+
+.gh-page[data-theme="light"] .gh-repository-viewer {
+  background: #fff;
+}
+
+.gh-page[data-theme="light"] .gh-code-toolbar button,
+.gh-page[data-theme="light"] .gh-code-toolbar a {
+  background: #f6f8fa;
+  color: #24292f !important;
+  border-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-file-tree-title strong,
+.gh-page[data-theme="light"] .gh-file-tree-title span,
+.gh-page[data-theme="light"] .gh-tree-state,
+.gh-page[data-theme="light"] .gh-viewer-notice {
+  color: #424a53;
+}
+
+.gh-page[data-theme="light"] .gh-code-line:hover {
+  background: #f6f8fa;
+}
+
+.gh-page[data-theme="light"] .gh-code-string {
+  color: #0a3069;
+}
+
+.gh-page[data-theme="light"] .gh-code-keyword {
+  color: #cf222e;
+}
+
+.gh-page[data-theme="light"] .gh-code-comment {
+  color: #57606a;
+}
+
+.gh-page[data-theme="light"] .gh-code-number {
+  color: #8250df;
+}
+
+@media (max-width: 390px) {
+  .gh-page .gh-brand>span:last-child {
+    display: none;
+  }
+
+  .gh-page .gh-header-inner {
+    gap: 7px;
+    padding-inline: 12px;
+  }
+
+  .gh-page .gh-search-wrapper .gh-global-search {
+    width: min(150px, 40vw);
+  }
+
+  .gh-page .gh-header-right {
+    gap: 7px;
+  }
+}

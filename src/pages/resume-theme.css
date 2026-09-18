@@ -1,0 +1,135 @@
+/* Restore the original classic white résumé palette. The same standalone HTML
+   powers preview, PDF export, and printing; the toolbar is not part of the PDF. */
+.resume-page {
+   background: #eae9e3;
+   color: #20292f;
+   min-height: 100vh;
+   padding-bottom: 45px;
+}
+
+.resume-page .resume-nav {
+   background: #10131e;
+   color: #fff;
+   border-bottom: 1px solid #313845;
+}
+
+.resume-page .resume-nav-inner {
+   display: flex;
+   gap: 15px;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.resume-page .resume-back {
+   color: #fff;
+}
+
+.resume-page .resume-back:hover,
+.resume-page .resume-print:hover {
+   color: #c6f477;
+}
+
+.resume-page .resume-toolbar-actions {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+}
+
+.resume-page .resume-print {
+   padding: 8px 10px;
+   font-size: 11px;
+   border: 1px solid #505a66;
+   border-radius: 5px;
+   color: #f0f2f5;
+   background: transparent;
+}
+
+.resume-page .resume-download {
+   color: #10131e;
+   background: #c6f477;
+   border-color: #c6f477;
+   min-height: 40px;
+   border-radius: 4px;
+}
+
+.resume-page .resume-download:hover {
+   background: #d9ff9a;
+}
+
+.resume-preview-wrap {
+   width: min(840px, calc(100% - 28px));
+   margin: 0 auto;
+}
+
+.resume-preview {
+   display: block;
+   width: 100%;
+   border: 0;
+   background: #fff;
+}
+
+.resume-page .resume-bottom-actions {
+   padding: 20px 14px 0;
+}
+
+.resume-page .resume-bottom-actions a {
+   color: #45652f;
+}
+
+@media (max-width: 700px) {
+   .resume-page .resume-nav-inner {
+      min-height: 72px;
+   }
+
+   .resume-page .resume-toolbar-actions {
+      gap: 6px;
+   }
+
+   .resume-page .resume-print {
+      font-size: 10px;
+   }
+
+   .resume-page .resume-download {
+      font-size: 10px;
+      padding: 8px;
+   }
+}
+
+@media (max-width: 420px) {
+   .resume-page .resume-back {
+      letter-spacing: 0;
+      font-size: 9px;
+   }
+
+   .resume-page .resume-print {
+      font-size: 0;
+   }
+
+   .resume-page .resume-print svg {
+      width: 17px;
+   }
+
+   .resume-page .resume-download {
+      gap: 5px;
+   }
+}
+
+@media print {
+
+   .resume-page .resume-nav,
+   .resume-page .resume-bottom-actions {
+      display: none !important;
+   }
+
+   .resume-page,
+   .resume-preview-wrap {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      width: 100%;
+   }
+
+   .resume-preview {
+      width: 100%;
+   }
+}
