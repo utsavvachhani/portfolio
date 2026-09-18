@@ -1,8 +1,9 @@
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { projects } from "../content/page.jsx";
+import { PROJECTS } from "../constants";
 import ProjectCard from "../components/ReactBits/ProjectCard.jsx";
 import FeaturedProjectCard from "../components/ReactBits/FeaturedProjectCard.jsx";
+import { SectionHeader, AmbientBackground, StatCard } from "../components/common";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -11,8 +12,8 @@ const ProjectsSection = () => {
   const [filter, setFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const featuredProject = projects[0];
-  const otherProjects = projects.slice(1);
+  const featuredProject = PROJECTS[0];
+  const otherProjects = PROJECTS.slice(1);
 
   // Filter projects by category and search keyword
   const filteredProjects = useMemo(() => {
@@ -35,35 +36,39 @@ const ProjectsSection = () => {
     });
   }, [otherProjects, filter, searchQuery]);
 
+  const liveProjectsCount = useMemo(
+    () => PROJECTS.filter((p) => p.live && p.live.trim() !== "").length,
+    []
+  );
+
+  const fullStackCount = useMemo(
+    () =>
+      PROJECTS.filter(
+        (p) =>
+          p.title.toLowerCase().includes("mern") ||
+          p.description.toLowerCase().includes("mern") ||
+          p.id === "converse2k25" ||
+          p.id === "memories"
+      ).length,
+    []
+  );
+
   return (
     <section className="relative bg-primary text-primary min-h-screen pt-28 sm:pt-36 pb-20 px-6 sm:px-12 lg:px-8 overflow-hidden">
       {/* Background Orbs */}
-      <div className="absolute top-[10%] left-[-15%] w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-full bg-highlight/5 blur-[120px] pointer-events-none" />
-      <div className="absolute top-[45%] right-[-15%] w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full bg-purple-500/5 blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[-10%] w-[300px] h-[300px] rounded-full bg-cyan-500/5 blur-[100px] pointer-events-none" />
+      <AmbientBackground variant="cyan" />
 
       <div className="max-w-7xl mx-auto relative z-10">
 
-        {/* Page Header with Navbar Clearance */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center text-center mb-14"
-        >
-          <div className="p-3 rounded-2xl bg-highlight/10 border border-highlight/20 mb-3.5 shadow-md">
-            <FolderOpenIcon className="text-highlight" sx={{ fontSize: 36 }} />
-          </div>
-          <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none mb-3">
-            Open Source Catalog
-          </span>
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight">
-            My Creative <span className="text-highlight font-extrabold">Archive</span>
-          </h1>
-          <p className="text-third text-sm md:text-base mt-4 max-w-xl leading-relaxed">
-            A comprehensive catalog of full-stack products, lab utilities, algorithms, and frontend interfaces I have designed and deployed.
-          </p>
-        </motion.div>
+        {/* Page Header */}
+        <SectionHeader
+          as="h1"
+          icon={<FolderOpenIcon sx={{ fontSize: 36 }} />}
+          badge="Open Source Catalog"
+          title="My Creative"
+          highlight="Archive"
+          subtitle="A comprehensive catalog of full-stack products, lab utilities, algorithms, and frontend interfaces I have designed and deployed."
+        />
 
         {/* Featured Project Showcase Card */}
         <motion.div
@@ -72,42 +77,42 @@ const ProjectsSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-16"
         >
-          <div className="flex flex-col items-center text-center mb-8">
-            <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none">
-              Flagship Application
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-primary mt-3">
-              {featuredProject.title}
-            </h2>
-            <div className="h-1 w-16 bg-highlight rounded-full mt-3 shadow-md shadow-highlight/45" />
-          </div>
+          <SectionHeader
+            badge="Flagship Application"
+            title={featuredProject.title}
+            className="mb-8"
+          />
 
           <FeaturedProjectCard {...featuredProject} />
         </motion.div>
 
-        {/* Interactive Filter & Search Bar - Ambient Glass Elevation */}
+        {/* Interactive Filter & Search Bar */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-12"
         >
-          <div className="flex flex-col items-center text-center mb-8">
-            <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none">
-              Browse Repositories
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-primary mt-3">
-              All Project Repositories
-            </h2>
-          </div>
+          <SectionHeader
+            badge="Browse Repositories"
+            title="All Project"
+            highlight="Repositories"
+            className="mb-8"
+          />
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-secondary/30 backdrop-blur-2xl p-4 sm:p-5 rounded-3xl border border-divider/10 shadow-2xl max-w-4xl mx-auto">
             {/* Filter Pills */}
             <div className="flex flex-wrap gap-2 justify-center">
               {[
                 { type: "all", label: `📁 All (${otherProjects.length})` },
-                { type: "live", label: `⚡ Live Demos (${otherProjects.filter((p) => p.live && p.live.trim() !== "").length})` },
-                { type: "repo", label: `💻 Code Repos (${otherProjects.filter((p) => !p.live || p.live.trim() === "").length})` },
+                {
+                  type: "live",
+                  label: `⚡ Live Demos (${otherProjects.filter((p) => p.live && p.live.trim() !== "").length})`,
+                },
+                {
+                  type: "repo",
+                  label: `💻 Code Repos (${otherProjects.filter((p) => !p.live || p.live.trim() === "").length})`,
+                },
               ].map(({ type, label }) => (
                 <button
                   key={type}
@@ -131,7 +136,7 @@ const ProjectsSection = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search stack or title..."
-                className="w-full pl-10 pr-4 py-2 rounded-xl bg-primary/60 text-primary text-xs border border-divider/15 focus:border-highlight focus:outline-none transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-xs transition-all shadow-inner"
               />
             </div>
           </div>
@@ -180,63 +185,10 @@ const ProjectsSection = () => {
         {/* Bottom Interactive Stats Panel */}
         <div className="mt-24 pt-12 border-t border-divider/10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-
-            <motion.div 
-              whileHover={{ y: -4 }}
-              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/10 hover:border-highlight/25 transition-all duration-300 text-center shadow-md"
-            >
-              <div className="text-4xl sm:text-5xl font-black text-highlight mb-2 tracking-tight group-hover:scale-105 transition-transform duration-300">
-                {projects.length}
-              </div>
-              <div className="text-xs sm:text-sm text-third font-medium tracking-wider uppercase">
-                Total Projects
-              </div>
-            </motion.div>
-
-            <motion.div 
-              whileHover={{ y: -4 }}
-              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/10 hover:border-highlight/25 transition-all duration-300 text-center shadow-md"
-            >
-              <div className="text-4xl sm:text-5xl font-black text-highlight mb-2 tracking-tight group-hover:scale-105 transition-transform duration-300">
-                {projects.filter((p) => p.live && p.live.trim() !== "").length}
-              </div>
-              <div className="text-xs sm:text-sm text-third font-medium tracking-wider uppercase">
-                Live Demos
-              </div>
-            </motion.div>
-
-            <motion.div 
-              whileHover={{ y: -4 }}
-              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/10 hover:border-highlight/25 transition-all duration-300 text-center shadow-md"
-            >
-              <div className="text-4xl sm:text-5xl font-black text-highlight mb-2 tracking-tight group-hover:scale-105 transition-transform duration-300">
-                {
-                  projects.filter(
-                    (p) =>
-                      p.title.toLowerCase().includes("mern") ||
-                      p.description.toLowerCase().includes("mern") ||
-                      p.title.toLowerCase() === "converse2k25" ||
-                      p.title.toLowerCase() === "memories"
-                  ).length
-                }
-              </div>
-              <div className="text-xs sm:text-sm text-third font-medium tracking-wider uppercase">
-                Full Stack
-              </div>
-            </motion.div>
-
-            <motion.div 
-              whileHover={{ y: -4 }}
-              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/10 hover:border-highlight/25 transition-all duration-300 text-center shadow-md"
-            >
-              <div className="text-4xl sm:text-5xl font-black text-highlight mb-2 tracking-tight group-hover:scale-105 transition-transform duration-300">
-                100%
-              </div>
-              <div className="text-xs sm:text-sm text-third font-medium tracking-wider uppercase">
-                Open Source
-              </div>
-            </motion.div>
-
+            <StatCard value={PROJECTS.length} label="Total Projects" delay={0.1} />
+            <StatCard value={liveProjectsCount} label="Live Demos" delay={0.2} />
+            <StatCard value={fullStackCount} label="Full Stack" delay={0.3} />
+            <StatCard value="100%" label="Open Source" delay={0.4} />
           </div>
         </div>
 

@@ -27,6 +27,13 @@
   background-color: var(--color-background);
 }
 
+body {
+  background-color: var(--color-background) !important;
+  color: var(--color-text) !important;
+  min-height: 100vh;
+  margin: 0;
+}
+
 /* Light Mode Theme */
 .light-mode {
   --color-background: #f8fafc;
@@ -50,6 +57,98 @@
   --secondary-button-text: #0f172a;
   --secondary-hover-button-bg: #0066cc;
   --secondary-hover-button-text: #ffffff;
+}
+
+/* App Header & Navigation styling */
+.app-header {
+  background-color: var(--color-bgPrimary);
+}
+
+.light-mode .app-header {
+  background-color: #ffffff;
+}
+
+.app-header-scrolled {
+  background-color: rgba(1, 4, 9, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.light-mode .app-header-scrolled {
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.app-nav-pill {
+  background-color: rgba(13, 17, 23, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.light-mode .app-nav-pill {
+  background-color: rgba(241, 245, 249, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.app-nav-active {
+  background-color: var(--primary-button-bg);
+  color: var(--primary-button-text) !important;
+  box-shadow: 0 4px 14px rgba(103, 154, 231, 0.3);
+}
+
+.app-nav-active span {
+  color: var(--primary-button-text) !important;
+}
+
+/* Universal Themed Input Styling (Dark & Light Mode) */
+input, textarea {
+  background-color: rgba(13, 17, 23, 0.65);
+  color: var(--color-text);
+  border: 1px solid var(--color-divider);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.light-mode input, .light-mode textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+input:focus, textarea:focus {
+  background-color: rgba(13, 17, 23, 0.9) !important;
+  color: #ffffff !important;
+  border-color: var(--color-highlight) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(103, 154, 231, 0.2) !important;
+}
+
+.light-mode input:focus, .light-mode textarea:focus {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: var(--color-highlight) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2) !important;
+}
+
+/* Fix autofill inside color override */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text) !important;
+  -webkit-box-shadow: 0 0 0px 1000px #0d1117 inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.light-mode input:-webkit-autofill,
+.light-mode input:-webkit-autofill:hover,
+.light-mode input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #0f172a !important;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
 }
 
 /* Dedicated Button Utility Classes with Ambient Drop Shadows */

@@ -5,6 +5,8 @@ import uvPhoto from "../../assets/uvPhoto.jpg";
 import CircularText from "../ReactBits/CircularText.jsx";
 import GradientText from "../ReactBits/GradientText.jsx";
 import Hero3DCanvas from "./Hero3DCanvas.jsx";
+import { AmbientBackground } from "../common";
+import { PERSONAL_INFO, HERO_TECH_STACK } from "../../constants";
 
 function ProfileAvatar() {
   return (
@@ -26,7 +28,7 @@ function ProfileAvatar() {
       <div className="relative z-20 p-2.5 rounded-full bg-gradient-to-tr from-highlight/40 via-emerald-500/30 to-purple-500/40 backdrop-blur-2xl border border-white/20 shadow-[0_0_60px_rgba(103,154,231,0.35)] group-hover:shadow-[0_0_90px_rgba(103,154,231,0.5)] transition-all duration-500">
         <img
           src={uvPhoto}
-          alt="Utsav Vachhani"
+          alt={PERSONAL_INFO.name}
           className="w-52 h-52 sm:w-64 sm:h-64 rounded-full border-4 border-white/20 shadow-2xl transform rotate-3 group-hover:rotate-[360deg] group-hover:scale-105 transition duration-700 ease-in-out object-cover"
         />
       </div>
@@ -37,12 +39,11 @@ function ProfileAvatar() {
 function HeroComp() {
   return (
     <section className="relative w-full min-h-[calc(100vh-80px)] flex items-center justify-center bg-primary overflow-hidden">
-      {/* 3D WebGL Background Scene covering full Hero section */}
+      {/* 3D WebGL Background Scene */}
       <Hero3DCanvas />
 
       {/* Radial Ambient Background Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[30rem] h-[30rem] rounded-full bg-highlight/10 blur-[130px] pointer-events-none animate-pulse" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[32rem] h-[32rem] rounded-full bg-emerald-500/10 blur-[140px] pointer-events-none" />
+      <AmbientBackground />
 
       {/* Hero Content Overlay */}
       <div className="max-w-7xl w-full mx-auto px-6 sm:px-12 lg:px-8 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 items-center gap-12 relative z-10 pointer-events-none">
@@ -57,7 +58,7 @@ function HeroComp() {
           {/* Status Pill */}
           <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-highlight/15 text-highlight border border-highlight/30 mb-6 flex items-center gap-2.5 backdrop-blur-md shadow-lg shadow-highlight/10 hover:border-highlight/60 transition-all cursor-default">
             <span className="w-2.5 h-2.5 rounded-full bg-highlight animate-ping" />
-            Open for Engineering Internships & Full-Stack Projects
+            {PERSONAL_INFO.status}
           </span>
 
           <h1 className="text-xl sm:text-2xl font-bold mb-2 text-third tracking-wide">
@@ -71,7 +72,7 @@ function HeroComp() {
               showBorder={false}
               className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight font-[poppins] block drop-shadow-lg"
             >
-              Utsav Vachhani
+              {PERSONAL_INFO.name}
             </GradientText>
           </div>
 
@@ -80,22 +81,12 @@ function HeroComp() {
           </p>
 
           <p className="text-sm sm:text-base text-third mt-4 leading-relaxed max-w-xl">
-            IT Undergraduate at <span className="text-primary font-bold">Sarvajanik College of Engineering & Technology (SCET), Surat</span>. I build scalable full-stack web applications, REST API servers, database architectures, and responsive 3D web interfaces.
+            IT Undergraduate at <span className="text-primary font-bold">{PERSONAL_INFO.college}</span>. I build scalable full-stack web applications, REST API servers, database architectures, and responsive 3D web interfaces.
           </p>
 
           {/* Core Tech Stack Chips with Interactive Glow */}
           <div className="flex flex-wrap gap-2 mt-6 justify-center lg:justify-start">
-            {[
-              "React.js",
-              "Node.js",
-              "MongoDB",
-              "Express.js",
-              "Next.js",
-              "Firebase",
-              "GitHub",
-              "Git",
-              "Tailwind",
-            ].map((tech) => (
+            {HERO_TECH_STACK.map((tech) => (
               <span
                 key={tech}
                 className="text-xs font-mono font-bold px-3.5 py-1.5 rounded-full bg-secondary/80 text-highlight border border-highlight/25 backdrop-blur-md hover:bg-highlight hover:text-dark hover:scale-105 active:scale-95 transition-all duration-300 shadow-md cursor-pointer"
@@ -105,7 +96,7 @@ function HeroComp() {
             ))}
           </div>
 
-          {/* Hero Action CTA Buttons using dedicated button design tokens */}
+          {/* Hero Action CTA Buttons */}
           <div className="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start">
             <a
               href="#featured-projects"

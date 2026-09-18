@@ -5,7 +5,8 @@ import HeroComp from "../components/Home/HeroComp.jsx";
 import FeaturedProjects from "../components/Home/FeaturedProjects.jsx";
 import LifeJourneyTimeline from "../components/ReactBits/LifeJourneyTimeline.jsx";
 import SkillsComponents from "../components/skills/SkillsComponents";
-import { stats, skillCategories } from "../content/page.jsx";
+import { STATS, SKILL_CATEGORIES } from "../constants";
+import { SectionHeader, AmbientBackground, StatCard } from "../components/common";
 
 function Home() {
   const containerVariants = {
@@ -38,36 +39,22 @@ function Home() {
   return (
     <div className="relative bg-primary text-primary overflow-hidden min-h-screen">
       {/* Background Radial Glow Orbs */}
-      <div className="absolute top-[30%] -right-48 w-96 h-96 rounded-full bg-highlight/5 blur-[120px] pointer-events-none" />
-      <div className="absolute top-[60%] -left-48 w-80 h-80 rounded-full bg-emerald-500/5 blur-[100px] pointer-events-none" />
+      <AmbientBackground />
 
       {/* 1. Full-Section 3D WebGL Hero */}
       <HeroComp />
 
-      {/* Animated Stats Banner */}
+      {/* Animated Stats Banner with Reusable StatCards */}
       <section className="relative z-10 bg-secondary/30 py-12 sm:py-16 border-y border-divider/10 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 sm:px-12 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, idx) => (
-              <motion.div
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {STATS.map((stat, idx) => (
+              <StatCard
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{
-                  duration: 0.6,
-                  delay: idx * 0.1,
-                  ease: "easeOut",
-                }}
-                className="text-center group flex flex-col justify-center items-center p-4 rounded-2xl hover:bg-highlight/5 transition-all duration-300"
-              >
-                <span className="text-3xl sm:text-4xl md:text-5xl font-black text-highlight mb-2 block tracking-tight group-hover:scale-105 transition-transform duration-300">
-                  {stat.value}
-                </span>
-                <span className="text-xs sm:text-sm text-third font-medium tracking-wider uppercase">
-                  {stat.label}
-                </span>
-              </motion.div>
+                value={stat.value}
+                label={stat.label}
+                delay={idx * 0.1}
+              />
             ))}
           </div>
         </div>
@@ -79,15 +66,11 @@ function Home() {
       {/* 3. Life Journey Timeline Section */}
       <section id="life-journey-timeline" className="relative z-10 py-20 sm:py-24 px-6 sm:px-12 lg:px-8 bg-secondary/10 border-t border-divider/10">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col items-center text-center mb-12">
-            <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none">
-              Academic & Professional Milestones
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary mt-3 tracking-tight">
-              Life Journey <span className="text-highlight">Timeline</span>
-            </h2>
-            <div className="h-1 w-16 bg-highlight rounded-full mt-3 shadow-md shadow-highlight/45" />
-          </div>
+          <SectionHeader
+            badge="Academic & Professional Milestones"
+            title="Life Journey"
+            highlight="Timeline"
+          />
 
           <LifeJourneyTimeline />
         </div>
@@ -96,31 +79,17 @@ function Home() {
       {/* 4. Tech Stack Dashboard Section */}
       <section className="relative z-10 bg-secondary/15 py-20 sm:py-24 px-6 sm:px-12 lg:px-8 border-t border-divider/10 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-black text-primary tracking-tight mb-4"
-            >
-              Skills & <span className="text-highlight">Capabilities</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-third text-sm sm:text-base max-w-xl mx-auto leading-relaxed"
-            >
-              Core technologies for building scalable full-stack web applications, REST microservices, and reactive user interfaces.
-            </motion.p>
-          </div>
+          <SectionHeader
+            badge="Engineering Matrix"
+            title="Skills &"
+            highlight="Capabilities"
+            subtitle="Core technologies for building scalable full-stack web applications, REST microservices, and reactive user interfaces."
+          />
 
           <SkillsComponents
             containerVariants={containerVariants}
             cardVariants={cardVariants}
-            skillCategories={skillCategories.slice(0, 3)}
+            skillCategories={SKILL_CATEGORIES.slice(0, 3)}
           />
 
           <div className="mt-12 text-center">

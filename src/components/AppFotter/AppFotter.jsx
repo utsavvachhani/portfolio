@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
-import { pages, socialLinks } from "../../content/page.jsx";
+import { NAV_PAGES, SOCIAL_LINKS, PERSONAL_INFO } from "../../constants";
 import uvPhoto from "../../assets/uvPhoto.jpg";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
@@ -23,20 +23,20 @@ function AppFooter() {
                 <div className="absolute -inset-1 bg-gradient-to-tr from-highlight via-cyan-500 to-indigo-500 rounded-full blur opacity-35 group-hover:opacity-65 transition duration-500"></div>
                 <img
                   src={uvPhoto}
-                  alt="Utsav Vachhani"
+                  alt={PERSONAL_INFO.name}
                   className="relative h-20 w-20 sm:h-24 sm:w-24 rounded-full border-2 border-divider/10 shadow-xl object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div>
                 <Typography variant="h6" className="font-black text-primary text-lg sm:text-xl tracking-tight mb-1">
-                  Utsav Vachhani
+                  {PERSONAL_INFO.name}
                 </Typography>
                 <div className="flex flex-col space-y-1.5 mt-2">
-                  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-secondary/60 text-highlight shadow-sm inline-block w-max mx-auto sm:mx-0">
-                    🚀 Full-Stack Developer
+                  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-secondary/60 text-highlight shadow-sm inline-block w-max mx-auto sm:mx-0 border border-highlight/15">
+                    🚀 {PERSONAL_INFO.role}
                   </span>
-                  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-secondary/60 text-highlight shadow-sm inline-block w-max mx-auto sm:mx-0">
-                    🎓 B.Tech IT Student
+                  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-secondary/60 text-highlight shadow-sm inline-block w-max mx-auto sm:mx-0 border border-highlight/15">
+                    🎓 {PERSONAL_INFO.degree}
                   </span>
                 </div>
               </div>
@@ -49,7 +49,7 @@ function AppFooter() {
               Quick Links
             </Typography>
             <div className="grid grid-cols-2 gap-x-6 gap-y-3.5 w-full max-w-[280px] md:max-w-none justify-items-center md:justify-items-start">
-              {pages.map(({ name, href, icon }) => (
+              {NAV_PAGES.map(({ name, href, icon }) => (
                 <Link
                   key={name}
                   to={href}
@@ -75,33 +75,33 @@ function AppFooter() {
               <div className="flex items-center justify-center md:justify-start space-x-2.5 group">
                 <LocalPhoneIcon className="text-highlight group-hover:scale-110 transition-transform" sx={{ fontSize: 18 }} />
                 <a
-                  href="tel:9512655868"
+                  href={`tel:${PERSONAL_INFO.phone}`}
                   className="text-sm text-third hover:text-highlight transition-colors duration-300 font-semibold"
                 >
-                  9512655868
+                  {PERSONAL_INFO.phone}
                 </a>
               </div>
               <div className="flex items-center justify-center md:justify-start space-x-2.5 group">
                 <EmailIcon className="text-highlight group-hover:scale-110 transition-transform" sx={{ fontSize: 18 }} />
                 <a
-                  href="mailto:vachhaniutsav2@gmail.com"
+                  href={`mailto:${PERSONAL_INFO.email}`}
                   className="text-sm text-third hover:text-highlight transition-colors duration-300 font-semibold break-all"
                 >
-                  vachhaniutsav2@gmail.com
+                  {PERSONAL_INFO.email}
                 </a>
               </div>
             </div>
 
             {/* Social Links */}
             <div className="flex items-center space-x-2 justify-center md:justify-start flex-wrap gap-y-2 max-w-[280px] md:max-w-none">
-              {socialLinks.map(({ href, icon, label, textColor }) => (
+              {SOCIAL_LINKS.map(({ href, icon, label, textColor }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   title={label}
-                  className="group p-2.5 rounded-xl text-third bg-secondary/50 hover:bg-secondary/80 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center cursor-pointer"
+                  className="group p-2.5 rounded-xl text-third bg-secondary/50 hover:bg-secondary/80 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center cursor-pointer border border-transparent hover:border-divider/20"
                 >
                   <span className={`transition-all duration-300 ${textColor} flex items-center justify-center`}>
                     {icon}
@@ -119,7 +119,7 @@ function AppFooter() {
         <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 text-sm text-third">
           {/* Copyright */}
           <div className="text-center sm:text-left font-medium">
-            © {new Date().getFullYear()} Utsav Vachhani. All rights reserved.
+            © {new Date().getFullYear()} {PERSONAL_INFO.name}. All rights reserved.
           </div>
 
           {/* Made with Love */}
