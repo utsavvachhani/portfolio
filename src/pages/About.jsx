@@ -6,7 +6,11 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LifeJourneyTimeline from "../components/ReactBits/LifeJourneyTimeline";
 import { STATS, FOCUS_AREAS, PERSONAL_INFO } from "../constants";
-import { SectionHeader, AmbientBackground, StatCard } from "../components/common";
+import {
+  SectionHeader,
+  AmbientBackground,
+  StatCard,
+} from "../components/common";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 25 },
@@ -28,7 +32,6 @@ function About() {
       <AmbientBackground />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        
         {/* Header */}
         <SectionHeader
           as="h1"
@@ -154,7 +157,6 @@ function About() {
 
           <LifeJourneyTimeline />
         </motion.div>
-
       </div>
     </section>
   );

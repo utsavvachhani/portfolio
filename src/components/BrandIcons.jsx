@@ -2,7 +2,15 @@
 // Each icon accepts the same size and aria props used by the portfolio and résumé.
 function BrandSvg({ size = 24, children, ...props }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      {...props}
+    >
       {children}
     </svg>
   );
@@ -19,8 +27,24 @@ export function Github(props) {
 export function Instagram(props) {
   return (
     <BrandSvg {...props}>
-      <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" strokeWidth="2" />
-      <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2" />
+      <rect
+        x="2"
+        y="2"
+        width="20"
+        height="20"
+        rx="5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      />
       <circle cx="17.5" cy="6.5" r="1.25" />
     </BrandSvg>
   );

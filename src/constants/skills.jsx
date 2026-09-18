@@ -56,7 +56,12 @@ export const SKILL_CATEGORIES = [
     textColor: "group-hover:text-indigo-400",
     borderColor: "hover:border-indigo-400",
     ringColor: "group-hover:ring-indigo-400",
-    skills: ["MERN Stack", "MVC Pattern", "Component-Based Design", "Microservices"],
+    skills: [
+      "MERN Stack",
+      "MVC Pattern",
+      "Component-Based Design",
+      "Microservices",
+    ],
   },
   {
     title: "Data Handling & APIs",
@@ -66,7 +71,13 @@ export const SKILL_CATEGORIES = [
     textColor: "group-hover:text-yellow-400",
     borderColor: "hover:border-yellow-400",
     ringColor: "group-hover:ring-yellow-400",
-    skills: ["RESTful APIs", "CRUD Operations", "JSON", "PostgreSQL", "MongoDB"],
+    skills: [
+      "RESTful APIs",
+      "CRUD Operations",
+      "JSON",
+      "PostgreSQL",
+      "MongoDB",
+    ],
   },
   {
     title: "Tools & Platforms",

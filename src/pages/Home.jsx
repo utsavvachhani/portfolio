@@ -6,7 +6,11 @@ import FeaturedProjects from "../components/Home/FeaturedProjects.jsx";
 import LifeJourneyTimeline from "../components/ReactBits/LifeJourneyTimeline.jsx";
 import SkillsComponents from "../components/skills/SkillsComponents";
 import { STATS, SKILL_CATEGORIES } from "../constants";
-import { SectionHeader, AmbientBackground, StatCard } from "../components/common";
+import {
+  SectionHeader,
+  AmbientBackground,
+  StatCard,
+} from "../components/common";
 
 function Home() {
   const containerVariants = {
@@ -64,7 +68,10 @@ function Home() {
       <FeaturedProjects limit={6} />
 
       {/* 3. Life Journey Timeline Section */}
-      <section id="life-journey-timeline" className="relative z-10 py-20 sm:py-24 px-6 sm:px-12 lg:px-8 bg-secondary/10 border-t border-divider/10">
+      <section
+        id="life-journey-timeline"
+        className="relative z-10 py-20 sm:py-24 px-6 sm:px-12 lg:px-8 bg-secondary/10 border-t border-divider/10"
+      >
         <div className="max-w-6xl mx-auto">
           <SectionHeader
             badge="Academic & Professional Milestones"

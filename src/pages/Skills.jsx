@@ -36,7 +36,6 @@ function Skills() {
       <AmbientBackground />
 
       <div className="max-w-6xl mx-auto relative z-10">
-
         {/* Header */}
         <SectionHeader
           as="h1"
@@ -56,7 +55,10 @@ function Skills() {
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             {CORE_METRICS.map((item, idx) => (
-              <div key={idx} className="p-3.5 rounded-2xl bg-secondary/50 border border-divider/5">
+              <div
+                key={idx}
+                className="p-3.5 rounded-2xl bg-secondary/50 border border-divider/5"
+              >
                 <div className="text-[11px] text-third uppercase font-mono tracking-wider mb-1">
                   {item.label}
                 </div>
@@ -93,7 +95,8 @@ function Skills() {
                 Building Production-Ready Systems
               </h2>
               <p className="text-third text-xs sm:text-sm max-w-2xl leading-relaxed">
-                Adhering to SOLID principles, modular component design, clean RESTful route structuring, and strict version control practices.
+                Adhering to SOLID principles, modular component design, clean
+                RESTful route structuring, and strict version control practices.
               </p>
             </div>
 
@@ -107,7 +110,6 @@ function Skills() {
             </a>
           </div>
         </motion.div>
-
       </div>
     </section>
   );

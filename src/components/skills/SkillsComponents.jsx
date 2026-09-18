@@ -16,7 +16,9 @@ function SkillsComponents({
 
     return skillCategories.filter((cat) => {
       const matchesTitle = cat.title.toLowerCase().includes(query);
-      const matchesSkill = cat.skills?.some((s) => s.toLowerCase().includes(query));
+      const matchesSkill = cat.skills?.some((s) =>
+        s.toLowerCase().includes(query),
+      );
       return matchesTitle || matchesSkill;
     });
   }, [skillCategories, searchQuery]);
@@ -25,7 +27,10 @@ function SkillsComponents({
     <div className="space-y-10">
       {/* Skill Search Box */}
       <div className="max-w-md mx-auto relative mb-10">
-        <SearchIcon sx={{ fontSize: 20 }} className="absolute left-4 top-1/2 -translate-y-1/2 text-third" />
+        <SearchIcon
+          sx={{ fontSize: 20 }}
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-third"
+        />
         <input
           type="text"
           value={searchQuery}
@@ -66,7 +71,9 @@ function SkillsComponents({
                 <div className="bg-secondary/60 text-highlight p-3 rounded-2xl transition-all duration-300 group-hover:bg-highlight group-hover:text-dark group-hover:scale-105 shadow-sm">
                   {icon}
                 </div>
-                <h3 className="text-xl font-black tracking-wide text-primary">{title}</h3>
+                <h3 className="text-xl font-black tracking-wide text-primary">
+                  {title}
+                </h3>
               </div>
 
               {/* Interactive Skills Chips */}
@@ -77,7 +84,10 @@ function SkillsComponents({
                     whileHover={{ scale: 1.04 }}
                     className="text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-primary/40 text-primary hover:text-highlight hover:bg-highlight/15 transition-all duration-200 cursor-default flex items-center gap-1.5 shadow-sm"
                   >
-                    <CheckCircleOutlineIcon sx={{ fontSize: 13 }} className="text-highlight" />
+                    <CheckCircleOutlineIcon
+                      sx={{ fontSize: 13 }}
+                      className="text-highlight"
+                    />
                     <span>{skill}</span>
                   </motion.div>
                 ))}
@@ -87,7 +97,9 @@ function SkillsComponents({
             {/* Bottom Indicator */}
             <div className="mt-6 pt-4 border-t border-divider/10 text-[10px] uppercase font-mono text-third flex items-center justify-between">
               <span>{skills.length} Technologies</span>
-              <span className="text-highlight font-bold">Verified Proficiency</span>
+              <span className="text-highlight font-bold">
+                Verified Proficiency
+              </span>
             </div>
           </motion.div>
         ))}
@@ -95,7 +107,9 @@ function SkillsComponents({
 
       {filteredCategories.length === 0 && (
         <div className="text-center py-12 bg-secondary/20 rounded-3xl border border-divider/10 max-w-md mx-auto">
-          <p className="text-xs text-third">No technologies found matching "{searchQuery}".</p>
+          <p className="text-xs text-third">
+            No technologies found matching "{searchQuery}".
+          </p>
         </div>
       )}
     </div>

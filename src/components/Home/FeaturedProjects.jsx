@@ -79,9 +79,11 @@ const FeaturedProjects = ({ limit = 6 }) => {
   }, [filteredProjects, limit]);
 
   return (
-    <section id="featured-projects" className="relative z-10 pt-24 md:pt-32 pb-20 px-6 sm:px-12 lg:px-8 bg-primary border-t border-divider/10">
+    <section
+      id="featured-projects"
+      className="relative z-10 pt-24 md:pt-32 pb-20 px-6 sm:px-12 lg:px-8 bg-primary border-t border-divider/10"
+    >
       <div className="max-w-7xl mx-auto">
-        
         {/* Reusable Section Header Sub-Component */}
         <SectionHeader
           badge="Software Showcase"
@@ -92,7 +94,6 @@ const FeaturedProjects = ({ limit = 6 }) => {
 
         {/* Clean Borderless Glass Filter & Search Bar */}
         <div className="mb-10 flex flex-col md:flex-row items-center justify-between gap-6 bg-secondary/40 backdrop-blur-2xl p-4 sm:p-5 rounded-3xl border border-divider/10 shadow-[0_15px_40px_rgba(0,0,0,0.35)]">
-          
           {/* Category Filter Pills */}
           <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
             {PROJECT_CATEGORIES.map((cat) => {
@@ -116,7 +117,10 @@ const FeaturedProjects = ({ limit = 6 }) => {
 
           {/* Live Search Box */}
           <div className="relative w-full md:w-72">
-            <SearchIcon sx={{ fontSize: 18 }} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-third" />
+            <SearchIcon
+              sx={{ fontSize: 18 }}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-third"
+            />
             <input
               type="text"
               value={searchQuery}
@@ -138,7 +142,15 @@ const FeaturedProjects = ({ limit = 6 }) => {
         {/* Project Results Count Indicator */}
         <div className="mb-6 flex items-center justify-between text-xs text-third font-medium px-2">
           <span>
-            Showing <strong className="text-highlight font-black">{displayedProjects.length}</strong> of <strong className="text-primary font-bold">{PROJECTS.length}</strong> project{PROJECTS.length === 1 ? "" : "s"}
+            Showing{" "}
+            <strong className="text-highlight font-black">
+              {displayedProjects.length}
+            </strong>{" "}
+            of{" "}
+            <strong className="text-primary font-bold">
+              {PROJECTS.length}
+            </strong>{" "}
+            project{PROJECTS.length === 1 ? "" : "s"}
           </span>
           <span className="flex items-center gap-1">
             <FilterListIcon sx={{ fontSize: 14 }} className="text-highlight" />
@@ -151,8 +163,16 @@ const FeaturedProjects = ({ limit = 6 }) => {
           <AnimatePresence mode="popLayout">
             {displayedProjects.map((project, index) => {
               const isExpanded = expandedProject === project.title;
-              const hasRepo = Boolean(project.repo && project.repo.trim() !== "" && project.repo !== "#");
-              const hasLive = Boolean(project.live && project.live.trim() !== "" && project.live !== "#");
+              const hasRepo = Boolean(
+                project.repo &&
+                project.repo.trim() !== "" &&
+                project.repo !== "#",
+              );
+              const hasLive = Boolean(
+                project.live &&
+                project.live.trim() !== "" &&
+                project.live !== "#",
+              );
 
               return (
                 <motion.div
@@ -168,7 +188,8 @@ const FeaturedProjects = ({ limit = 6 }) => {
                   <div className="relative overflow-hidden h-52 bg-black/40">
                     <img
                       src={
-                        project.image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80"
+                        project.image ||
+                        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80"
                       }
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -215,12 +236,20 @@ const FeaturedProjects = ({ limit = 6 }) => {
                     {(project.databaseSchema || project.apiRoutes) && (
                       <div className="pt-2 border-t border-divider/10">
                         <button
-                          onClick={() => setExpandedProject(isExpanded ? null : project.title)}
+                          onClick={() =>
+                            setExpandedProject(
+                              isExpanded ? null : project.title,
+                            )
+                          }
                           className="w-full py-2 px-3 rounded-xl bg-secondary/30 hover:bg-secondary/60 text-[11px] font-bold text-highlight transition-colors flex items-center justify-between cursor-pointer"
                         >
                           <span className="flex items-center gap-1.5">
                             <CodeIcon sx={{ fontSize: 14 }} />
-                            <span>{isExpanded ? "Hide Architecture Specs" : "View Technical Specs"}</span>
+                            <span>
+                              {isExpanded
+                                ? "Hide Architecture Specs"
+                                : "View Technical Specs"}
+                            </span>
                           </span>
                           <span>{isExpanded ? "▲" : "▼"}</span>
                         </button>
@@ -237,10 +266,14 @@ const FeaturedProjects = ({ limit = 6 }) => {
                                 <div className="p-3 rounded-xl bg-secondary/40 text-[11px] space-y-1">
                                   <div className="font-bold text-emerald-400 flex items-center gap-1">
                                     <StorageIcon sx={{ fontSize: 13 }} />
-                                    <span>DB: {project.databaseSchema.type}</span>
+                                    <span>
+                                      DB: {project.databaseSchema.type}
+                                    </span>
                                   </div>
                                   <div className="text-third font-mono">
-                                    {project.databaseSchema.collections?.slice(0, 2).join(", ")}
+                                    {project.databaseSchema.collections
+                                      ?.slice(0, 2)
+                                      .join(", ")}
                                   </div>
                                 </div>
                               )}
@@ -252,9 +285,13 @@ const FeaturedProjects = ({ limit = 6 }) => {
                                     <span>Endpoints</span>
                                   </div>
                                   <div className="text-third font-mono">
-                                    {project.apiRoutes.slice(0, 2).map((r, i) => (
-                                      <div key={i}>• {r.method} {r.path}</div>
-                                    ))}
+                                    {project.apiRoutes
+                                      .slice(0, 2)
+                                      .map((r, i) => (
+                                        <div key={i}>
+                                          • {r.method} {r.path}
+                                        </div>
+                                      ))}
                                   </div>
                                 </div>
                               )}
@@ -308,7 +345,9 @@ const FeaturedProjects = ({ limit = 6 }) => {
         {/* Empty Search State */}
         {filteredProjects.length === 0 && (
           <div className="text-center py-16 bg-secondary/20 rounded-3xl border border-divider/10">
-            <p className="text-third text-sm">No projects matching your current search or category filter.</p>
+            <p className="text-third text-sm">
+              No projects matching your current search or category filter.
+            </p>
             <button
               onClick={() => {
                 setSearchQuery("");
@@ -334,11 +373,13 @@ const FeaturedProjects = ({ limit = 6 }) => {
               className="btn-primary inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl font-black text-sm shadow-xl hover:scale-105 transition-all duration-300 group"
             >
               <span>Explore All ({PROJECTS.length}) Repositories & Demos</span>
-              <ArrowForwardIcon sx={{ fontSize: 18 }} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+              <ArrowForwardIcon
+                sx={{ fontSize: 18 }}
+                className="group-hover:translate-x-1.5 transition-transform duration-300"
+              />
             </Link>
           </motion.div>
         )}
-
       </div>
     </section>
   );

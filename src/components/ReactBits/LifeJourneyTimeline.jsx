@@ -20,7 +20,11 @@ const getIcon = (title = "") => {
     return <SchoolIcon sx={{ fontSize: 20 }} className="text-highlight" />;
   } else if (lower.includes("internship") || lower.includes("intern")) {
     return <WorkIcon sx={{ fontSize: 20 }} className="text-highlight" />;
-  } else if (lower.includes("project") || lower.includes("converse") || lower.includes("app")) {
+  } else if (
+    lower.includes("project") ||
+    lower.includes("converse") ||
+    lower.includes("app")
+  ) {
     return <CodeIcon sx={{ fontSize: 20 }} className="text-highlight" />;
   }
   return <EmojiEventsIcon sx={{ fontSize: 20 }} className="text-highlight" />;
@@ -39,8 +43,10 @@ const LifeJourneyTimeline = () => {
             const isLeft = item.side === "left" || index % 2 === 0;
 
             return (
-              <div key={index} className="relative flex flex-col md:flex-row items-center w-full group">
-                
+              <div
+                key={index}
+                className="relative flex flex-col md:flex-row items-center w-full group"
+              >
                 {/* Central Node Badge - Positioned Exactly on Central Line */}
                 <motion.div
                   initial={{ scale: 0, rotate: -90 }}
@@ -53,7 +59,9 @@ const LifeJourneyTimeline = () => {
                 </motion.div>
 
                 {/* Left Side Content Container */}
-                <div className={`w-full md:w-1/2 ${isLeft ? "md:pr-12 md:text-right" : "md:opacity-0 md:pointer-events-none"}`}>
+                <div
+                  className={`w-full md:w-1/2 ${isLeft ? "md:pr-12 md:text-right" : "md:opacity-0 md:pointer-events-none"}`}
+                >
                   {isLeft && (
                     <motion.div
                       initial={{ opacity: 0, x: -30 }}
@@ -78,25 +86,32 @@ const LifeJourneyTimeline = () => {
                         {item.description}
                       </p>
 
-                      {item.link && item.link !== "#" && !item.link.includes("example.com") && (
-                        <div className="mt-4 pt-2 border-t border-divider/10 flex items-center justify-start md:justify-end">
-                          <a
-                            href={item.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs font-bold text-highlight hover:text-white transition-colors duration-300 group/link"
-                          >
-                            <span>Explore Details</span>
-                            <LaunchIcon sx={{ fontSize: 13 }} className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                          </a>
-                        </div>
-                      )}
+                      {item.link &&
+                        item.link !== "#" &&
+                        !item.link.includes("example.com") && (
+                          <div className="mt-4 pt-2 border-t border-divider/10 flex items-center justify-start md:justify-end">
+                            <a
+                              href={item.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs font-bold text-highlight hover:text-white transition-colors duration-300 group/link"
+                            >
+                              <span>Explore Details</span>
+                              <LaunchIcon
+                                sx={{ fontSize: 13 }}
+                                className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform"
+                              />
+                            </a>
+                          </div>
+                        )}
                     </motion.div>
                   )}
                 </div>
 
                 {/* Right Side Content Container */}
-                <div className={`w-full md:w-1/2 mt-4 md:mt-0 ${!isLeft ? "md:pl-12 md:text-left" : "md:opacity-0 md:pointer-events-none hidden md:block"}`}>
+                <div
+                  className={`w-full md:w-1/2 mt-4 md:mt-0 ${!isLeft ? "md:pl-12 md:text-left" : "md:opacity-0 md:pointer-events-none hidden md:block"}`}
+                >
                   {!isLeft && (
                     <motion.div
                       initial={{ opacity: 0, x: 30 }}
@@ -121,23 +136,27 @@ const LifeJourneyTimeline = () => {
                         {item.description}
                       </p>
 
-                      {item.link && item.link !== "#" && !item.link.includes("example.com") && (
-                        <div className="mt-4 pt-2 border-t border-divider/10 flex items-center justify-start">
-                          <a
-                            href={item.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs font-bold text-highlight hover:text-white transition-colors duration-300 group/link"
-                          >
-                            <span>Explore Details</span>
-                            <LaunchIcon sx={{ fontSize: 13 }} className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                          </a>
-                        </div>
-                      )}
+                      {item.link &&
+                        item.link !== "#" &&
+                        !item.link.includes("example.com") && (
+                          <div className="mt-4 pt-2 border-t border-divider/10 flex items-center justify-start">
+                            <a
+                              href={item.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs font-bold text-highlight hover:text-white transition-colors duration-300 group/link"
+                            >
+                              <span>Explore Details</span>
+                              <LaunchIcon
+                                sx={{ fontSize: 13 }}
+                                className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform"
+                              />
+                            </a>
+                          </div>
+                        )}
                     </motion.div>
                   )}
                 </div>
-
               </div>
             );
           })}

@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import { useEffect, useRef } from "react";
+import * as THREE from "three";
 
 // Small, optional WebGL ornament. The hero portrait and styling remain visible without WebGL.
 export default function Hero3DCanvas() {
@@ -7,10 +7,20 @@ export default function Hero3DCanvas() {
 
   useEffect(() => {
     const target = holder.current;
-    if (!target || !window.matchMedia('(min-width: 769px) and (prefers-reduced-motion: no-preference)').matches) return;
+    if (
+      !target ||
+      !window.matchMedia(
+        "(min-width: 769px) and (prefers-reduced-motion: no-preference)",
+      ).matches
+    )
+      return;
     let renderer;
     try {
-      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false, powerPreference: 'low-power' });
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: false,
+        powerPreference: "low-power",
+      });
     } catch {
       return; // WebGL blocked or unavailable: CSS artwork still works.
     }
@@ -23,8 +33,22 @@ export default function Hero3DCanvas() {
     const group = new THREE.Group();
     scene.add(group);
     const geometry = new THREE.TorusKnotGeometry(2.1, 0.018, 160, 6, 2, 5);
-    const wire = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0xc3fb72, transparent: true, opacity: 0.85 }));
-    const orbit = new THREE.Mesh(new THREE.TorusGeometry(2.65, 0.007, 5, 140), new THREE.MeshBasicMaterial({ color: 0xe9e4db, transparent: true, opacity: 0.52 }));
+    const wire = new THREE.Mesh(
+      geometry,
+      new THREE.MeshBasicMaterial({
+        color: 0xc3fb72,
+        transparent: true,
+        opacity: 0.85,
+      }),
+    );
+    const orbit = new THREE.Mesh(
+      new THREE.TorusGeometry(2.65, 0.007, 5, 140),
+      new THREE.MeshBasicMaterial({
+        color: 0xe9e4db,
+        transparent: true,
+        opacity: 0.52,
+      }),
+    );
     orbit.rotation.x = 0.48;
     group.add(wire, orbit);
     const observer = new ResizeObserver(() => {
@@ -38,7 +62,9 @@ export default function Hero3DCanvas() {
     observer.observe(target);
     let frame = 0;
     let active = true;
-    const visibility = new IntersectionObserver(([entry]) => { active = entry.isIntersecting; });
+    const visibility = new IntersectionObserver(([entry]) => {
+      active = entry.isIntersecting;
+    });
     visibility.observe(target);
     const pointer = { x: 0, y: 0 };
     const onPointer = (event) => {
@@ -47,7 +73,7 @@ export default function Hero3DCanvas() {
       pointer.y = (event.clientY - rect.top) / rect.height - 0.5;
     };
     const parent = target.parentElement;
-    parent?.addEventListener('pointermove', onPointer, { passive: true });
+    parent?.addEventListener("pointermove", onPointer, { passive: true });
     const draw = () => {
       frame = requestAnimationFrame(draw);
       if (document.hidden || !active) return;
@@ -60,7 +86,7 @@ export default function Hero3DCanvas() {
     draw();
     return () => {
       cancelAnimationFrame(frame);
-      parent?.removeEventListener('pointermove', onPointer);
+      parent?.removeEventListener("pointermove", onPointer);
       visibility.disconnect();
       observer.disconnect();
       geometry.dispose();

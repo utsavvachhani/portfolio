@@ -43,12 +43,10 @@ function Contact() {
 
   return (
     <section className="relative bg-primary text-primary min-h-screen pt-28 sm:pt-36 pb-20 px-6 sm:px-12 lg:px-8 overflow-hidden">
-      
       {/* Background Ambient Glowing Nodes */}
       <AmbientBackground />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        
         {/* Animated Section Header */}
         <SectionHeader
           as="h1"
@@ -68,13 +66,17 @@ function Contact() {
         >
           <div className="group relative bg-secondary/30 backdrop-blur-xl border border-divider/10 hover:border-highlight/30 p-8 md:p-10 rounded-3xl text-center shadow-2xl transition-all duration-300 max-w-md w-full overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-highlight/0 to-highlight/[0.03] pointer-events-none"></div>
-            
+
             <div className="mx-auto w-14 h-14 rounded-2xl bg-highlight/10 flex items-center justify-center text-highlight mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md">
               <EmailIcon sx={{ fontSize: 30 }} />
             </div>
 
-            <p className="text-xl font-black text-primary tracking-wide mb-1">Direct Email</p>
-            <p className="text-sm text-third font-mono font-semibold select-all mb-6">{PERSONAL_INFO.email}</p>
+            <p className="text-xl font-black text-primary tracking-wide mb-1">
+              Direct Email
+            </p>
+            <p className="text-sm text-third font-mono font-semibold select-all mb-6">
+              {PERSONAL_INFO.email}
+            </p>
 
             <div className="flex items-center justify-center gap-3">
               <a
@@ -92,12 +94,18 @@ function Contact() {
               >
                 {copied ? (
                   <>
-                    <CheckIcon sx={{ fontSize: 15 }} className="text-emerald-400" />
+                    <CheckIcon
+                      sx={{ fontSize: 15 }}
+                      className="text-emerald-400"
+                    />
                     <span className="text-emerald-400">Copied!</span>
                   </>
                 ) : (
                   <>
-                    <ContentCopyIcon sx={{ fontSize: 15 }} className="text-highlight" />
+                    <ContentCopyIcon
+                      sx={{ fontSize: 15 }}
+                      className="text-highlight"
+                    />
                     <span>Copy Address</span>
                   </>
                 )}
@@ -114,7 +122,7 @@ function Contact() {
         />
 
         {/* Social Cards Stagger Grid */}
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -133,13 +141,18 @@ function Contact() {
               <div className="absolute inset-0 bg-gradient-to-tr from-highlight/0 to-highlight/[0.03] pointer-events-none"></div>
 
               <div className="flex flex-col items-center transition duration-300 group-hover:scale-105 text-primary">
-                <div className={`text-4xl mb-3 text-highlight group-hover:scale-110 transition-transform duration-300 ${textColor}`}>{icon}</div>
-                <p className="font-extrabold text-xs tracking-wider uppercase text-primary">{label}</p>
+                <div
+                  className={`text-4xl mb-3 text-highlight group-hover:scale-110 transition-transform duration-300 ${textColor}`}
+                >
+                  {icon}
+                </div>
+                <p className="font-extrabold text-xs tracking-wider uppercase text-primary">
+                  {label}
+                </p>
               </div>
             </motion.a>
           ))}
         </motion.div>
-
       </div>
     </section>
   );

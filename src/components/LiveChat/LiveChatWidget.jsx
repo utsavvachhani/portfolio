@@ -5,7 +5,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import PersonIcon from "@mui/icons-material/Person";
-import { INITIAL_MESSAGES, getBotResponse, PERSONAL_INFO } from "../../constants";
+import {
+  INITIAL_MESSAGES,
+  getBotResponse,
+  PERSONAL_INFO,
+} from "../../constants";
 
 const LiveChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +37,10 @@ const LiveChatWidget = () => {
       id: Date.now(),
       sender: "user",
       text: userText,
-      time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      time: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
     };
 
     setMessages((prev) => [...prev, userMsg]);
@@ -47,7 +54,10 @@ const LiveChatWidget = () => {
         id: Date.now() + 1,
         sender: "bot",
         text: botText,
-        time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        time: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
         options: followUpOptions,
       };
 
@@ -68,7 +78,6 @@ const LiveChatWidget = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none">
-      
       {/* Teaser Tooltip Popover */}
       <AnimatePresence>
         {!isOpen && showTooltip && (
@@ -93,7 +102,12 @@ const LiveChatWidget = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.7, y: 30, transformOrigin: "bottom right" }}
+            initial={{
+              opacity: 0,
+              scale: 0.7,
+              y: 30,
+              transformOrigin: "bottom right",
+            }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.7, y: 30 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
@@ -175,19 +189,21 @@ const LiveChatWidget = () => {
                   </div>
 
                   {/* Interactive Quick Option Chips */}
-                  {msg.sender === "bot" && msg.options && msg.options.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mt-2.5 pl-9 max-w-[90%]">
-                      {msg.options.map((opt) => (
-                        <button
-                          key={opt.id}
-                          onClick={() => handleOptionClick(opt)}
-                          className="px-3 py-1.5 rounded-xl bg-highlight/15 hover:bg-highlight hover:text-dark text-highlight text-[11px] font-bold transition-all duration-300 shadow-sm cursor-pointer active:scale-95 text-left"
-                        >
-                          {opt.label}
-                        </button>
-                      ))}
-                    </div>
-                  )}
+                  {msg.sender === "bot" &&
+                    msg.options &&
+                    msg.options.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mt-2.5 pl-9 max-w-[90%]">
+                        {msg.options.map((opt) => (
+                          <button
+                            key={opt.id}
+                            onClick={() => handleOptionClick(opt)}
+                            className="px-3 py-1.5 rounded-xl bg-highlight/15 hover:bg-highlight hover:text-dark text-highlight text-[11px] font-bold transition-all duration-300 shadow-sm cursor-pointer active:scale-95 text-left"
+                          >
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                 </motion.div>
               ))}
 
@@ -201,9 +217,18 @@ const LiveChatWidget = () => {
                     <SmartToyIcon sx={{ fontSize: 14 }} />
                   </div>
                   <div className="bg-primary/70 p-3 rounded-2xl rounded-bl-none flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-highlight animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-highlight animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-highlight animate-bounce" style={{ animationDelay: "300ms" }} />
+                    <span
+                      className="w-1.5 h-1.5 rounded-full bg-highlight animate-bounce"
+                      style={{ animationDelay: "0ms" }}
+                    />
+                    <span
+                      className="w-1.5 h-1.5 rounded-full bg-highlight animate-bounce"
+                      style={{ animationDelay: "150ms" }}
+                    />
+                    <span
+                      className="w-1.5 h-1.5 rounded-full bg-highlight animate-bounce"
+                      style={{ animationDelay: "300ms" }}
+                    />
                   </div>
                 </motion.div>
               )}
@@ -256,7 +281,6 @@ const LiveChatWidget = () => {
           </span>
         )}
       </motion.button>
-
     </div>
   );
 };

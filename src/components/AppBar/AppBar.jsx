@@ -63,7 +63,6 @@ function AppBar() {
       }`}
     >
       <div className="flex items-center justify-between max-w-screen-xl mx-auto">
-        
         {/* Left: Logo and Title */}
         <div className="flex items-center space-x-3">
           <Link to="/" className="flex items-center space-x-3 group">
@@ -123,20 +122,24 @@ function AppBar() {
         <div className="hidden md:flex items-center space-x-3">
           {/* Social Links - Clean Borderless */}
           <div className="flex items-center space-x-1.5">
-            {SOCIAL_LINKS.slice(0, 4).map(({ href, icon, label, textColor }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={label}
-                className="group p-2 rounded-xl text-primary/70 bg-secondary/40 hover:bg-secondary/80 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center cursor-pointer"
-              >
-                <span className={`transition-all duration-300 ${textColor} flex items-center justify-center`}>
-                  {icon}
-                </span>
-              </a>
-            ))}
+            {SOCIAL_LINKS.slice(0, 4).map(
+              ({ href, icon, label, textColor }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={label}
+                  className="group p-2 rounded-xl text-primary/70 bg-secondary/40 hover:bg-secondary/80 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center cursor-pointer"
+                >
+                  <span
+                    className={`transition-all duration-300 ${textColor} flex items-center justify-center`}
+                  >
+                    {icon}
+                  </span>
+                </a>
+              ),
+            )}
           </div>
 
           {/* Theme Toggle Button - Clean Borderless */}
@@ -155,9 +158,15 @@ function AppBar() {
                 className="flex items-center justify-center"
               >
                 {isDarkMode ? (
-                  <LightModeIcon className="text-amber-400" sx={{ fontSize: 20 }} />
+                  <LightModeIcon
+                    className="text-amber-400"
+                    sx={{ fontSize: 20 }}
+                  />
                 ) : (
-                  <DarkModeIcon className="text-indigo-400" sx={{ fontSize: 20 }} />
+                  <DarkModeIcon
+                    className="text-indigo-400"
+                    sx={{ fontSize: 20 }}
+                  />
                 )}
               </motion.div>
             </AnimatePresence>
@@ -217,7 +226,9 @@ function AppBar() {
                         : "text-primary hover:bg-highlight/10 hover:text-highlight"
                     }`}
                   >
-                    <span className={isActive ? "text-inherit" : "text-highlight"}>
+                    <span
+                      className={isActive ? "text-inherit" : "text-highlight"}
+                    >
                       {page.icon}
                     </span>
                     <span>{page.name}</span>
@@ -227,17 +238,19 @@ function AppBar() {
             </nav>
 
             <div className="mt-4 pt-3 flex items-center justify-around">
-              {SOCIAL_LINKS.slice(0, 4).map(({ href, icon, label, textColor }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-primary/40 text-primary hover:text-highlight transition-all"
-                >
-                  <span className={textColor}>{icon}</span>
-                </a>
-              ))}
+              {SOCIAL_LINKS.slice(0, 4).map(
+                ({ href, icon, label, textColor }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-xl bg-primary/40 text-primary hover:text-highlight transition-all"
+                  >
+                    <span className={textColor}>{icon}</span>
+                  </a>
+                ),
+              )}
             </div>
           </motion.div>
         )}

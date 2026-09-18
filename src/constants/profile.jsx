@@ -14,7 +14,8 @@ export const PERSONAL_INFO = {
   email: "vachhaniutsav2@gmail.com",
   phone: "9512655868",
   location: "Surat, Gujarat, India",
-  cvLink: "https://drive.google.com/file/d/1zGjqP97eWmsi4EpYrL9FZXMl4KveP65P/view?usp=drive_link",
+  cvLink:
+    "https://drive.google.com/file/d/1zGjqP97eWmsi4EpYrL9FZXMl4KveP65P/view?usp=drive_link",
   github: "https://github.com/utsavvachhani",
   linkedin: "https://www.linkedin.com/in/vachhani-utsav-21ut75/",
   bioGreeting: "Hi, I'm Utsav Vachhani 👋",
