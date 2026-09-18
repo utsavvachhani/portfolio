@@ -1,17 +1,17 @@
-import Converse2k24 from "../assets/Converse2k24.png";
-import Converse2k25 from "../assets/Converse2k25.png";
-import cyberShield from "../assets/cyberShield.png";
-import whatsappweb from "../assets/whatsapp-web-js.png";
-import financialDakbord from "../assets/financialDakbord.png";
-import taskmanger from "../assets/taskmanger.png";
-import Memories from "../assets/memories.png";
-import ReactJSStudt from "../assets/React-JS-Study.png";
-import SoftwareEngineering from "../assets/SoftwareEngineering.png";
-import JSLOGO from "../assets/JSLOGO.png";
-import WT_LAB from "../assets/WT_LAB.png";
-import linkedlist from "../assets/linkedlist.png";
-import codesoftportfolie from "../assets/codesoftportfolie.jpg";
-import landingC from "../assets/landingC.jpg";
+import Converse2k24 from "../assets/optimized/Converse2k24.webp";
+import Converse2k25 from "../assets/optimized/Converse2k25.webp";
+import cyberShield from "../assets/optimized/cyberShield.webp";
+import whatsappweb from "../assets/optimized/whatsapp-web-js.webp";
+import financialDakbord from "../assets/optimized/financialDakbord.webp";
+import taskmanger from "../assets/optimized/taskmanger.webp";
+import Memories from "../assets/optimized/memories.webp";
+import ReactJSStudt from "../assets/optimized/React-JS-Study.webp";
+import SoftwareEngineering from "../assets/optimized/SoftwareEngineering.webp";
+import JSLOGO from "../assets/optimized/JSLOGO.webp";
+import WT_LAB from "../assets/optimized/WT_LAB.webp";
+import linkedlist from "../assets/optimized/linkedlist.webp";
+import codesoftportfolie from "../assets/optimized/codesoftportfolie.webp";
+import landingC from "../assets/optimized/landingC.webp";
 
 export const PROJECT_CATEGORIES = [
   { id: "all", label: "All Projects", tag: null },

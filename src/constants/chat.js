@@ -20,7 +20,7 @@ export const getBotResponse = (userText) => {
   let botText = "";
   let followUpOptions = QUICK_OPTIONS;
 
-  if (lower.includes("hi") || lower.includes("hello") || lower.includes("hey")) {
+  if (/\b(hi|hello|hey)\b/.test(lower)) {
     botText =
       "Hello! 👋 Great to meet you! I can help you learn more about Utsav's engineering projects, MERN stack skills, or contact info. What would you like to explore?";
   } else if (
@@ -40,16 +40,20 @@ export const getBotResponse = (userText) => {
     lower.includes("about") ||
     lower.includes("who") ||
     lower.includes("background") ||
-    lower.includes("education")
+    lower.includes("education") ||
+    lower.includes("experience") ||
+    lower.includes("intern")
   ) {
     botText =
-      "👤 Utsav Vachhani is a Full-Stack MERN Developer and IT Undergraduate student at Sarvajanik College of Engineering & Technology (SCET), Surat. He specializes in building scalable backend REST APIs, MongoDB schemas, and responsive React/Next.js interfaces.";
+      "👤 Utsav Vachhani is a Full-Stack Developer and B.Tech Information Technology student at SCET, Surat (2022–2026). He worked as a Web Development Intern at Cybersecurity Umbrella from January to April 2026, building Next.js dashboards, Node.js/Express services, API integrations, and PostgreSQL functionality.";
     followUpOptions = [
       { id: "projects", label: "💻 View Projects" },
       { id: "skills", label: "🛠️ Technical Skills" },
     ];
   } else if (
     lower.includes("skill") ||
+    lower.includes("technolog") ||
+    lower.includes("tech") ||
     lower.includes("mern") ||
     lower.includes("stack") ||
     lower.includes("react") ||

@@ -1,30 +1,20 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AppBar from './components/AppBar/AppBar.jsx';
-import AppFotter from './components/AppFotter/AppFotter.jsx';
-import Home from './pages/Home.jsx';
-import About from './pages/About.jsx';
-import Project from './pages/Project.jsx';
-import Contact from './pages/Contact.jsx';
-import Skills from './pages/Skills.jsx';
-import LiveChatWidget from './components/LiveChat/LiveChatWidget.jsx';
-import { ScrollToTop } from './components/common';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Portfolio from './pages/Portfolio.jsx';
+import Resume from './pages/Resume.jsx';
 
 function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <AppBar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Project />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/skills" element={<Skills />} />
+        <Route path="/" element={<Portfolio />} />
+        <Route path="/resume" element={<Resume />} />
+        <Route path="/about" element={<Navigate to="/#about" replace />} />
+        <Route path="/projects" element={<Navigate to="/#projects" replace />} />
+        <Route path="/skills" element={<Navigate to="/#skills" replace />} />
+        <Route path="/contact" element={<Navigate to="/#contact" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <AppFotter />
-      <LiveChatWidget />
     </BrowserRouter>
   );
 }
-
 export default App;
