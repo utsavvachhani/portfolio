@@ -9,7 +9,12 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "verify:source": "node scripts/verify-source.mjs"
+    "verify:source": "node scripts/verify-source.mjs",
+    "verify:github": "node scripts/verify-github.mjs",
+    "verify:upgrade": "node scripts/verify-upgrade.mjs",
+    "test:github": "node --test tests/*.test.mjs",
+    "resume:pdf": "node scripts/export-resume-pdf.mjs",
+    "verify:resume": "node scripts/verify-resume.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

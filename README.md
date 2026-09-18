@@ -1,38 +1,46 @@
-# Utsav Vachhani — single-page portfolio redesign
+# Utsav Vachhani — GitHub-style developer portfolio
 
-## Run
+An updated version of the **portfolio in the provided ZIP**, using the supplied Utsav Vachhani identity, portrait, résumé, real project records and existing assets. The GitHub-inspired profile is now the default homepage; the original creative design is retained at `/creative` rather than replaced.
+
+## Start locally
+
+Use Node.js **22.12+** (or a supported recent Node 20 version) and a compatible npm version.
 
 ```bash
 npm ci
-npm run verify:source
 npm run dev
-npm run build
-npm run lint
 ```
 
-This retains the original React 19/Vite 7 project and all original project asset files. The new experience is in `src/pages/Portfolio.jsx`, the separate résumé page is `src/pages/Resume.jsx`, and design tokens/layouts are in `src/index.css`. The existing project constants, personal information, social URLs, milestone content and skills data remain the data sources. The supplied PDF is copied **unchanged** to `public/resume/utsav-vachhani-resume.pdf`, so the Download PDF button serves the original rather than attempting a potentially inconsistent conversion.
+Open the local URL printed by Vite, normally `http://localhost:5173`.
 
-**Latest implementation:** See [README-REDESIGN.md](README-REDESIGN.md) for the final hero, project gallery, fullscreen case studies, assistant, footer and data-source limitations. Avoid mixing npm 12 with Node.js 20; use an npm version compatible with your Node version or update both together.
+```bash
+npm run verify:source
+npm run verify:github
+npm run lint
+npm run build
+npm run preview
+```
 
-## Routes
+`npm run preview` runs the built production frontend. Deploy the `dist` directory. The existing `vercel.json` provides SPA rewrites when deployed at the domain root. A GitHub Pages repository subpath requires adjusting `vite.config.js` base and the router; do not deploy under a subpath unchanged.
 
-- `/` — complete single-page portfolio (`#home`, `#about`, `#projects`, `#skills`, `#journey`, `#contact`).
-- `/resume` — accessible HTML résumé, original PDF download and print layout.
-- Old `/about`, `/projects`, `/skills`, `/contact` routes redirect to the matching section.
-- `/?project=project-id` — a directly linkable, native accessible project-details dialog.
+## What is merged?
 
-## Functionality
+- `/` — NEW GitHub-style, responsive developer profile, sidebar, README, socials, skill badges, pinned projects, accurate portfolio statistics, searchable/filterable repositories, full-screen overview-first project dialogs, profile light/dark switcher, biography, timeline and contact links.
+- `/creative` — ORIGINAL animated creative portfolio: original sections, animations, galleries, filterable work, contact form and assistant.
+- `/resume` — restored classic white résumé preview, all 15 projects, print control, and downloadable **A4 PDF generated from the same standalone HTML source** (`public/resume/resume.html`).
+- `/?project=project-id` — deep-linkable full-screen GitHub-style project dialog opening on Overview, with a source-code tab and next/previous controls. Repository rows contain no thumbnails.
+- The original project files, images, source URLs, social links, achievements context and CV are included. Original project details and the locally scripted portfolio assistant are reused.
 
-All original portfolio projects are retained; the PDF-only uvMart entry was additionally included using the résumé's description and embedded GitHub link. There is no invented screenshot or live URL for projects that lack one. Card filters and search are client-side and do not fetch user data. Project details have native dialog focus management and Escape dismissal. The contact form opens the visitor's email app: it does **not** claim to send to an unavailable backend. External links open with `rel="noopener noreferrer"`. Canvas art only loads for fine-pointer, sufficiently wide, reduced-motion-disabled screens; the hero has a CSS and photo fallback. Project tilt, ticker and custom cursor are disabled for reduced-motion or touch users.
+### Important accuracy choices
 
-## Notes about source material
+The uploaded project belongs to **Utsav Vachhani**. The preceding conceptual design image used a different placeholder name, so this implementation deliberately preserves the actual ZIP owner's identity instead of misattributing projects or reusing a generated portrait. GitHub stars, streaks, contributions, followers and repo totals were **not fabricated**. The optional public GitHub API loads followers and public repository totals when available; if not, these remain hidden. Portfolio counts are calculated from the supplied project records. Technology-coverage bars describe the included projects, not GitHub contribution history.
 
-The PDF is the sole content source for `/resume`, including its original wording, links and dates. The broader portfolio retains the extra biography/milestones/skills from the ZIP. The PDF contains the original printed wording `quizze` and trailing `h` after one experience bullet; these are preserved for strict fidelity. Review and update the **source PDF** and HTML together if the résumé owner wishes to correct them.
+No backend contact API was supplied. The new contact action opens an email client, and the original contact form also uses mailto. The assistant is a local predefined-answer widget, not an AI API.
 
-Before deployment, verify the original GitHub/demo/social URLs are still live, since the supplied files were used without external link verification. No contact API exists in the source ZIP; add and secure one only if real in-site form submission is needed.
+**Deployment checklist:** Run all commands above with network access for npm packages, inspect desktop/tablet/mobile layouts in your browser, and confirm external GitHub/demo links and personal details are current before publishing.
 
-## Verification status (18 September 2026)
+More setup and architecture: [README-GITHUB.md](README-GITHUB.md). Original release documentation is preserved in [README-REDESIGN.md](README-REDESIGN.md) and [README-ORIGINAL.md](README-ORIGINAL.md).
 
-Offline validation passed for JSX/JavaScript parsing and internal import paths, all 14 original project IDs, feature coverage for all 15 displayed projects, section anchors, CSS parsing, screenshot paths, and byte-for-byte fidelity of the original one-page PDF including its hyperlinks.
+## Current release notes
 
-**Important:** The npm registry could not be resolved (`EAI_AGAIN`) in this environment, so dependency installation, `npm run build`, `npm run lint`, and live browser interaction testing could **not** be completed here. Run these commands locally, review screenshots on real breakpoints and verify external links before calling the deployment production-ready. Deploy at the domain root on Vercel (the existing `vercel.json` provides SPA rewrites); GitHub Pages under a repository subpath requires additional base-path/router changes.
+See `CHANGELOG-RESUME-APPEARANCE.md` for the latest requested changes. Edit only `public/resume/resume.html` for the résumé; after editing run `npm run resume:pdf` to regenerate the matching PDF. `npm run verify:resume` checks the résumé and the related UI source.

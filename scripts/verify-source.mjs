@@ -24,10 +24,9 @@ for (const file of allSource) {
     assert(['', '.js', '.jsx', '.json'].some((ext) => existsSync(base + ext) || existsSync(join(base, 'index' + (ext || '.js')))), `Broken import: ${file}: ${match[1]}`);
     importsChecked++;
   }
-  if (file.endsWith('Portfolio.jsx') || file.endsWith('Resume.jsx')) {
-    const lucide = source.match(/import\s+\{[^}]*\}\s+from\s+['"]lucide-react['"]/g) || [];
-    assert(lucide.every((line) => !/\b(?:Github|Instagram|Linkedin)\b/.test(line)), `${file} imports unavailable brand icon from lucide-react`);
-  }
+  // Modern Lucide omits brand marks. Check EVERY source file, including nested viewers.
+  const lucide = source.match(/import\s+\{[^}]*\}\s+from\s+['"]lucide-react['"]/g) || [];
+  assert(lucide.every((line) => !/\b(?:Github|Instagram|Linkedin|Twitter|Facebook)\b/.test(line)), `${file} imports an unavailable brand icon from lucide-react; import it from BrandIcons.jsx instead`);
 }
 const portfolio = read('src/pages/Portfolio.jsx');
 const dialog = read('src/components/ProjectDetailDialog.jsx');

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light" />
+<title>Utsav Vachhani — Résumé</title>
+<!-- The single editable résumé HTML source. Screen preview, browser printing and
+     the downloadable A4 PDF are all rendered from THIS file. See RESUME-SOURCE.md. -->
+<style>
+  :root { color-scheme: light; --ink:#20292f; --muted:#515b62; --accent:#64833c; --line:#cfd4c7; }
+  *,*::before,*::after {box-sizing:border-box}
+  html,body {margin:0;padding:0;background:#ecece7;color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a {color:#45652f;text-decoration:none;overflow-wrap:anywhere}
+  a:hover {text-decoration:underline}
+  .sheet {width:min(210mm,100%);padding:15mm 16mm 16mm;margin:22px auto 36px;background:#fff;box-shadow:0 15px 48px #17221a18;min-height:297mm}
+  .topline {display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:9px;font-size:9px;font-weight:700;letter-spacing:.15em;color:#788265}
+  header {display:flex;justify-content:space-between;align-items:end;gap:20px;padding:25px 0 25px}
+  .eyebrow {font-size:10px;letter-spacing:.14em;font-weight:700;color:#6f8750;margin:0 0 7px}
+  h1 {font-size:48px;letter-spacing:-.07em;line-height:.99;margin:0;font-weight:700}
+  h1 em {font-style:normal;color:#7d9954}
+  .contact {display:grid;gap:6px;font-size:10px;line-height:1.4;min-width:205px}
+  .contact a {color:#48535c}
+  .line {border-top:1px solid var(--line);padding:14px 0;display:grid;grid-template-columns:116px 1fr;gap:18px}
+  .line h2 {margin:0;font-size:12px;letter-spacing:-.02em}
+  .line h2 span {font-size:9px;color:#7a9d50;margin-right:7px}
+  .line p,.line li {font-size:10px;line-height:1.56;color:#454f57;margin:0}
+  .line ul {margin:7px 0 0;padding-left:15px}
+  .line li {margin:0 0 3px}
+  .entry {break-inside:avoid;page-break-inside:avoid}
+  .entry-title {display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-size:10px}
+  .entry-title strong {font-weight:700}
+  .entry-title small {color:#56616b;font-size:9px;white-space:nowrap}
+  .entry-sub {color:#57646a;font-size:9px;margin-top:3px}
+  .project-intro {margin-bottom:9px!important;color:#646e74!important}
+  .projects {display:grid;gap:0}
+  .project {padding:9px 0;border-bottom:1px solid #e5e9e1;break-inside:avoid;page-break-inside:avoid}
+  .project:last-child {border:0}
+  .project-title {display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .project h3 {margin:0 0 3px;font-size:10px;color:#20292f}
+  .project-links {display:flex;gap:10px;flex-shrink:0;font-size:9px;font-weight:700}.project-links a{white-space:nowrap}
+  .project p {margin:0;font-size:9.6px;line-height:1.48}
+  .project .tech {font-size:9px;color:#6b735f;margin-top:3px}
+  .skills p {margin:0 0 5px}
+  .bottom {border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;padding-top:11px;color:#7c8576;font-size:8px;font-weight:700;letter-spacing:.14em}
+  @page { size: A4; margin: 0; }
+  @media print {
+    html,body {background:#fff!important}
+    .sheet {width:210mm;min-height:0;margin:0;padding:15mm 16mm 16mm;box-shadow:none}
+    .line {break-inside:avoid-page}
+    .projects-line {break-inside:auto}
+    .project {break-inside:avoid-page}
+    h2 {break-after:avoid}
+    a {text-decoration:none}
+  }
+  @media (max-width:650px) {
+    .sheet {width:100%;padding:25px 20px;min-height:0;margin:0;box-shadow:none}
+    header {display:block}h1{font-size:44px}.contact{margin-top:17px}
+    .line{grid-template-columns:1fr;gap:9px;padding:16px 0}
+    .entry-title,.project-title{align-items:flex-start;flex-wrap:wrap}
+  }
+</style>
+</head>
+<body>
+<main class="sheet" id="resume-document" aria-label="Utsav Vachhani résumé">
+<div class="topline"><span>CURRICULUM VITAE</span><span>UTSAV / 2026</span></div>
+<header><div><p class="eyebrow">FULL-STACK DEVELOPER</p><h1>Utsav<br/><em>Vachhani.</em></h1></div>
+<div class="contact"><a href="tel:+919512655868">+91 9512655868</a><a href="mailto:vachhaniutsav2@gmail.com">vachhaniutsav2@gmail.com</a><a href="https://github.com/utsavvachhani">github.com/utsavvachhani</a><a href="https://www.linkedin.com/in/vachhaniutsav/">linkedin.com/in/vachhaniutsav</a><span>Surat, Gujarat, India</span></div></header>
+<section class="line"><h2><span>01</span> Summary</h2><div><p>Full-Stack Developer experienced with modern web applications, responsive interfaces, REST APIs, authentication and database-backed products. Works with React, Next.js, Node.js and the MERN stack, bringing product ideas from frontend design through backend implementation.</p></div></section>
+<section class="line"><h2><span>02</span> Education</h2><div class="entry"><div class="entry-title"><strong>Sarvajanik College of Engineering &amp; Technology (SCET)</strong><small>2022–2026</small></div><div class="entry-sub">B.Tech., Information Technology · CGPA 9.34 · Surat, India</div></div></section>
+<section class="line"><h2><span>03</span> Experience</h2><div class="entry"><div class="entry-title"><strong>Web Development Intern · Cybersecurity Umbrella</strong><small>Jan–Apr 2026</small></div><div class="entry-sub">On site</div><ul><li>Built Next.js dashboards and internal tools; developed Node.js and Express.js backend services.</li><li>Integrated APIs and frontend–backend data flows.</li><li>Worked with PostgreSQL for database design and data management.</li></ul></div></section>
+<section class="line"><h2><span>04</span> Leadership</h2><div class="entry"><div class="entry-title"><strong>Head of Event Management · Converse 2K25</strong><small>2025</small></div><div class="entry-sub">SCET · Surat, India · <a href="https://www.instagram.com/converse2k25/">Event page ↗</a></div><ul><li>Led a two-day national tech fest with 2,000+ participants and managed 180+ coordinators and volunteers.</li><li>Coordinated communications and proposed 30+ event concepts; one was selected and executed.</li><li>Developed the event platform to streamline registration and operations.</li></ul></div></section>
+<section class="line"><h2><span>05</span> Technical skills</h2><div class="skills"><p><strong>Frontend:</strong> React.js, Next.js, JavaScript, HTML5, CSS3, Tailwind CSS</p><p><strong>Backend:</strong> Node.js, Express.js, REST APIs</p><p><strong>Databases:</strong> MongoDB, Firebase, PostgreSQL, MySQL</p><p><strong>Other:</strong> Git, GitHub, Vercel, Python, Java, C, JWT</p></div></section>
+<section class="line projects-line"><h2><span>06</span> Projects<br/><small style="font-size:9px;color:#7c886d;font-weight:400">All 15 showcased projects</small></h2><div><p class="project-intro">Selected professional, academic and independent work. Repository and demo links are included when supplied in the original portfolio.</p><div class="projects">
+<article class="project">
+    <div class="project-title"><h3>Converse2K25</h3><div class="project-links"><a href="https://github.com/utsavvachhani/converse2k25" rel="noopener noreferrer">GitHub ↗</a><a href="https://converse2k25.vercel.app/" rel="noopener noreferrer">Live ↗</a></div></div>
+    <p>Full-stack annual college fest registration and event management platform built with the MERN stack.</p><p class="tech"><strong>Stack:</strong> MongoDB, Express.js, React.js, Node.js, Redux Toolkit, JWT</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>Cyber Shield - Threat Analytics</h3><div class="project-links"><a href="https://github.com/utsavvachhani/emailAwareness" rel="noopener noreferrer">GitHub ↗</a></div></div>
+    <p>Email security awareness platform with automated threat simulations, analytics reports, and user audits.</p><p class="tech"><strong>Stack:</strong> Next.js, Express.js, Tailwind CSS, Node.js, JWT, Stripe, PostgreSQL, Nodemailer, bcryptjs, axios, framer-motion, recharts</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>WhatsApp Web Service</h3><div class="project-links"></div></div>
+    <p>Headless WhatsApp automation client and webhook server using whatsapp-web.js and WebSockets.</p><p class="tech"><strong>Stack:</strong> Vite.js, Express.js, Tailwind CSS, Node.js, JWT, bcryptjs, whatsapp-web.js, Socket.io</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>Task Manager App</h3><div class="project-links"></div></div>
+    <p>Intuitive productivity application for organized daily workflow tracking, priorities, and status updates.</p><p class="tech"><strong>Stack:</strong> React.js, Express.js, Tailwind CSS, Node.js, MongoDB, JWT, RESTful API</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>Converse2K24</h3><div class="project-links"><a href="https://github.com/utsavvachhani/converse2k24" rel="noopener noreferrer">GitHub ↗</a><a href="https://utsavvachhani.github.io/converse2k24/" rel="noopener noreferrer">Live ↗</a></div></div>
+    <p>Full-stack fest registration portal featuring real-time synchronization with Google Sheets API and Firebase.</p><p class="tech"><strong>Stack:</strong> React.js, Firebase Auth, Tailwind CSS, Google Sheets API</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>Finance Dashboard UI</h3><div class="project-links"><a href="https://github.com/utsavvachhani/finance-dashboard-ui" rel="noopener noreferrer">GitHub ↗</a><a href="https://finance-dashboard-ui-psi-ten.vercel.app/" rel="noopener noreferrer">Live ↗</a></div></div>
+    <p>Modern financial analytics telemetry dashboard featuring responsive charts, KPI widgets, and fluid micro-animations.</p><p class="tech"><strong>Stack:</strong> React.js, framer-motion, lucide-react, Tailwind CSS, Recharts</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>Memories Social App</h3><div class="project-links"><a href="https://github.com/utsavvachhani/memories" rel="noopener noreferrer">GitHub ↗</a><a href="https://memories-app-omega.vercel.app/" rel="noopener noreferrer">Live ↗</a></div></div>
+    <p>Full-stack MERN social journal for sharing personal milestones, images, and user interactions with JWT auth.</p><p class="tech"><strong>Stack:</strong> MongoDB, Express.js, React.js, Node.js, Redux Toolkit, JWT</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>React JS Architecture Lab</h3><div class="project-links"><a href="https://github.com/utsavvachhani/react-js-study" rel="noopener noreferrer">GitHub ↗</a></div></div>
+    <p>Comprehensive React.js deep-dive repository showcasing custom hooks, Context API, state patterns, and optimizations.</p><p class="tech"><strong>Stack:</strong> React.js, Context API, React Hooks, CSS Modules</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>URKJ Fitness House (Gym Management)</h3><div class="project-links"><a href="https://github.com/utsavvachhani/Software-Engineering" rel="noopener noreferrer">GitHub ↗</a><a href="https://utsavvachhani.github.io/Software-Engineering/Home.html" rel="noopener noreferrer">Live ↗</a></div></div>
+    <p>Software engineering course project: Gym management system simplifying membership records, workouts, and schedules.</p><p class="tech"><strong>Stack:</strong> HTML5, CSS3, JavaScript, PHP, MySQL</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>Modern JavaScript Algorithms</h3><div class="project-links"><a href="https://github.com/utsavvachhani/js-studey" rel="noopener noreferrer">GitHub ↗</a></div></div>
+    <p>In-depth collection of JavaScript practice routines, ES6+ features, algorithmic solutions, and DOM manipulations.</p><p class="tech"><strong>Stack:</strong> JavaScript (ES6+), Algorithms, DOM Operations, Interactive UI</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>Web Technologies Lab Suite</h3><div class="project-links"><a href="https://github.com/utsavvachhani/WT_Lab" rel="noopener noreferrer">GitHub ↗</a><a href="https://utsavvachhani.github.io/WT_Lab/" rel="noopener noreferrer">Live ↗</a></div></div>
+    <p>Academic lab suite covering client-server architectures, XML schema validation, and responsive frontends.</p><p class="tech"><strong>Stack:</strong> HTML5, CSS3, JavaScript, XML Schemas, Java Servlets</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>Data Structures - Linked List in C</h3><div class="project-links"><a href="https://github.com/utsavvachhani/LinkedList_uv" rel="noopener noreferrer">GitHub ↗</a></div></div>
+    <p>Comprehensive implementation of singly and doubly linked lists in C with dynamic memory management algorithms.</p><p class="tech"><strong>Stack:</strong> C Programming, Pointers, Data Structures, Memory Management</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>CodSoft Portfolio Showcase</h3><div class="project-links"><a href="https://github.com/utsavvachhani/CODSOFT_PROTFOLIO" rel="noopener noreferrer">GitHub ↗</a><a href="https://utsavvachhani.github.io/CODSOFT_PROTFOLIO/" rel="noopener noreferrer">Live ↗</a></div></div>
+    <p>Personal web developer portfolio crafted with vanilla HTML5, CSS3, and modern CSS transitions.</p><p class="tech"><strong>Stack:</strong> HTML5, CSS3, Vanilla JS, Responsive Design, Micro-Animations</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>CodSoft Landing Page</h3><div class="project-links"><a href="https://github.com/utsavvachhani/CODSOFT_LANDING-PAGE" rel="noopener noreferrer">GitHub ↗</a><a href="https://utsavvachhani.github.io/CODSOFT_LANDING-PAGE/" rel="noopener noreferrer">Live ↗</a></div></div>
+    <p>High-converting modern product landing page built with semantic HTML5, Flexbox, and CSS Grid layouts.</p><p class="tech"><strong>Stack:</strong> HTML5, CSS3, Flexbox Grid, Transitions, Interactive Elements</p>
+  </article>
+<article class="project">
+    <div class="project-title"><h3>uvMart</h3><div class="project-links"><a href="https://github.com/utsavvachhani/uvMart" rel="noopener noreferrer">GitHub ↗</a></div></div>
+    <p>E-commerce platform with basic product management and email notification features.</p><p class="tech"><strong>Stack:</strong> MERN Stack, Nodemailer</p>
+  </article>
+</div></div></section>
+
+<div class="bottom"><span>UTSAV VACHHANI</span><span>RÉSUMÉ · PORTFOLIO PROJECTS</span></div>
+</main>
+</body></html>
