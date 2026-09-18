@@ -18,7 +18,7 @@ export default function Resume() {
   const [height, setHeight] = useState(1320);
 
   useEffect(() => {
-    document.title = "Résumé — Utsav Vachhani";
+    document.title = "Resume — Utsav Vachhani";
     window.scrollTo(0, 0);
     const update = () => {
       const doc = previewRef.current?.contentDocument;
@@ -52,7 +52,7 @@ export default function Resume() {
 
   return (
     <div className="resume-page">
-      <nav className="resume-nav" aria-label="Résumé toolbar">
+      <nav className="resume-nav" aria-label="Resume toolbar">
         <div className="resume-nav-inner shell">
           <a href="/#home" className="resume-back">
             <ArrowLeft size={17} /> BACK TO PORTFOLIO
@@ -79,7 +79,7 @@ export default function Resume() {
         <iframe
           ref={previewRef}
           src={HTML}
-          title="Classic white résumé — HTML preview"
+          title="Classic white Resume — HTML preview"
           onLoad={onPreviewLoad}
           className="resume-preview"
           style={{ height: `${height}px` }}

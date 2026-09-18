@@ -6,4 +6,4 @@ The new homepage follows its recognizable information architecture: dark platfor
 
 Polish added: consistent 8–12px spacing scale, responsive two-column to stacked layout, visible keyboard focus, genuine interactive repository search/filter, detail dialogs, verified-only optional public GitHub account totals and non-fabricated project metrics. The actual GitHub contribution graph and star counts are deliberately not guessed.
 
-The creative legacy homepage and HTML/PDF résumé remain available under `/creative` and `/resume`.
+The creative legacy homepage and HTML/PDF Resume remain available under `/creative` and `/resume`.

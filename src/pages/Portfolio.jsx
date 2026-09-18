@@ -198,7 +198,7 @@ function Header({ active }) {
             ))}
           </div>
           <a className="header-resume" href="/resume">
-            Résumé <ArrowUpRight size={14} />
+            Resume <ArrowUpRight size={14} />
           </a>
           <button
             className="menu-toggle"
@@ -224,7 +224,7 @@ function Header({ active }) {
             </a>
           ))}
           <a href="/resume" onClick={() => setMenuOpen(false)}>
-            View résumé <ArrowUpRight size={18} />
+            View Resume <ArrowUpRight size={18} />
           </a>
           <div className="mobile-socials">
             {SOCIALS.map((s) => (
@@ -311,7 +311,7 @@ function Hero() {
               download="Utsav_Vachhani_Resume.pdf"
               className="button button-resume"
             >
-              <Download size={16} /> Download résumé
+              <Download size={16} /> Download Resume
             </a>
           </div>
           <div className="hero-bottom">
@@ -320,7 +320,7 @@ function Hero() {
             </a>
             <span className="hero-bottom-rule" />
             <a href="/resume">
-              VIEW RÉSUMÉ <ArrowUpRight size={14} />
+              VIEW Resume <ArrowUpRight size={14} />
             </a>
           </div>
         </Reveal>
@@ -932,7 +932,7 @@ function Footer() {
               </a>
             ))}
             <a href="/resume">
-              Résumé <ArrowUpRight size={13} />
+              Resume <ArrowUpRight size={13} />
             </a>
           </nav>
           <div>

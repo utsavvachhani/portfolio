@@ -1,22 +1,73 @@
-import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
-const read = (name) => readFileSync(new URL(`../${name}`, import.meta.url), 'utf8');
-const portfolio = read('src/pages/GitHubPortfolio.jsx');
-const styles = read('src/pages/github-portfolio.css');
-const resume = read('src/pages/resume-theme.css');
-const app = read('src/App.jsx');
-for (const path of ['/creative','/resume']) assert(app.includes(`path="${path}"`), `${path} route removed`);
-assert(portfolio.includes('onResult={selectSearchResult}'), 'Global search must navigate results');
-assert(portfolio.includes('aria-autocomplete="list"') && portfolio.includes('ArrowDown') && portfolio.includes('ArrowUp'), 'Search keyboard controls missing');
-assert(portfolio.includes('gh-fullscreen-modal') && styles.includes('height: 100dvh'), 'Full-screen viewer missing');
-assert(portfolio.includes('<RepositoryViewer project={project}/>') && portfolio.includes('readmeOnly'), 'GitHub viewer or README missing');
-assert(existsSync(new URL('../src/services/githubRepository.js', import.meta.url)), 'GitHub public API service missing');
-assert(!portfolio.includes('ProjectScreenshotGallery') && !styles.includes('.gh-screenshot-gallery'), 'User excluded the PNG screenshot gallery');
-assert(resume.includes('@media print') && resume.includes('#eae9e3'), 'Classic white résumé theme / print styles missing');
-assert(portfolio.includes("useState('overview')"), 'Projects must open on Overview first');
-assert(!portfolio.includes('gh-repo-thumbnail'), 'Repository list must not show images');
-assert(portfolio.includes('gh-profile-menu') && portfolio.includes('utsav-portfolio-theme'), 'Profile dropdown / persisted theme missing');
-assert(existsSync(new URL('../public/resume/resume.html', import.meta.url)), 'Single HTML resume source missing');
-assert(existsSync(new URL('../public/resume/utsav-vachhani-resume.pdf', import.meta.url)), 'Original résumé missing');
-assert(portfolio.includes('const PROJECTS = PORTFOLIO_PROJECTS'), 'Original project data changed');
-console.log('PASS: full-screen live-code modal, working search, screenshot-gallery exclusion, white résumé, project-overview-first, no repository thumbnails, themes and preserved routes verified.');
+import assert from "node:assert/strict";
+import { readFileSync, existsSync } from "node:fs";
+const read = (name) =>
+  readFileSync(new URL(`../${name}`, import.meta.url), "utf8");
+const portfolio = read("src/pages/GitHubPortfolio.jsx");
+const styles = read("src/pages/github-portfolio.css");
+const resume = read("src/pages/resume-theme.css");
+const app = read("src/App.jsx");
+for (const path of ["/creative", "/resume"])
+  assert(app.includes(`path="${path}"`), `${path} route removed`);
+assert(
+  portfolio.includes("onResult={selectSearchResult}"),
+  "Global search must navigate results",
+);
+assert(
+  portfolio.includes('aria-autocomplete="list"') &&
+    portfolio.includes("ArrowDown") &&
+    portfolio.includes("ArrowUp"),
+  "Search keyboard controls missing",
+);
+assert(
+  portfolio.includes("gh-fullscreen-modal") &&
+    styles.includes("height: 100dvh"),
+  "Full-screen viewer missing",
+);
+assert(
+  portfolio.includes("<RepositoryViewer project={project}/>") &&
+    portfolio.includes("readmeOnly"),
+  "GitHub viewer or README missing",
+);
+assert(
+  existsSync(new URL("../src/services/githubRepository.js", import.meta.url)),
+  "GitHub public API service missing",
+);
+assert(
+  !portfolio.includes("ProjectScreenshotGallery") &&
+    !styles.includes(".gh-screenshot-gallery"),
+  "User excluded the PNG screenshot gallery",
+);
+assert(
+  resume.includes("@media print") && resume.includes("#eae9e3"),
+  "Classic white Resume theme / print styles missing",
+);
+assert(
+  portfolio.includes("useState('overview')"),
+  "Projects must open on Overview first",
+);
+assert(
+  !portfolio.includes("gh-repo-thumbnail"),
+  "Repository list must not show images",
+);
+assert(
+  portfolio.includes("gh-profile-menu") &&
+    portfolio.includes("utsav-portfolio-theme"),
+  "Profile dropdown / persisted theme missing",
+);
+assert(
+  existsSync(new URL("../public/resume/resume.html", import.meta.url)),
+  "Single HTML resume source missing",
+);
+assert(
+  existsSync(
+    new URL("../public/resume/utsav-vachhani-resume.pdf", import.meta.url),
+  ),
+  "Original Resume missing",
+);
+assert(
+  portfolio.includes("const PROJECTS = PORTFOLIO_PROJECTS"),
+  "Original project data changed",
+);
+console.log(
+  "PASS: full-screen live-code modal, working search, screenshot-gallery exclusion, white Resume, project-overview-first, no repository thumbnails, themes and preserved routes verified.",
+);

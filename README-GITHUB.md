@@ -4,21 +4,21 @@
 
 ## 1. Architecture and content
 
-The application retains React 19, React Router 7, Vite 7, the original CSS and source assets. `src/App.jsx` now chooses the GitHub-inspired page for `/` while continuing to serve the original experience via `/creative` and the existing résumé via `/resume`.
+The application retains React 19, React Router 7, Vite 7, the original CSS and source assets. `src/App.jsx` now chooses the GitHub-inspired page for `/` while continuing to serve the original experience via `/creative` and the existing Resume via `/resume`.
 
-| Component/file | Role |
-|---|---|
-| `src/pages/GitHubPortfolio.jsx` | New responsive homepage, project filters, navigation, GitHub API fallback, accessible native project dialog and contact CTA. |
-| `src/pages/github-portfolio.css` | Isolated `gh-` design system: GitHub-style dark colors, cards, layout, breakpoints and dialog/assistant overrides. |
-| `src/constants/profile.jsx` | Original name, email, bio and profile details. |
-| `src/constants/navigation.jsx` | Original external social profile URLs. |
-| `src/constants/projects.js` | Original 14 projects, real provided screenshots, tech lists and URLs. |
-| `src/constants/projectDetails.js` | The 14 original projects plus the résumé-sourced `uvMart` record, featured project IDs and project feature descriptions. |
-| `src/pages/Portfolio.jsx` | Preserved creative portfolio on `/creative`. |
-| `src/pages/Resume.jsx`, `src/pages/resume-theme.css` and `public/resume/` | Blue/navy refreshed HTML résumé, white print stylesheet, preserved original source PDF. |
-| `src/components/github/RepositoryViewer.jsx` | Full-screen public repository browser, lazy directory tree, source and README viewers. |
-| `src/services/githubRepository.js` | Public GitHub REST API fetches, URL validation, safe UTF-8 file decoding, readable-file filtering and in-session response cache. |
-| `src/components/PortfolioAssistant.jsx` | Preserved local Q&A; dark-theme scoped styling on new page. |
+| Component/file                                                            | Role                                                                                                                             |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `src/pages/GitHubPortfolio.jsx`                                           | New responsive homepage, project filters, navigation, GitHub API fallback, accessible native project dialog and contact CTA.     |
+| `src/pages/github-portfolio.css`                                          | Isolated `gh-` design system: GitHub-style dark colors, cards, layout, breakpoints and dialog/assistant overrides.               |
+| `src/constants/profile.jsx`                                               | Original name, email, bio and profile details.                                                                                   |
+| `src/constants/navigation.jsx`                                            | Original external social profile URLs.                                                                                           |
+| `src/constants/projects.js`                                               | Original 14 projects, real provided screenshots, tech lists and URLs.                                                            |
+| `src/constants/projectDetails.js`                                         | The 14 original projects plus the Resume-sourced `uvMart` record, featured project IDs and project feature descriptions.         |
+| `src/pages/Portfolio.jsx`                                                 | Preserved creative portfolio on `/creative`.                                                                                     |
+| `src/pages/Resume.jsx`, `src/pages/resume-theme.css` and `public/resume/` | Blue/navy refreshed HTML Resume, white print stylesheet, preserved original source PDF.                                          |
+| `src/components/github/RepositoryViewer.jsx`                              | Full-screen public repository browser, lazy directory tree, source and README viewers.                                           |
+| `src/services/githubRepository.js`                                        | Public GitHub REST API fetches, URL validation, safe UTF-8 file decoding, readable-file filtering and in-session response cache. |
+| `src/components/PortfolioAssistant.jsx`                                   | Preserved local Q&A; dark-theme scoped styling on new page.                                                                      |
 
 The project has **no API keys** or new paid dependencies. Fonts fall back to system fonts in the GitHub-inspired theme. Existing original dependencies remain in the lockfile.
 
@@ -34,25 +34,25 @@ The project has **no API keys** or new paid dependencies. Fonts fall back to sys
 - Portfolio statistics are derived from project records: showcased project count, number of supplied source links and number of supplied demos. The coverage bars count technologies listed in the project data.
 - The Source code tab fetches **real public source files on demand** from the selected project’s original GitHub URL. Folders expand lazily, supported files get escaped/syntax-tinted read-only previews with line numbers, Copy, and Open on GitHub. Unsupported/large/binary files are not previewed. README shows its actual content as safe plain text. Missing/private repositories and rate limits show honest status messages. No browser access tokens are used.
 - **No repository PNG screenshot gallery is included**, as requested. Existing original images remain untouched in the original portfolio/repository cards and Overview tab.
-- Original local assistant is still available at bottom right; the creative portfolio and résumé are one click away.
+- Original local assistant is still available at bottom right; the creative portfolio and Resume are one click away.
 - Reduced-motion preferences disable nonessential transitions.
 
 ## 3. Routes
 
-| URL | Page |
-|---|---|
-| `/` | GitHub-inspired overview |
-| `/#projects` | Pinned project section |
-| `/#repositories` | Searchable portfolio project list |
-| `/#skills`, `/#about`, `/#contact` | Specific profile sections |
-| `/?project=converse2k25` | Example direct project deep link |
-| `/creative` | Original site |
-| `/creative?project=converse2k25` | Original project-details dialog |
-| `/resume` | Résumé |
+| URL                                | Page                              |
+| ---------------------------------- | --------------------------------- |
+| `/`                                | GitHub-inspired overview          |
+| `/#projects`                       | Pinned project section            |
+| `/#repositories`                   | Searchable portfolio project list |
+| `/#skills`, `/#about`, `/#contact` | Specific profile sections         |
+| `/?project=converse2k25`           | Example direct project deep link  |
+| `/creative`                        | Original site                     |
+| `/creative?project=converse2k25`   | Original project-details dialog   |
+| `/resume`                          | Resume                            |
 
 ## 4. Editing identity and project information
 
-**Current identity is intentionally Utsav Vachhani**, matching the uploaded ZIP, screenshot and source résumé. Before adapting the site for another owner, update `src/constants/profile.jsx`, `src/constants/navigation.jsx`, `src/constants/milestones.js`, `src/constants/projects.js`, `src/constants/projectDetails.js`, `src/constants/chat.js`, the old creative/resume pages, portrait, favicon, index metadata, and replace the PDF. Update `utsavvachhani` used for the GitHub API and README display in the new page as well. Do not simply change the homepage display name while retaining another person's projects and contact details.
+**Current identity is intentionally Utsav Vachhani**, matching the uploaded ZIP, screenshot and source Resume. Before adapting the site for another owner, update `src/constants/profile.jsx`, `src/constants/navigation.jsx`, `src/constants/milestones.js`, `src/constants/projects.js`, `src/constants/projectDetails.js`, `src/constants/chat.js`, the old creative/resume pages, portrait, favicon, index metadata, and replace the PDF. Update `utsavvachhani` used for the GitHub API and README display in the new page as well. Do not simply change the homepage display name while retaining another person's projects and contact details.
 
 Add a project to `src/constants/projects.js` with its actual title, unique ID, description, verified tech list and optional `image`, `repo` and `live`. Add capabilities in `src/constants/projectDetails.js` only when known. No source/demo link should be made up. Pin existing project IDs by changing `FEATURE_IDS`.
 

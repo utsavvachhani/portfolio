@@ -1,6 +1,6 @@
 # Utsav Vachhani — GitHub-style developer portfolio
 
-An updated version of the **portfolio in the provided ZIP**, using the supplied Utsav Vachhani identity, portrait, résumé, real project records and existing assets. The GitHub-inspired profile is now the default homepage; the original creative design is retained at `/creative` rather than replaced.
+An updated version of the **portfolio in the provided ZIP**, using the supplied Utsav Vachhani identity, portrait, Resume, real project records and existing assets. The GitHub-inspired profile is now the default homepage; the original creative design is retained at `/creative` rather than replaced.
 
 ## Start locally
 
@@ -27,7 +27,7 @@ npm run preview
 
 - `/` — NEW GitHub-style, responsive developer profile, sidebar, README, socials, skill badges, pinned projects, accurate portfolio statistics, searchable/filterable repositories, full-screen overview-first project dialogs, profile light/dark switcher, biography, timeline and contact links.
 - `/creative` — ORIGINAL animated creative portfolio: original sections, animations, galleries, filterable work, contact form and assistant.
-- `/resume` — restored classic white résumé preview, all 15 projects, print control, and downloadable **A4 PDF generated from the same standalone HTML source** (`public/resume/resume.html`).
+- `/resume` — restored classic white Resume preview, all 15 projects, print control, and downloadable **A4 PDF generated from the same standalone HTML source** (`public/resume/resume.html`).
 - `/?project=project-id` — deep-linkable full-screen GitHub-style project dialog opening on Overview, with a source-code tab and next/previous controls. Repository rows contain no thumbnails.
 - The original project files, images, source URLs, social links, achievements context and CV are included. Original project details and the locally scripted portfolio assistant are reused.
 
@@ -43,4 +43,4 @@ More setup and architecture: [README-GITHUB.md](README-GITHUB.md). Original rele
 
 ## Current release notes
 
-See `CHANGELOG-RESUME-APPEARANCE.md` for the latest requested changes. Edit only `public/resume/resume.html` for the résumé; after editing run `npm run resume:pdf` to regenerate the matching PDF. `npm run verify:resume` checks the résumé and the related UI source.
+See `CHANGELOG-RESUME-APPEARANCE.md` for the latest requested changes. Edit only `public/resume/resume.html` for the Resume; after editing run `npm run resume:pdf` to regenerate the matching PDF. `npm run verify:resume` checks the Resume and the related UI source.
