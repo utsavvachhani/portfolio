@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { NAV_PAGES, SOCIAL_LINKS, PERSONAL_INFO } from "../../constants";
-import uvPhoto from "../../assets/uvPhoto.jpg";
+import uvPhoto from "../../assets/optimized/uvPhoto.webp";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import EmailIcon from "@mui/icons-material/Email";

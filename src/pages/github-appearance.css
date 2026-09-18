@@ -437,11 +437,61 @@
 }
 
 .gh-page[data-theme="light"] .gh-modal-top>div,
+.gh-page[data-theme="light"] .gh-modal-heading p,
 .gh-page[data-theme="light"] .gh-modal-heading>p,
 .gh-page[data-theme="light"] .gh-modal-body p,
 .gh-page[data-theme="light"] .gh-modal-body li,
 .gh-page[data-theme="light"] .gh-modal-bottom {
   color: #57606a;
+}
+
+.gh-page[data-theme="light"] .gh-modal-breadcrumb-owner {
+  color: #0969da;
+}
+
+.gh-page[data-theme="light"] .gh-modal-breadcrumb-owner:hover {
+  color: #0550ae;
+}
+
+.gh-page[data-theme="light"] .gh-modal-breadcrumb-separator {
+  color: #8c959f;
+}
+
+.gh-page[data-theme="light"] .gh-modal-breadcrumb-repo {
+  color: #24292f;
+}
+
+.gh-page[data-theme="light"] .gh-modal-category-badge {
+  background: rgba(9, 105, 218, 0.1);
+  color: #0969da;
+  border-color: rgba(9, 105, 218, 0.25);
+}
+
+.gh-page[data-theme="light"] .gh-modal-project-counter,
+.gh-page[data-theme="light"] .gh-modal-description {
+  color: #57606a;
+}
+
+.gh-page[data-theme="light"] .gh-modal-counter-slash {
+  color: #8c959f;
+}
+
+.gh-page[data-theme="light"] .gh-fullscreen-modal .gh-modal-heading {
+  background: #ffffff;
+  border-bottom-color: #d0d7de;
+}
+
+.gh-page[data-theme="light"] .gh-modal-heading-links .gh-button-muted {
+  background: #f6f8fa;
+  color: #24292f !important;
+  border-color: #d0d7de;
+  box-shadow: 0 1px 2px rgba(27, 31, 36, 0.04);
+}
+
+.gh-page[data-theme="light"] .gh-modal-heading-links .gh-button-muted:hover {
+  background: #f3f4f6;
+  border-color: #afb8c1;
+  color: #0969da !important;
 }
 
 .gh-page[data-theme="light"] .gh-modal-heading h2,

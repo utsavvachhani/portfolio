@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import uvPhoto from "../../assets/uvPhoto.jpg";
+import uvPhoto from "../../assets/optimized/uvPhoto.webp";
 import CircularText from "../ReactBits/CircularText.jsx";
 import GradientText from "../ReactBits/GradientText.jsx";
 import Hero3DCanvas from "./Hero3DCanvas.jsx";

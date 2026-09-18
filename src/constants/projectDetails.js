@@ -4,7 +4,7 @@ import { PROJECTS } from "./projects.js";
 export const PORTFOLIO_PROJECTS = [
   ...PROJECTS,
   {
-    id: "uvmart",
+    id: 'uvmart',
     title: "uvMart",
     description:
       "Developed an e-commerce style platform with basic product management and email notification features.",
@@ -45,7 +45,7 @@ export const PROJECT_FEATURES = {
     "Firebase integration",
     "Google Sheets synchronization",
   ],
-  "finance-dashboard": [
+  'finance-dashboard': [
     "Responsive financial charts",
     "KPI widgets",
     "Interface micro-animations",
@@ -55,38 +55,38 @@ export const PROJECT_FEATURES = {
     "View shared posts",
     "Edit and delete own entries",
   ],
-  "react-js-study": [
+  'react-js-study': [
     "Custom React hooks",
     "Context API examples",
     "State-management patterns",
     "Optimization examples",
   ],
-  "software-engineering": [
+  'software-engineering': [
     "Gym membership records",
     "Workout management",
     "Schedule management",
   ],
-  "js-study": [
+  'js-study': [
     "JavaScript algorithms",
     "ES6+ examples",
     "DOM manipulation exercises",
   ],
-  "wt-lab": [
+  'wt-lab': [
     "Client-server examples",
     "XML schema validation",
     "Responsive frontend exercises",
   ],
-  "linked-list": [
+  'linked-list': [
     "Singly linked lists in C",
     "Doubly linked lists in C",
     "Dynamic memory management",
   ],
-  "codsoft-portfolio": [
+  'codsoft-portfolio': [
     "Personal portfolio",
     "HTML and CSS implementation",
     "CSS transitions",
   ],
-  "codsoft-landing": [
+  'codsoft-landing': [
     "Product landing page",
     "Flexbox and CSS Grid layouts",
     "Interactive elements",

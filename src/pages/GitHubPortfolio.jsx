@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -136,13 +136,10 @@ function useGitHubProfile() {
   const [stats, setStats] = useState(null);
   useEffect(() => {
     const controller = new AbortController();
-    fetch(
-      `https://api.github.com/users/${encodeURIComponent("utsavvachhani")}`,
-      {
-        headers: { Accept: "application/vnd.github+json" },
-        signal: controller.signal,
-      },
-    )
+    fetch(`https://api.github.com/users/${encodeURIComponent("utsavvachhani")}`, {
+      headers: { Accept: "application/vnd.github+json" },
+      signal: controller.signal,
+    })
       .then((response) => {
         if (!response.ok) throw new Error("GitHub unavailable");
         return response.json();
@@ -1200,7 +1197,7 @@ function ProjectModal({ project, onClose }) {
   const ref = useRef(null);
   const closeButton = useRef(null);
   const details = getProjectDetails(project);
-  const [tab, setTab] = useState("overview");
+  const [tab, setTab] = useState('overview');
   const index = PROJECTS.findIndex((item) => item.id === project.id);
   const move = (direction) =>
     PROJECTS[(index + direction + PROJECTS.length) % PROJECTS.length];
@@ -1232,8 +1229,19 @@ function ProjectModal({ project, onClose }) {
         <header className="gh-modal-top">
           <div>
             <FolderGit2 size={19} />
-            <span>
-              utsavvachhani / {project.repo?.split("/").pop() || project.id}
+            <span className="gh-modal-breadcrumb">
+              <Link
+                to="/"
+                onClick={() => onClose()}
+                className="gh-modal-breadcrumb-owner"
+                title="Back to home page"
+              >
+                utsavvachhani
+              </Link>
+              <span className="gh-modal-breadcrumb-separator">/</span>
+              <span className="gh-modal-breadcrumb-repo">
+                {project.repo?.split("/").pop() || project.id}
+              </span>
             </span>
             <span className="gh-modal-public">
               {project.repo ? "Public repository" : "Portfolio project"}
@@ -1249,27 +1257,36 @@ function ProjectModal({ project, onClose }) {
           </button>
         </header>
         <div className="gh-modal-heading">
-          <span className="gh-small-overline">
-            {categoryOf(project)} · PROJECT {index + 1} / {PROJECTS.length}
-          </span>
-          <h2 id="gh-modal-title">{project.title}</h2>
-          <p>{details.overview}</p>
-          <div className="gh-modal-heading-links">
-            {project.repo && (
-              <External
-                href={project.repo}
-                className="gh-button gh-button-blue"
-              >
-                <Github size={15} /> Open GitHub <ArrowUpRight size={14} />
-              </External>
-            )}
-            {project.live && (
-              <External
-                href={project.live}
-                className="gh-button gh-button-muted"
-              >
-                <ExternalLink size={15} /> Live demo <ArrowUpRight size={14} />
-              </External>
+          <div className="gh-modal-heading-content">
+            <div className="gh-modal-heading-main">
+              <div className="gh-modal-meta-row">
+                <span className="gh-modal-category-badge">{categoryOf(project)}</span>
+                <span className="gh-modal-project-counter">
+                  PROJECT {index + 1} <span className="gh-modal-counter-slash">/</span> {PROJECTS.length}
+                </span>
+              </div>
+              <h2 id="gh-modal-title">{project.title}</h2>
+              <p className="gh-modal-description">{details.overview}</p>
+            </div>
+            {(project.repo || project.live) && (
+              <div className="gh-modal-heading-links">
+                {project.repo && (
+                  <External
+                    href={project.repo}
+                    className="gh-button gh-button-blue"
+                  >
+                    <Github size={15} /> Open GitHub <ArrowUpRight size={14} className="gh-button-arrow" />
+                  </External>
+                )}
+                {project.live && (
+                  <External
+                    href={project.live}
+                    className="gh-button gh-button-muted"
+                  >
+                    <ExternalLink size={15} /> Live demo <ArrowUpRight size={14} className="gh-button-arrow" />
+                  </External>
+                )}
+              </div>
             )}
           </div>
         </div>
@@ -1311,7 +1328,7 @@ function ProjectModal({ project, onClose }) {
           aria-labelledby={`gh-project-tab-${tab}`}
         >
           {tab === "code" ? (
-            <RepositoryViewer project={project} />
+            <RepositoryViewer project={project}/>
           ) : tab === "readme" ? (
             <RepositoryViewer project={project} readmeOnly />
           ) : (
