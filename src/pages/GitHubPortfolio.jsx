@@ -409,7 +409,7 @@ function Header({
             </a>
             <a className="gh-header-link gh-resume-top" href="/resume">
               <Download size={16} />
-              <span>Résumé</span>
+              <span>Resume</span>
             </a>
             <div className="gh-profile-menu-wrap" ref={profileRef}>
               <button
@@ -463,7 +463,7 @@ function Header({
                   </div>
                   <div className="gh-profile-menu-divider" />
                   <a href="/resume">
-                    <Download size={16} /> View résumé{" "}
+                    <Download size={16} /> View Resume{" "}
                     <ArrowUpRight size={13} />
                   </a>
                   <a href="/creative">
@@ -514,7 +514,7 @@ function Header({
               Creative portfolio <ArrowUpRight size={15} />
             </a>
             <a href="/resume" onClick={() => setMenu(false)}>
-              View résumé <ArrowUpRight size={15} />
+              View Resume <ArrowUpRight size={15} />
             </a>
             <External href={PERSONAL_INFO.github}>
               GitHub profile <ArrowUpRight size={15} />
@@ -539,7 +539,7 @@ function Header({
           ))}
           <a className="gh-tab gh-tab-resume" href="/resume">
             <Download size={16} />
-            <span>Résumé</span>
+            <span>Resume</span>
           </a>
         </div>
       </nav>
@@ -641,14 +641,14 @@ function ProfileSidebar({ ghStats }) {
         <ArrowUpRight size={14} />
       </a>
       <a href="/resume" className="gh-side-link">
-        <FileCode2 size={17} /> Interactive résumé <ArrowUpRight size={14} />
+        <FileCode2 size={17} /> Interactive Resume <ArrowUpRight size={14} />
       </a>
       <a
         href={RESUME}
         download="Utsav_Vachhani_Resume.pdf"
         className="gh-side-link"
       >
-        <Download size={17} /> Download PDF résumé <ArrowUpRight size={14} />
+        <Download size={17} /> Download PDF Resume <ArrowUpRight size={14} />
       </a>
     </aside>
   );
@@ -1106,7 +1106,7 @@ function About() {
       <SectionHeading
         icon={GraduationCap}
         title="Experience & background"
-        action="Full résumé"
+        action="Full Resume"
         href="/resume"
       />
       <div className="gh-about-grid">
@@ -1123,7 +1123,7 @@ function About() {
             and practical security-minded web applications.
           </p>
           <a className="gh-button gh-button-muted" href="/resume">
-            <FileCode2 size={16} /> Explore my résumé <ArrowUpRight size={14} />
+            <FileCode2 size={16} /> Explore my Resume <ArrowUpRight size={14} />
           </a>
         </div>
         <div className="gh-timeline">
@@ -1260,9 +1260,13 @@ function ProjectModal({ project, onClose }) {
           <div className="gh-modal-heading-content">
             <div className="gh-modal-heading-main">
               <div className="gh-modal-meta-row">
-                <span className="gh-modal-category-badge">{categoryOf(project)}</span>
+                <span className="gh-modal-category-badge">
+                  {categoryOf(project)}
+                </span>
                 <span className="gh-modal-project-counter">
-                  PROJECT {index + 1} <span className="gh-modal-counter-slash">/</span> {PROJECTS.length}
+                  PROJECT {index + 1}{" "}
+                  <span className="gh-modal-counter-slash">/</span>{" "}
+                  {PROJECTS.length}
                 </span>
               </div>
               <h2 id="gh-modal-title">{project.title}</h2>
@@ -1275,7 +1279,8 @@ function ProjectModal({ project, onClose }) {
                     href={project.repo}
                     className="gh-button gh-button-blue"
                   >
-                    <Github size={15} /> Open GitHub <ArrowUpRight size={14} className="gh-button-arrow" />
+                    <Github size={15} /> Open GitHub{" "}
+                    <ArrowUpRight size={14} className="gh-button-arrow" />
                   </External>
                 )}
                 {project.live && (
@@ -1283,7 +1288,8 @@ function ProjectModal({ project, onClose }) {
                     href={project.live}
                     className="gh-button gh-button-muted"
                   >
-                    <ExternalLink size={15} /> Live demo <ArrowUpRight size={14} className="gh-button-arrow" />
+                    <ExternalLink size={15} /> Live demo{" "}
+                    <ArrowUpRight size={14} className="gh-button-arrow" />
                   </External>
                 )}
               </div>

@@ -1,4 +1,4 @@
-> **Historical notes only:** This document describes the previous code-viewer update. For the latest behaviour, read `CHANGELOG-RESUME-APPEARANCE.md`. The project now opens on Overview, repository rows have no images, the résumé is classic white, and the downloadable A4 PDF matches its HTML source.
+> **Historical notes only:** This document describes the previous code-viewer update. For the latest behaviour, read `CHANGELOG-RESUME-APPEARANCE.md`. The project now opens on Overview, repository rows have no images, the Resume is classic white, and the downloadable A4 PDF matches its HTML source.
 
 # Portfolio upgrade — live GitHub code viewer
 
@@ -9,7 +9,7 @@ This is an upgrade of the **uploaded `utsav-github-style-portfolio.zip`**. The e
 1. **Full-screen project viewer:** Open any pinned/repository project. The dialog takes the full viewport and has **Overview / Source code / README** tabs. Source code opens first when the project already contains a GitHub URL. Escape or × closes; previous/next navigation and shareable `/?project=...` URL work as before.
 2. **Actual source code:** Public GitHub REST API loads the specific project's original repository. A tree expands directories on demand and displays the selected real file with line numbers, basic syntax colors, Copy and Open on GitHub. README is loaded from the public repository on request, rendered as safe text. No fake files or metrics.
 3. **Search repaired:** Header search returns live suggestions for portfolio projects, tech skills and sections. Click a result or use Arrow Up/Down and Enter. `/` focuses the search. Repository keyword filtering remains unchanged.
-4. **Résumé colors:** `/resume` now uses dark navy, blue and cyan, more defined cards and borders; printing automatically switches to a clean white page. The existing Download PDF action deliberately preserves the old original PDF document.
+4. **Resume colors:** `/resume` now uses dark navy, blue and cyan, more defined cards and borders; printing automatically switches to a clean white page. The existing Download PDF action deliberately preserves the old original PDF document.
 5. **PNG screenshot gallery: NOT added.** As requested, current project imagery on the original homepage and Overview is unchanged.
 
 ## Configure a project
@@ -17,7 +17,7 @@ This is an upgrade of the **uploaded `utsav-github-style-portfolio.zip`**. The e
 To show real code, put a public repository root URL into that project's `repo` field in `src/constants/projects.js` or `src/constants/projectDetails.js`:
 
 ```js
-repo: 'https://github.com/OWNER/REPOSITORY'
+repo: "https://github.com/OWNER/REPOSITORY";
 ```
 
 Private repositories cannot be loaded by the public-only frontend. Projects without a public repository still open their Overview tab; the code tab explains why no source is available. For older broken/renamed GitHub URLs, correct the supplied repo field; no URL is guessed.

@@ -9,22 +9,22 @@ npm run build
 npm run lint
 ```
 
-This retains the original React 19/Vite 7 project and all original project asset files. The new experience is in `src/pages/Portfolio.jsx`, the separate résumé page is `src/pages/Resume.jsx`, and design tokens/layouts are in `src/index.css`. The existing project constants, personal information, social URLs, milestone content and skills data remain the data sources. The supplied PDF is copied **unchanged** to `public/resume/utsav-vachhani-resume.pdf`, so the Download PDF button serves the original rather than attempting a potentially inconsistent conversion.
+This retains the original React 19/Vite 7 project and all original project asset files. The new experience is in `src/pages/Portfolio.jsx`, the separate Resume page is `src/pages/Resume.jsx`, and design tokens/layouts are in `src/index.css`. The existing project constants, personal information, social URLs, milestone content and skills data remain the data sources. The supplied PDF is copied **unchanged** to `public/resume/utsav-vachhani-resume.pdf`, so the Download PDF button serves the original rather than attempting a potentially inconsistent conversion.
 
 ## Routes
 
 - `/` — complete single-page portfolio (`#home`, `#about`, `#projects`, `#skills`, `#journey`, `#contact`).
-- `/resume` — accessible HTML résumé, original PDF download and print layout.
+- `/resume` — accessible HTML Resume, original PDF download and print layout.
 - Old `/about`, `/projects`, `/skills`, `/contact` routes redirect to the matching section.
 - `/?project=project-id` — a directly linkable, native accessible project-details dialog.
 
 ## Functionality
 
-All original portfolio projects are retained; the PDF-only uvMart entry was additionally included using the résumé's description and embedded GitHub link. There is no invented screenshot or live URL for projects that lack one. Card filters and search are client-side and do not fetch user data. Project details have native dialog focus management and Escape dismissal. The contact form opens the visitor's email app: it does **not** claim to send to an unavailable backend. External links open with `rel="noopener noreferrer"`. Canvas art only loads for fine-pointer, sufficiently wide, reduced-motion-disabled screens; the hero has a CSS and photo fallback. Project tilt, ticker and custom cursor are disabled for reduced-motion or touch users.
+All original portfolio projects are retained; the PDF-only uvMart entry was additionally included using the Resume's description and embedded GitHub link. There is no invented screenshot or live URL for projects that lack one. Card filters and search are client-side and do not fetch user data. Project details have native dialog focus management and Escape dismissal. The contact form opens the visitor's email app: it does **not** claim to send to an unavailable backend. External links open with `rel="noopener noreferrer"`. Canvas art only loads for fine-pointer, sufficiently wide, reduced-motion-disabled screens; the hero has a CSS and photo fallback. Project tilt, ticker and custom cursor are disabled for reduced-motion or touch users.
 
 ## Notes about source material
 
-The PDF is the sole content source for `/resume`, including its original wording, links and dates. The broader portfolio retains the extra biography/milestones/skills from the ZIP. The PDF contains the original printed wording `quizze` and trailing `h` after one experience bullet; these are preserved for strict fidelity. Review and update the **source PDF** and HTML together if the résumé owner wishes to correct them.
+The PDF is the sole content source for `/resume`, including its original wording, links and dates. The broader portfolio retains the extra biography/milestones/skills from the ZIP. The PDF contains the original printed wording `quizze` and trailing `h` after one experience bullet; these are preserved for strict fidelity. Review and update the **source PDF** and HTML together if the Resume owner wishes to correct them.
 
 Before deployment, verify the original GitHub/demo/social URLs are still live, since the supplied files were used without external link verification. No contact API exists in the source ZIP; add and secure one only if real in-site form submission is needed.
 
@@ -35,6 +35,7 @@ Offline validation passed for JSX/JavaScript parsing and internal import paths, 
 **Important:** The npm registry could not be resolved (`EAI_AGAIN`) in this environment, so dependency installation, `npm run build`, `npm run lint`, and live browser interaction testing could **not** be completed here. Run these commands locally, review screenshots on real breakpoints and verify external links before calling the deployment production-ready. Deploy at the domain root on Vercel (the existing `vercel.json` provides SPA rewrites); GitHub Pages under a repository subpath requires additional base-path/router changes.
 
 ### Build compatibility fix
+
 Brand icons are now local SVG React components (`src/components/BrandIcons.jsx`), rather than importing GitHub, Instagram or LinkedIn icons from `lucide-react` 1.x. This fixes the reported missing `Github` export in the portfolio and resume.
 
 ## September 18 final enhancement

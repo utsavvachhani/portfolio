@@ -1,5 +1,5 @@
 // Brand marks are kept locally because newer lucide-react releases do not export brand icons.
-// Each icon accepts the same size and aria props used by the portfolio and résumé.
+// Each icon accepts the same size and aria props used by the portfolio and Resume.
 function BrandSvg({ size = 24, children, ...props }) {
   return (
     <svg
