@@ -65,13 +65,27 @@ export async function getRepository(identity, signal) {
   return request(repoPath(identity), signal);
 }
 
-export async function getDirectory(identity, directory = "", signal) {
+export async function getBranches(identity, signal) {
+  if (!identity) return [];
+  try {
+    const list = await request(`${repoPath(identity)}/branches?per_page=100`, signal);
+    if (Array.isArray(list)) {
+      return list.map((b) => (typeof b === "string" ? b : b?.name)).filter(Boolean);
+    }
+  } catch {
+    // If rate-limited or unavailable, caller falls back to repository default branch
+  }
+  return [];
+}
+
+export async function getDirectory(identity, directory = "", branch = "", signal) {
   if (!identity) throw new Error("No repository was provided.");
   const suffix = directory
     ? `/${directory.split("/").map(encodeURIComponent).join("/")}`
     : "";
+  const query = branch ? `?ref=${encodeURIComponent(branch)}` : "";
   const result = await request(
-    `${repoPath(identity)}/contents${suffix}`,
+    `${repoPath(identity)}/contents${suffix}${query}`,
     signal,
   );
   if (!Array.isArray(result)) throw new Error("This path is not a directory.");
@@ -86,11 +100,12 @@ export async function getDirectory(identity, directory = "", signal) {
     );
 }
 
-export async function getFile(identity, path, signal) {
+export async function getFile(identity, path, branch = "", signal) {
   if (!identity || !path) throw new Error("No source file selected.");
   const suffix = path.split("/").map(encodeURIComponent).join("/");
+  const query = branch ? `?ref=${encodeURIComponent(branch)}` : "";
   const result = await request(
-    `${repoPath(identity)}/contents/${suffix}`,
+    `${repoPath(identity)}/contents/${suffix}${query}`,
     signal,
   );
   if (result.type !== "file")

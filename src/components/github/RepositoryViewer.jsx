@@ -8,11 +8,14 @@ import {
   Code2,
   FileCode2,
   Folder,
-  LoaderCircle,
+  GitBranch,
+  Menu,
   RefreshCw,
+  X,
 } from "lucide-react";
 import { Github } from "../BrandIcons.jsx";
 import {
+  getBranches,
   getDirectory,
   getFile,
   getRepository,
@@ -59,7 +62,7 @@ function Notice({ message, retry, loading = false }) {
   return (
     <div className="gh-viewer-notice" role="status">
       {loading ? (
-        <LoaderCircle className="gh-spinning" size={22} />
+        <span className="gh-skeleton gh-skeleton-notice-spinner" />
       ) : (
         <Code2 size={22} />
       )}
@@ -73,14 +76,51 @@ function Notice({ message, retry, loading = false }) {
   );
 }
 
-function FolderNode({ identity, directory, depth, onChoose, selected }) {
+function TreeSkeleton() {
+  return (
+    <div className="gh-tree-skeleton" aria-label="Loading repository files" role="status">
+      {[70, 55, 80, 60, 45, 75, 50, 65, 85].map((width, idx) => (
+        <div
+          key={idx}
+          className="gh-tree-skeleton-item"
+          style={{ paddingLeft: `${12 + (idx % 3) * 14}px` }}
+        >
+          <span className="gh-skeleton gh-skeleton-icon" />
+          <span className="gh-skeleton gh-skeleton-text" style={{ width: `${width}%` }} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CodeSkeleton() {
+  return (
+    <div className="gh-code-skeleton" aria-label="Loading source code" role="status">
+      <div className="gh-code-skeleton-lines">
+        {[40, 75, 60, 85, 30, 95, 70, 55, 80, 45, 65, 90, 35, 78, 52, 68].map(
+          (width, idx) => (
+            <div key={idx} className="gh-code-skeleton-row">
+              <span className="gh-code-skeleton-num">{idx + 1}</span>
+              <span
+                className="gh-skeleton gh-skeleton-code-line"
+                style={{ width: `${width}%` }}
+              />
+            </div>
+          ),
+        )}
+      </div>
+    </div>
+  );
+}
+
+function FolderNode({ identity, directory, branch, depth, onChoose, selected }) {
   const [expanded, setExpanded] = useState(false);
   const contents = useRemote(
     (signal) =>
       expanded
-        ? getDirectory(identity, directory, signal)
+        ? getDirectory(identity, directory, branch, signal)
         : Promise.resolve([]),
-    [identity.owner, identity.repo, directory, expanded],
+    [identity.owner, identity.repo, directory, expanded, branch],
   );
   const title = directory.split("/").pop();
   return (
@@ -98,7 +138,18 @@ function FolderNode({ identity, directory, depth, onChoose, selected }) {
       </button>
       {expanded &&
         (contents.status === "loading" ? (
-          <p className="gh-tree-state">Loading…</p>
+          <div className="gh-tree-node-skeleton">
+            {[60, 45, 75].map((w, idx) => (
+              <div
+                key={idx}
+                className="gh-tree-skeleton-item"
+                style={{ paddingLeft: `${12 + (depth + 1) * 14}px` }}
+              >
+                <span className="gh-skeleton gh-skeleton-icon" />
+                <span className="gh-skeleton gh-skeleton-text" style={{ width: `${w}%` }} />
+              </div>
+            ))}
+          </div>
         ) : contents.status === "error" ? (
           <div className="gh-tree-state">
             {contents.error}
@@ -113,6 +164,7 @@ function FolderNode({ identity, directory, depth, onChoose, selected }) {
                 key={entry.path}
                 identity={identity}
                 directory={entry.path}
+                branch={branch}
                 depth={depth + 1}
                 onChoose={onChoose}
                 selected={selected}
@@ -187,10 +239,10 @@ function CodeLine({ text, number }) {
   );
 }
 
-function SourceFile({ identity, path, branch, isReadme = false }) {
+function SourceFile({ identity, path, branch, isReadme = false, onToggleTree }) {
   const source = useRemote(
-    (signal) => getFile(identity, path, signal),
-    [identity.owner, identity.repo, path],
+    (signal) => getFile(identity, path, branch, signal),
+    [identity.owner, identity.repo, path, branch],
   );
   const [copied, setCopied] = useState(false);
   useEffect(() => {
@@ -215,12 +267,24 @@ function SourceFile({ identity, path, branch, isReadme = false }) {
       aria-label={isReadme ? "GitHub README" : "GitHub source code"}
     >
       <div className="gh-code-toolbar">
-        <div>
+        <div className="gh-code-toolbar-file">
+          {onToggleTree && (
+            <button
+              type="button"
+              className="gh-mobile-tree-btn"
+              onClick={onToggleTree}
+              aria-label="Toggle repository file tree"
+              title="Browse files"
+            >
+              <Menu size={16} />
+              <span>Files</span>
+            </button>
+          )}
           <FileCode2 size={17} />
           <span title={path}>{path}</span>
           {source.status === "ready" && <small>{lines.length} lines</small>}
         </div>
-        <div>
+        <div className="gh-code-toolbar-actions">
           {source.status === "ready" && (
             <button type="button" onClick={copy}>
               {copied ? <Check size={14} /> : <Clipboard size={14} />}{" "}
@@ -233,7 +297,7 @@ function SourceFile({ identity, path, branch, isReadme = false }) {
         </div>
       </div>
       {source.status === "loading" ? (
-        <Notice loading message="Fetching the actual file from GitHub…" />
+        <CodeSkeleton />
       ) : source.status === "error" ? (
         <Notice message={source.error} retry={source.reload} />
       ) : (
@@ -263,12 +327,27 @@ export default function RepositoryViewer({ project, readmeOnly = false }) {
     (signal) => getRepository(identity, signal),
     [identity?.owner, identity?.repo],
   );
+  const branchesRemote = useRemote(
+    (signal) => (identity ? getBranches(identity, signal) : Promise.resolve([])),
+    [identity?.owner, identity?.repo],
+  );
+  const defaultBranch = repo.value?.default_branch || "main";
+  const [selectedBranch, setSelectedBranch] = useState(null);
+  const activeBranch = selectedBranch || defaultBranch;
+  const [mobileTreeOpen, setMobileTreeOpen] = useState(false);
+
+  const branches = useMemo(() => {
+    const list = branchesRemote.value || [];
+    if (!list.includes(defaultBranch)) return [defaultBranch, ...list];
+    return list;
+  }, [branchesRemote.value, defaultBranch]);
+
   const root = useRemote(
     (signal) =>
       identity && repo.status === "ready"
-        ? getDirectory(identity, "", signal)
+        ? getDirectory(identity, "", activeBranch, signal)
         : Promise.resolve([]),
-    [identity?.owner, identity?.repo, repo.status],
+    [identity?.owner, identity?.repo, repo.status, activeBranch],
   );
   const [selected, setSelected] = useState(null);
   const initialFile = useMemo(
@@ -284,28 +363,39 @@ export default function RepositoryViewer({ project, readmeOnly = false }) {
       ),
     [root.value],
   );
+
+  const handleChoose = (entry) => {
+    setSelected(entry);
+    setMobileTreeOpen(false);
+  };
+
   if (!identity)
     return (
       <Notice message="This project has no public GitHub repository linked. The overview and provided project links remain available." />
     );
   if (repo.status === "loading")
     return (
-      <Notice loading message="Connecting to the public GitHub repository…" />
+      <div className="gh-repository-viewer">
+        <aside className="gh-file-tree" aria-label="Repository file explorer">
+          <TreeSkeleton />
+        </aside>
+        <div className="gh-file-preview">
+          <CodeSkeleton />
+        </div>
+      </div>
     );
   if (repo.status === "error")
     return <Notice message={repo.error} retry={repo.reload} />;
-  if (root.status === "loading")
-    return <Notice loading message="Loading GitHub repository files…" />;
-  if (root.status === "error")
-    return <Notice message={root.error} retry={root.reload} />;
   if (readmeOnly)
     return (
       <div className="gh-readme-view">
-        {readme ? (
+        {root.status === "loading" ? (
+          <CodeSkeleton />
+        ) : readme ? (
           <SourceFile
             identity={identity}
             path={readme.path}
-            branch={repo.value.default_branch}
+            branch={activeBranch}
             isReadme
           />
         ) : (
@@ -315,14 +405,60 @@ export default function RepositoryViewer({ project, readmeOnly = false }) {
     );
   return (
     <div className="gh-repository-viewer">
-      <aside className="gh-file-tree" aria-label="Repository file explorer">
+      {mobileTreeOpen && (
+        <div
+          className="gh-tree-backdrop"
+          onClick={() => setMobileTreeOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+      <aside
+        className={`gh-file-tree ${mobileTreeOpen ? "gh-file-tree-open" : ""}`}
+        aria-label="Repository file explorer"
+      >
         <div className="gh-file-tree-title">
-          <Github size={17} />
-          <strong>{identity.repo}</strong>
-          <span>{repo.value.default_branch}</span>
+          <div className="gh-file-tree-brand">
+            <Github size={16} />
+            <strong>{identity.repo}</strong>
+          </div>
+          <div className="gh-branch-select-wrap" title="Switch branch">
+            <GitBranch size={13} className="gh-branch-icon" />
+            <select
+              value={activeBranch}
+              onChange={(event) => {
+                setSelectedBranch(event.target.value);
+                setSelected(null);
+              }}
+              aria-label="Switch branch"
+              className="gh-branch-select"
+            >
+              {branches.map((b) => (
+                <option key={b} value={b}>
+                  {b}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            type="button"
+            className="gh-tree-close-mobile"
+            onClick={() => setMobileTreeOpen(false)}
+            aria-label="Close file tree"
+          >
+            <X size={16} />
+          </button>
         </div>
         <div className="gh-tree-scroll">
-          {root.value.length === 0 ? (
+          {root.status === "loading" ? (
+            <TreeSkeleton />
+          ) : root.status === "error" ? (
+            <div className="gh-tree-state">
+              {root.error}
+              <button onClick={root.reload} type="button">
+                Retry
+              </button>
+            </div>
+          ) : root.value.length === 0 ? (
             <p className="gh-tree-state">No files found.</p>
           ) : (
             root.value.map((entry) =>
@@ -331,8 +467,9 @@ export default function RepositoryViewer({ project, readmeOnly = false }) {
                   key={entry.path}
                   identity={identity}
                   directory={entry.path}
+                  branch={activeBranch}
                   depth={0}
-                  onChoose={setSelected}
+                  onChoose={handleChoose}
                   selected={selectedFile?.path}
                 />
               ) : (
@@ -340,7 +477,7 @@ export default function RepositoryViewer({ project, readmeOnly = false }) {
                   key={entry.path}
                   entry={entry}
                   depth={0}
-                  onChoose={setSelected}
+                  onChoose={handleChoose}
                   selected={selectedFile?.path}
                 />
               ),
@@ -357,11 +494,14 @@ export default function RepositoryViewer({ project, readmeOnly = false }) {
         </a>
       </aside>
       <div className="gh-file-preview">
-        {selectedFile ? (
+        {root.status === "loading" ? (
+          <CodeSkeleton />
+        ) : selectedFile ? (
           <SourceFile
             identity={identity}
             path={selectedFile.path}
-            branch={repo.value.default_branch}
+            branch={activeBranch}
+            onToggleTree={() => setMobileTreeOpen((prev) => !prev)}
           />
         ) : (
           <Notice message="No previewable source files were found in the repository root. Expand a folder to choose a code file." />

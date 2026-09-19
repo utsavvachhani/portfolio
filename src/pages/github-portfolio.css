@@ -127,6 +127,15 @@
   border: 1px solid #495360;
   border-radius: 50%;
   background: #192332;
+  overflow: hidden;
+}
+
+.gh-brand-logo-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: contain;
+  display: block;
 }
 
 .gh-brand-accent {
@@ -447,6 +456,7 @@
   color: #a6b0bf;
   margin: 15px 0 0;
   font-size: 12px;
+  padding: 12px 0px 0px 0px;
 }
 
 .gh-followers strong {
@@ -1345,8 +1355,13 @@
 .gh-repo-filters {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 6px;
   margin-top: 13px;
+  scroll-snap-type: x mandatory;
 }
 
 .gh-filter {
@@ -1357,6 +1372,9 @@
   min-height: 29px;
   padding: 4px 12px;
   font-size: 11px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  scroll-snap-align: start;
 }
 
 .gh-filter:hover {
@@ -2977,10 +2995,26 @@
   background: #192331;
 }
 
+.gh-modal-scrollable-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.gh-modal-tablist-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #0d1117;
+}
+
 .gh-fullscreen-modal .gh-modal-content {
   flex: 1;
   min-height: 0;
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .gh-modal-overview {
@@ -3013,7 +3047,8 @@
   display: grid;
   grid-template-columns: minmax(220px, 270px) minmax(0, 1fr);
   height: 100%;
-  min-height: 0;
+  min-height: 480px;
+  flex: 1;
   background: #0d1117;
 }
 
@@ -3028,31 +3063,74 @@
 
 .gh-file-tree-title {
   display: flex;
-  gap: 9px;
+  gap: 8px;
   align-items: center;
-  padding: 15px 14px;
+  justify-content: space-between;
+  padding: 12px 14px;
   border-bottom: 1px solid #303b47;
   font-size: 12px;
 }
 
-.gh-file-tree-title strong {
-  flex: 1;
+.gh-file-tree-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   min-width: 0;
-  text-overflow: ellipsis;
   overflow: hidden;
+  flex: 1;
+}
+
+.gh-file-tree-brand strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
   color: #e6edf3;
 }
 
-.gh-file-tree-title span {
-  font: 10px ui-monospace, monospace;
-  padding: 3px 6px;
-  border: 1px solid #3e4b5b;
-  border-radius: 5px;
-  color: #a8b9c9;
+.gh-branch-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: #21262d;
+  border: 1px solid #384250;
+  border-radius: 6px;
+  padding: 2px 6px;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.gh-branch-icon {
+  color: #8b949e;
+  flex-shrink: 0;
+}
+
+.gh-branch-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  color: #c9d1d9;
+  font: 11px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
+  padding-right: 12px;
+  cursor: pointer;
+  outline: none;
   max-width: 90px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.gh-branch-select-wrap::after {
+  content: "";
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 4px solid #8b949e;
+  pointer-events: none;
+}
+
+.gh-tree-close-mobile {
+  display: none;
 }
 
 .gh-tree-scroll {
@@ -3163,16 +3241,150 @@
   border-bottom: 1px solid #344353;
 }
 
-.gh-code-toolbar>div {
+.gh-code-toolbar-file {
   display: flex;
   align-items: center;
   gap: 9px;
   min-width: 0;
-}
-
-.gh-code-toolbar>div:first-child {
   flex: 1;
   overflow: hidden;
+}
+
+.gh-code-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.gh-mobile-tree-btn {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: #21262d;
+  border: 1px solid #384250;
+  border-radius: 6px;
+  color: #c9d1d9;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.gh-mobile-tree-btn:hover {
+  background: #30363d;
+  color: #f0f6fc;
+}
+
+/* GitHub Skeleton Loading Styles */
+@keyframes gh-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.gh-skeleton {
+  display: inline-block;
+  background: linear-gradient(90deg, #1c232d 25%, #2d3848 50%, #1c232d 75%);
+  background-size: 200% 100%;
+  animation: gh-shimmer 1.8s infinite ease-in-out;
+  border-radius: 4px;
+}
+
+[data-theme="light"] .gh-skeleton {
+  background: linear-gradient(90deg, #e1e4e8 25%, #f4f6f8 50%, #e1e4e8 75%);
+  background-size: 200% 100%;
+}
+
+.gh-followers-skeleton {
+  margin: 15px 0 0;
+  padding: 12px 0 0 0;
+}
+
+.gh-skeleton-pill {
+  width: 175px;
+  height: 18px;
+  border-radius: 12px;
+}
+
+.gh-skeleton-notice-spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+.gh-tree-skeleton {
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.gh-tree-skeleton-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 12px;
+  height: 24px;
+}
+
+.gh-tree-node-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 6px;
+}
+
+.gh-skeleton-icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.gh-skeleton-text {
+  height: 12px;
+  border-radius: 3px;
+}
+
+.gh-code-skeleton {
+  padding: 14px 16px;
+  height: 100%;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gh-code-skeleton-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.gh-code-skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.gh-code-skeleton-num {
+  width: 24px;
+  text-align: right;
+  font: 11px/1 ui-monospace, monospace;
+  color: #484f58;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.gh-skeleton-code-line {
+  height: 12px;
+  border-radius: 3px;
 }
 
 .gh-code-toolbar>div:first-child span {
@@ -3374,25 +3586,78 @@
   }
 
   .gh-repository-viewer {
-    grid-template-columns: 1fr;
-    grid-template-rows: minmax(115px, 30%) minmax(0, 1fr);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    min-height: 400px;
+  }
+
+  .gh-mobile-tree-btn {
+    display: inline-flex !important;
+  }
+
+  .gh-tree-close-mobile {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    background: transparent;
+    border: 1px solid #384250;
+    color: #8b949e;
+    cursor: pointer;
+    margin-left: 6px;
+    flex-shrink: 0;
+  }
+
+  .gh-tree-close-mobile:hover {
+    background: #21262d;
+    color: #f0f6fc;
   }
 
   .gh-file-tree {
-    border-right: none;
-    border-bottom: 1px solid #344353;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 82vw;
+    max-width: 320px;
+    z-index: 999;
+    background: #111821;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.75);
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border-right: 1px solid #344353;
+    border-bottom: none;
   }
 
-  .gh-file-tree-title {
-    padding: 8px 12px;
+  .gh-file-tree.gh-file-tree-open {
+    transform: translateX(0);
   }
 
-  .gh-tree-github {
-    display: none;
+  .gh-tree-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(2px);
+    z-index: 998;
   }
 
   .gh-file-preview {
-    padding: 8px;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    padding: 6px;
+  }
+
+  .gh-file-tree-title {
+    padding: 10px 12px;
+  }
+
+  .gh-tree-github {
+    display: flex;
   }
 
   .gh-code-toolbar {

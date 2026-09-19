@@ -41,6 +41,7 @@ import {
 import PortfolioAssistant from "../components/PortfolioAssistant.jsx";
 import RepositoryViewer from "../components/github/RepositoryViewer.jsx";
 import portrait from "../assets/optimized/uvPhoto.webp";
+import profileLogo from "../assets/ProfileSection.svg";
 import "./github-portfolio.css";
 import "./github-appearance.css";
 
@@ -80,7 +81,15 @@ const SKILLS = [
   { name: "Java", short: "J", color: "orange" },
   { name: "C", short: "C", color: "slate" },
 ];
-const FILTERS = ["All", "Full stack", "Frontend", "Backend", "Learning"];
+const REPO_FILTER_OPTIONS = [
+  { id: "all", label: "All", category: "All" },
+  { id: "fullstack", label: "Full stack", category: "Full stack" },
+  { id: "frontend", label: "Frontend", category: "Frontend" },
+  { id: "backend", label: "Backend", category: "Backend" },
+  { id: "learning", label: "Learning", category: "Learning" },
+];
+const DEFAULT_REPO_FILTER_ID = "all";
+const FILTERS = REPO_FILTER_OPTIONS.map((item) => item.category);
 const SOCIAL_ICONS = {
   GitHub: Github,
   LinkedIn: Linkedin,
@@ -123,13 +132,10 @@ function useGitHubProfile() {
   const [stats, setStats] = useState(null);
   useEffect(() => {
     const controller = new AbortController();
-    fetch(
-      `https://api.github.com/users/${encodeURIComponent("utsavvachhani")}`,
-      {
-        headers: { Accept: "application/vnd.github+json" },
-        signal: controller.signal,
-      },
-    )
+    fetch(`https://api.github.com/users/${encodeURIComponent("utsavvachhani")}`, {
+      headers: { Accept: "application/vnd.github+json" },
+      signal: controller.signal,
+    })
       .then((response) => {
         if (!response.ok) throw new Error("GitHub unavailable");
         return response.json();
@@ -273,7 +279,11 @@ function Header({
             aria-label="Utsav portfolio, go to overview"
           >
             <span className="gh-brand-mark">
-              <Code2 size={25} strokeWidth={2.5} />
+              <img
+                src={profileLogo}
+                alt="Utsav Vachhani"
+                className="gh-brand-logo-img"
+              />
             </span>
             <span>
               utsav<span className="gh-brand-accent">.</span>dev
@@ -558,14 +568,17 @@ function ProfileSidebar({ ghStats }) {
       <External href={PERSONAL_INFO.github} className="gh-follow-button">
         <Github size={16} /> Follow on GitHub <ArrowUpRight size={15} />
       </External>
-      {ghStats && (
+      {ghStats ? (
         <p className="gh-followers">
           <Github size={15} />
           <strong>{ghStats.followers.toLocaleString()}</strong> followers{" "}
           <span className="gh-small-dot">·</span>{" "}
           <strong>{ghStats.repos.toLocaleString()}</strong> public repos{" "}
-          <span className="gh-api-note">via GitHub</span>
         </p>
+      ) : (
+        <div className="gh-followers-skeleton" aria-hidden="true">
+          <span className="gh-skeleton gh-skeleton-pill" />
+        </div>
       )}
       <div className="gh-profile-details">
         <div>
@@ -926,13 +939,16 @@ function Stats({ ghStats }) {
 }
 
 function Repositories({ query, setQuery, onOpen }) {
-  const [category, setCategory] = useState("All");
+  const [filterId, setFilterId] = useState(DEFAULT_REPO_FILTER_ID);
+  const activeFilter =
+    REPO_FILTER_OPTIONS.find((f) => f.id === filterId) || REPO_FILTER_OPTIONS[0];
   const [sort, setSort] = useState("featured");
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     const results = PROJECTS.filter(
       (project) =>
-        (category === "All" || categoryOf(project) === category) &&
+        (activeFilter.category === "All" ||
+          categoryOf(project) === activeFilter.category) &&
         (!normalized ||
           `${project.title} ${project.description} ${project.techStack.join(" ")}`
             .toLowerCase()
@@ -946,7 +962,7 @@ function Repositories({ query, setQuery, onOpen }) {
         Number(!FEATURE_IDS.includes(b.id))
       );
     });
-  }, [query, category, sort]);
+  }, [query, activeFilter, sort]);
   return (
     <section className="gh-block gh-repositories" id="repositories">
       <SectionHeading
@@ -989,17 +1005,18 @@ function Repositories({ query, setQuery, onOpen }) {
         </label>
       </div>
       <div className="gh-repo-filters" aria-label="Filter repositories">
-        {FILTERS.map((item) => (
+        {REPO_FILTER_OPTIONS.map((item) => (
           <button
             type="button"
-            key={item}
+            key={item.id}
+            id={`gh-repo-filter-${item.id}`}
             className={
-              item === category ? "gh-filter gh-filter-active" : "gh-filter"
+              item.id === filterId ? "gh-filter gh-filter-active" : "gh-filter"
             }
-            onClick={() => setCategory(item)}
-            aria-pressed={item === category}
+            onClick={() => setFilterId(item.id)}
+            aria-pressed={item.id === filterId}
           >
-            {item}
+            {item.label}
           </button>
         ))}
       </div>
@@ -1187,7 +1204,7 @@ function ProjectModal({ project, onClose }) {
   const ref = useRef(null);
   const closeButton = useRef(null);
   const details = getProjectDetails(project);
-  const [tab, setTab] = useState("overview");
+  const [tab, setTab] = useState('overview');
   const index = PROJECTS.findIndex((item) => item.id === project.id);
   const move = (direction) =>
     PROJECTS[(index + direction + PROJECTS.length) % PROJECTS.length];
@@ -1246,88 +1263,91 @@ function ProjectModal({ project, onClose }) {
             <X size={21} />
           </button>
         </header>
-        <div className="gh-modal-heading">
-          <div className="gh-modal-heading-content">
-            <div className="gh-modal-heading-main">
-              <div className="gh-modal-meta-row">
-                <span className="gh-modal-category-badge">
-                  {categoryOf(project)}
-                </span>
-                <span className="gh-modal-project-counter">
-                  PROJECT {index + 1}{" "}
-                  <span className="gh-modal-counter-slash">/</span>{" "}
-                  {PROJECTS.length}
-                </span>
+        <div className="gh-modal-scrollable-body">
+          <div className="gh-modal-heading">
+            <div className="gh-modal-heading-content">
+              <div className="gh-modal-heading-main">
+                <div className="gh-modal-meta-row">
+                  <span className="gh-modal-category-badge">
+                    {categoryOf(project)}
+                  </span>
+                  <span className="gh-modal-project-counter">
+                    PROJECT {index + 1}{" "}
+                    <span className="gh-modal-counter-slash">/</span>{" "}
+                    {PROJECTS.length}
+                  </span>
+                </div>
+                <h2 id="gh-modal-title">{project.title}</h2>
+                <p className="gh-modal-description">{details.overview}</p>
               </div>
-              <h2 id="gh-modal-title">{project.title}</h2>
-              <p className="gh-modal-description">{details.overview}</p>
+              {(project.repo || project.live) && (
+                <div className="gh-modal-heading-links">
+                  {project.repo && (
+                    <External
+                      href={project.repo}
+                      className="gh-button gh-button-blue"
+                    >
+                      <Github size={15} /> Open GitHub{" "}
+                      <ArrowUpRight size={14} className="gh-button-arrow" />
+                    </External>
+                  )}
+                  {project.live && (
+                    <External
+                      href={project.live}
+                      className="gh-button gh-button-muted"
+                    >
+                      <ExternalLink size={15} /> Live demo{" "}
+                      <ArrowUpRight size={14} className="gh-button-arrow" />
+                    </External>
+                  )}
+                </div>
+              )}
             </div>
-            {(project.repo || project.live) && (
-              <div className="gh-modal-heading-links">
-                {project.repo && (
-                  <External
-                    href={project.repo}
-                    className="gh-button gh-button-blue"
-                  >
-                    <Github size={15} /> Open GitHub{" "}
-                    <ArrowUpRight size={14} className="gh-button-arrow" />
-                  </External>
-                )}
-                {project.live && (
-                  <External
-                    href={project.live}
-                    className="gh-button gh-button-muted"
-                  >
-                    <ExternalLink size={15} /> Live demo{" "}
-                    <ArrowUpRight size={14} className="gh-button-arrow" />
-                  </External>
-                )}
-              </div>
-            )}
           </div>
-        </div>
-        <div
-          className="gh-modal-tablist"
-          role="tablist"
-          aria-label="Project content"
-        >
-          {[
-            ["overview", "Overview"],
-            ["code", "Source code"],
-            ["readme", "README"],
-          ].map(([id, label]) => (
-            <button
-              key={id}
-              type="button"
-              role="tab"
-              id={`gh-project-tab-${id}`}
-              aria-selected={tab === id}
-              aria-controls="gh-project-content"
-              className={tab === id ? "gh-modal-tab-active" : ""}
-              onClick={() => setTab(id)}
+          <div className="gh-modal-tablist-wrap">
+            <div
+              className="gh-modal-tablist"
+              role="tablist"
+              aria-label="Project content"
             >
-              {id === "code" ? (
-                <Code2 size={15} />
-              ) : id === "readme" ? (
-                <BookOpen size={15} />
-              ) : (
-                <Layers3 size={15} />
-              )}{" "}
-              {label}
-            </button>
-          ))}
-        </div>
-        <div
-          className="gh-modal-content"
-          id="gh-project-content"
-          role="tabpanel"
-          aria-labelledby={`gh-project-tab-${tab}`}
-        >
-          {tab === "code" ? (
-            <RepositoryViewer project={project} />
-          ) : tab === "readme" ? (
-            <RepositoryViewer project={project} readmeOnly />
-          ) : (
+              {[
+                ["overview", "Overview"],
+                ["code", "Source code"],
+                ["readme", "README"],
+              ].map(([id, label]) => (
+                <button
+                  key={id}
+                  type="button"
+                  role="tab"
+                  id={`gh-project-tab-${id}`}
+                  aria-selected={tab === id}
+                  aria-controls="gh-project-content"
+                  className={tab === id ? "gh-modal-tab-active" : ""}
+                  onClick={() => setTab(id)}
+                >
+                  {id === "code" ? (
+                    <Code2 size={15} />
+                  ) : id === "readme" ? (
+                    <BookOpen size={15} />
+                  ) : (
+                    <Layers3 size={15} />
+                  )}{" "}
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div
+            className="gh-modal-content"
+            id="gh-project-content"
+            role="tabpanel"
+            aria-labelledby={`gh-project-tab-${tab}`}
+          >
+            {tab === "code" ? (
+              <RepositoryViewer project={project}/>
+            ) : tab === "readme" ? (
+              <RepositoryViewer project={project} readmeOnly />
+            ) : (
             <div className="gh-modal-overview">
               {details.images.length > 0 && (
                 <div className="gh-modal-image">
@@ -1398,7 +1418,8 @@ function ProjectModal({ project, onClose }) {
             </div>
           )}
         </div>
-        <footer className="gh-modal-bottom">
+      </div>
+      <footer className="gh-modal-bottom">
           <button type="button" onClick={() => onClose(move(-1).id)}>
             <ArrowLeft size={16} /> Previous project
           </button>
