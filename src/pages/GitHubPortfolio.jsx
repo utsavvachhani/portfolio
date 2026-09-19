@@ -35,6 +35,8 @@ import {
   FEATURE_IDS,
   PORTFOLIO_PROJECTS,
   getProjectDetails,
+  getProjectById,
+  categoryOf,
 } from "../constants/projectDetails.js";
 import PortfolioAssistant from "../components/PortfolioAssistant.jsx";
 import RepositoryViewer from "../components/github/RepositoryViewer.jsx";
@@ -88,21 +90,6 @@ const SOCIALS = SOCIAL_LINKS.filter(({ label }) =>
   ["GitHub", "LinkedIn", "Instagram", "X (Twitter)"].includes(label),
 );
 
-function categoryOf(project) {
-  const stack = project.techStack.join(" ").toLowerCase();
-  if (
-    /study|lab|data structures|algorithms/i.test(project.title) ||
-    ["react-js-study", "js-study", "wt-lab", "linked-list"].includes(project.id)
-  )
-    return "Learning";
-  const hasBackend =
-    /node|express|php|mongodb|postgresql|mysql|mern|websocket/.test(stack);
-  const hasFrontend =
-    /react|next|html|css|vite|tailwind|javascript|framer|mern/.test(stack);
-  if (hasBackend && hasFrontend) return "Full stack";
-  if (hasBackend) return "Backend";
-  return "Frontend";
-}
 const LANGUAGE_GROUPS = [
   {
     name: "JavaScript / React",
@@ -136,10 +123,13 @@ function useGitHubProfile() {
   const [stats, setStats] = useState(null);
   useEffect(() => {
     const controller = new AbortController();
-    fetch(`https://api.github.com/users/${encodeURIComponent("utsavvachhani")}`, {
-      headers: { Accept: "application/vnd.github+json" },
-      signal: controller.signal,
-    })
+    fetch(
+      `https://api.github.com/users/${encodeURIComponent("utsavvachhani")}`,
+      {
+        headers: { Accept: "application/vnd.github+json" },
+        signal: controller.signal,
+      },
+    )
       .then((response) => {
         if (!response.ok) throw new Error("GitHub unavailable");
         return response.json();
@@ -1197,7 +1187,7 @@ function ProjectModal({ project, onClose }) {
   const ref = useRef(null);
   const closeButton = useRef(null);
   const details = getProjectDetails(project);
-  const [tab, setTab] = useState('overview');
+  const [tab, setTab] = useState("overview");
   const index = PROJECTS.findIndex((item) => item.id === project.id);
   const move = (direction) =>
     PROJECTS[(index + direction + PROJECTS.length) % PROJECTS.length];
@@ -1334,7 +1324,7 @@ function ProjectModal({ project, onClose }) {
           aria-labelledby={`gh-project-tab-${tab}`}
         >
           {tab === "code" ? (
-            <RepositoryViewer project={project}/>
+            <RepositoryViewer project={project} />
           ) : tab === "readme" ? (
             <RepositoryViewer project={project} readmeOnly />
           ) : (
@@ -1437,7 +1427,9 @@ export default function GitHubPortfolio() {
   });
   const [activeTab, setActiveTab] = useState("overview");
   const [params, setParams] = useSearchParams();
-  const selected = PROJECTS.find(({ id }) => id === params.get("project"));
+  const selected =
+    getProjectById(params.get("project")) ||
+    PROJECTS.find(({ id }) => id === params.get("project"));
   const ghStats = useGitHubProfile();
   useEffect(() => {
     try {
