@@ -114,10 +114,49 @@ export function getProjectDetails(project) {
   );
   return {
     ...project,
-    category: project.category || null,
+    category: project.category || categoryOf(project),
     overview: project.overview || project.description,
     images,
     features: project.features || PROJECT_FEATURES[project.id] || [],
     challenges,
   };
+}
+
+export function getProjectById(id) {
+  if (!id) return null;
+  const project = PORTFOLIO_PROJECTS.find((item) => item.id === id);
+  return project ? getProjectDetails(project) : null;
+}
+
+export function categoryOf(project) {
+  if (!project) return "Full stack";
+  const stack = Array.isArray(project.techStack)
+    ? project.techStack.join(" ").toLowerCase()
+    : "";
+  if (
+    /study|lab|data structures|algorithms/i.test(project.title || "") ||
+    ["react-js-study", "js-study", "wt-lab", "linked-list"].includes(project.id)
+  )
+    return "Learning";
+  const hasBackend =
+    /node|express|php|mongodb|postgresql|mysql|mern|websocket/.test(stack);
+  const hasFrontend =
+    /react|next|html|css|vite|tailwind|javascript|framer|mern/.test(stack);
+  if (hasBackend && hasFrontend) return "Full stack";
+  if (hasBackend) return "Backend";
+  return "Frontend";
+}
+
+export function getProjectNeighbors(id, projects = PORTFOLIO_PROJECTS) {
+  const index = projects.findIndex((p) => p.id === id);
+  if (index === -1)
+    return {
+      prev: projects[0],
+      next: projects[0],
+      index: 0,
+      total: projects.length,
+    };
+  const prev = projects[(index - 1 + projects.length) % projects.length];
+  const next = projects[(index + 1) % projects.length];
+  return { prev, next, index, total: projects.length };
 }

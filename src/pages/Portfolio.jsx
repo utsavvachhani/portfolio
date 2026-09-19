@@ -31,6 +31,8 @@ import ProjectDetailDialog from "../components/ProjectDetailDialog.jsx";
 import {
   PORTFOLIO_PROJECTS,
   FEATURE_IDS,
+  getProjectById,
+  categoryOf,
 } from "../constants/projectDetails.js";
 
 const NAV = [
@@ -463,12 +465,6 @@ function About() {
   );
 }
 
-function categoryOf(project) {
-  const tech = project.techStack.join(" ").toLowerCase();
-  if (/mongodb|postgres|express|mern|node/.test(tech)) return "Full stack";
-  if (/react|next|tailwind|css|html/.test(tech)) return "Frontend";
-  return "Tools";
-}
 function ProjectCard({ project, index, onOpen, featured }) {
   const ref = useRef(null);
   const reduced = useReducedMotion();
@@ -970,9 +966,7 @@ function Footer() {
 export default function Portfolio() {
   const [active, setActive] = useState("home");
   const [searchParams, setSearchParams] = useSearchParams();
-  const selected = ALL_PROJECTS.find(
-    (p) => p.id === searchParams.get("project"),
-  );
+  const selected = getProjectById(searchParams.get("project"));
   useEffect(() => {
     document.title = "Utsav Vachhani — Full-Stack Developer";
     const ids = NAV.map(([id]) => id);
