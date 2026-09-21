@@ -15,6 +15,8 @@ export const PERSONAL_INFO = {
   phone: "9512655868",
   location: "Surat, Gujarat, India",
   cvLink: "/resume/utsav-vachhani-resume.pdf",
+  portfolio: "https://utsavvachhani-portfolio.vercel.app/",
+  website: "https://utsavvachhani-portfolio.vercel.app/",
   github: "https://github.com/utsavvachhani",
   linkedin: "https://www.linkedin.com/in/vachhani-utsav-21ut75/",
   bioGreeting: "Hi, I'm Utsav Vachhani 👋",

@@ -89,7 +89,7 @@ export function generateProjectsHtml(projects) {
       const stackText = p.techStack.join(", ");
       const escapedTitle = p.title.replaceAll("&", "&amp;");
 
-      return `<article class="project">\n    <div class="project-title"><h3>${escapedTitle}</h3><div class="project-links">${linksHtml}</div></div>\n    <p>${p.description}</p><p class="tech"><strong>Stack:</strong> ${stackText}</p>\n  </article>`;
+      return `<article class="project">\n    <div class="project-title"><h3>${escapedTitle}</h3><div class="project-links">${linksHtml}</div></div>\n    <p class="tech"><strong>Stack:</strong> ${stackText}</p>\n    <p>${p.description}</p>\n  </article>`;
     })
     .join("\n");
 }

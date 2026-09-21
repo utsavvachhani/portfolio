@@ -15,14 +15,15 @@
   a:hover {text-decoration:underline;color:#284216}
   .sheet {width:min(210mm,100%);padding:14mm 16mm 15mm;margin:22px auto 36px;background:#fff;box-shadow:0 12px 40px #17221a14;min-height:297mm}
   .topline {display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:9px;font-size:8.5px;font-weight:700;letter-spacing:.16em;color:#748060}
-  header {display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:22px 0 20px}
-  .eyebrow {font-size:9.5px;letter-spacing:.16em;font-weight:700;color:var(--accent);margin:0 0 6px;text-transform:uppercase}
-  h1 {font-size:44px;letter-spacing:-.05em;line-height:.96;margin:0;font-weight:700;color:#182026}
+  header {display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:18px 0 16px}
+  .eyebrow {font-size:9.5px;letter-spacing:.16em;font-weight:700;color:var(--accent);margin:0 0 3px;text-transform:uppercase;text-align:center}
+  h1 {font-size:36px;letter-spacing:-.04em;line-height:1;margin:0;font-weight:700;color:#182026;text-align:center}
   h1 em {font-style:normal;color:#6f8c47}
-  .contact {display:grid;gap:4px;font-size:9.5px;line-height:1.45;min-width:215px;text-align:right}
-  .contact a {color:#424c54;transition:color .15s}
+  .contact {display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;gap:0;font-size:8px;letter-spacing:-.015em;line-height:1.4;white-space:nowrap;width:100%}
+  .contact a {color:#424c54;transition:color .15s;white-space:nowrap;display:inline-flex;align-items:center}
   .contact a:hover {color:var(--accent)}
-  .contact span {color:#6b7680}
+  .contact span {color:#6b7680;white-space:nowrap;display:inline-flex;align-items:center}
+  .contact > *:not(:last-child)::after {content:"•";margin:0 6px;color:#96a683;font-size:7px}
   .line {border-top:1px solid var(--line);padding:13px 0;display:grid;grid-template-columns:116px 1fr;gap:18px}
   .line h2 {margin:0;font-size:11.5px;letter-spacing:-.01em;font-weight:700;color:#1f282f}
   .line h2 span {display:inline-block;padding:1px 5px;border-radius:3px;background:var(--badge-bg);color:var(--badge-text);font-size:8.5px;font-weight:700;margin-right:6px}
@@ -34,7 +35,6 @@
   .entry-title strong {font-weight:700;color:#1a2228}
   .entry-title small {color:#626f78;font-size:8.8px;white-space:nowrap}
   .entry-sub {color:#5d6a71;font-size:8.8px;margin-top:2px}
-  .project-intro {margin-bottom:8px!important;color:#616c73!important;font-size:9.4px!important}
   .projects {display:grid;grid-template-columns:1fr;gap:0}
   .project {padding:7px 0 8px;border-bottom:1px solid var(--line-subtle);break-inside:avoid;page-break-inside:avoid}
   .project:last-child {border:0}
@@ -42,8 +42,8 @@
   .project h3 {margin:0 0 2px;font-size:10px;font-weight:700;color:#1d252b}
   .project-links {display:flex;gap:10px;flex-shrink:0;font-size:8.8px;font-weight:700}.project-links a{white-space:nowrap;color:#496a30}
   .project-links a:hover {color:#264115}
+  .project .tech {font-size:8.8px;color:#5a6850;margin:2px 0 2.5px}
   .project p {margin:0;font-size:9.3px;line-height:1.45;color:#3e474f}
-  .project .tech {font-size:8.8px;color:#616b58;margin-top:2.5px}
   .skills p {margin:0 0 4.5px;font-size:9.6px;line-height:1.5}
   .bottom {border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;padding-top:10px;color:#7a8370;font-size:8px;font-weight:700;letter-spacing:.14em}
   @page { size: A4; margin: 0; }
@@ -75,20 +75,25 @@
       break-inside: avoid;
       page-break-inside: avoid;
     }
+    .project .tech {font-size:8.6px;color:#5a6850;margin:1.5px 0 2px}
     .project p {font-size:9.2px;line-height:1.42}
-    .project .tech {font-size:8.6px;margin-top:2px}
     .bottom {
       break-inside: avoid;
       page-break-inside: avoid;
       margin-top: 12px;
       clear: both;
     }
+    header {padding:12px 0 10px;gap:5px;align-items:center;text-align:center}
+    h1 {font-size:34px}
+    .contact {font-size:7.8px;letter-spacing:-.015em;flex-wrap:nowrap;justify-content:center}
+    .contact > *:not(:last-child)::after {margin:0 5px;color:#96a683;font-size:6.5px}
     h2 {break-after:avoid}
     a {text-decoration:none}
   }
   @media (max-width:650px) {
     .sheet {width:100%;padding:22px 18px;min-height:0;margin:0;box-shadow:none}
-    header {display:block}h1{font-size:40px}.contact{margin-top:14px;text-align:left}
+    header {display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}h1{font-size:30px}.contact{flex-wrap:wrap;justify-content:center;gap:4px 6px;font-size:8.5px}
+    .contact > *:not(:last-child)::after {margin:0 4px}
     .line{grid-template-columns:1fr;gap:8px;padding:14px 0}
     .entry-title,.project-title{align-items:flex-start;flex-wrap:wrap}
   }
@@ -97,49 +102,58 @@
 <body>
 <main class="sheet" id="resume-document" aria-label="Utsav Vachhani Resume">
 <div class="topline"><span>CURRICULUM VITAE</span><span>UTSAV / 2026</span></div>
-<header><div><p class="eyebrow">FULL-STACK DEVELOPER</p><h1>Utsav<br/><em>Vachhani.</em></h1></div>
-<div class="contact"><a href="tel:+919512655868">+91 9512655868</a><a href="mailto:vachhaniutsav2@gmail.com">vachhaniutsav2@gmail.com</a><a href="https://github.com/utsavvachhani">github.com/utsavvachhani</a><a href="https://www.linkedin.com/in/vachhaniutsav/">linkedin.com/in/vachhaniutsav</a><span>Surat, Gujarat, India</span></div></header>
+<header><div><p class="eyebrow">FULL-STACK DEVELOPER</p><h1>Utsav <em>Vachhani.</em></h1></div>
+<div class="contact"><a href="tel:+919512655868">+91 9512655868</a><a href="mailto:vachhaniutsav2@gmail.com">vachhaniutsav2@gmail.com</a><a href="https://utsavvachhani-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer">utsavvachhani-portfolio.vercel.app</a><a href="https://github.com/utsavvachhani" target="_blank" rel="noopener noreferrer">github.com/utsavvachhani</a><a href="https://www.linkedin.com/in/vachhaniutsav/" target="_blank" rel="noopener noreferrer">linkedin.com/in/vachhaniutsav</a><span>Surat, Gujarat, India</span></div></header>
 <section class="line"><h2><span>01</span> Summary</h2><div><p>Full-Stack Developer experienced with modern web applications, responsive interfaces, REST APIs, authentication and database-backed products. Works with React, Next.js, Node.js and the MERN stack, bringing product ideas from frontend design through backend implementation.</p></div></section>
 <section class="line"><h2><span>02</span> Education</h2><div class="entry"><div class="entry-title"><strong>Sarvajanik College of Engineering &amp; Technology (SCET)</strong><small>2022–2026</small></div><div class="entry-sub">B.Tech., Information Technology · CGPA 9.34 · Surat, India</div></div></section>
 <section class="line"><h2><span>03</span> Experience</h2><div><div class="entry"><div class="entry-title"><strong>Full Stack Developer Intern · Cirkle Studio Pvt. Ltd.</strong><small>Apr–Sep 2026</small></div><div class="entry-sub">Surat, India</div><ul><li>Designed, developed, and maintained responsive user interfaces using React.js and Next.js.</li><li>Built and maintained RESTful APIs with Node.js and Express.js, integrating frontend and backend systems.</li><li>Performed debugging, code optimization, and responsive UI development across real-world workflows.</li></ul></div><div class="entry" style="margin-top:10px;"><div class="entry-title"><strong>Web Development Intern · Cybersecurity Umbrella</strong><small>Jan–Apr 2026</small></div><div class="entry-sub">On site</div><ul><li>Built Next.js dashboards and internal tools; developed Node.js and Express.js backend services.</li><li>Integrated APIs and frontend–backend data flows.</li><li>Worked with PostgreSQL for database design and data management.</li></ul></div></div></section>
 <section class="line"><h2><span>04</span> Leadership</h2><div class="entry"><div class="entry-title"><strong>Head of Event Management · Converse 2K25</strong><small>2025</small></div><div class="entry-sub">SCET · Surat, India · <a href="https://www.instagram.com/converse2k25/">Event page ↗</a></div><ul><li>Led a two-day national tech fest with 2,000+ participants and managed 180+ coordinators and volunteers.</li><li>Coordinated communications and proposed 30+ event concepts; one was selected and executed.</li><li>Developed the event platform to streamline registration and operations.</li></ul></div></section>
 <section class="line"><h2><span>05</span> Technical skills</h2><div class="skills"><p><strong>Frontend:</strong> React.js, Next.js, JavaScript, HTML5, CSS3, Tailwind CSS</p><p><strong>Backend:</strong> Node.js, Express.js, REST APIs</p><p><strong>Databases:</strong> MongoDB, Firebase, PostgreSQL, MySQL</p><p><strong>Other:</strong> Git, GitHub, Vercel, Python, Java, C, JWT</p></div></section>
-<section class="line projects-line"><h2><span>06</span> Projects<br/><small style="font-size:9px;color:#7c886d;font-weight:400">All 9 showcased projects</small></h2><div><p class="project-intro">Selected professional, academic and independent work. Repository and demo links are included when supplied in the original portfolio.</p><div class="projects">
+<section class="line projects-line"><h2><span>06</span> Projects<br/><small style="font-size:9px;color:#7c886d;font-weight:400">All 9 showcased projects</small></h2><div><div class="projects">
 <article class="project">
     <div class="project-title"><h3>Converse2K25</h3><div class="project-links"><a href="https://github.com/utsavvachhani/converse2k25" rel="noopener noreferrer">GitHub ↗</a><a href="https://converse2k25.vercel.app/" rel="noopener noreferrer">Live ↗</a></div></div>
-    <p>Full-stack annual college fest registration and event management platform built with the MERN stack.</p><p class="tech"><strong>Stack:</strong> MongoDB, Express.js, React.js, Node.js, Redux Toolkit, JWT</p>
+    <p class="tech"><strong>Stack:</strong> MongoDB, Express.js, React.js, Node.js, Redux Toolkit, JWT</p>
+    <p>Full-stack annual college fest registration and event management platform built with the MERN stack.</p>
   </article>
 <article class="project">
     <div class="project-title"><h3>Cyber Shield - Threat Analytics</h3><div class="project-links"><a href="https://github.com/utsavvachhani/emailAwareness" rel="noopener noreferrer">GitHub ↗</a></div></div>
-    <p>Email security awareness platform with automated threat simulations, analytics reports, and user audits.</p><p class="tech"><strong>Stack:</strong> Next.js, Express.js, Tailwind CSS, Node.js, JWT, Stripe, PostgreSQL, Nodemailer, bcryptjs, axios, framer-motion, recharts</p>
+    <p class="tech"><strong>Stack:</strong> Next.js, Express.js, Tailwind CSS, Node.js, JWT, Stripe, PostgreSQL, Nodemailer, bcryptjs, axios, framer-motion, recharts</p>
+    <p>Email security awareness platform with automated threat simulations, analytics reports, and user audits.</p>
   </article>
 <article class="project">
     <div class="project-title"><h3>WhatsApp Web Service</h3><div class="project-links"></div></div>
-    <p>Headless WhatsApp automation client and webhook server using whatsapp-web.js and WebSockets.</p><p class="tech"><strong>Stack:</strong> Vite.js, Express.js, Tailwind CSS, Node.js, JWT, bcryptjs, whatsapp-web.js, Socket.io</p>
+    <p class="tech"><strong>Stack:</strong> Vite.js, Express.js, Tailwind CSS, Node.js, JWT, bcryptjs, whatsapp-web.js, Socket.io</p>
+    <p>Headless WhatsApp automation client and webhook server using whatsapp-web.js and WebSockets.</p>
   </article>
 <article class="project">
     <div class="project-title"><h3>Task Manager App</h3><div class="project-links"></div></div>
-    <p>Intuitive productivity application for organized daily workflow tracking, priorities, and status updates.</p><p class="tech"><strong>Stack:</strong> React.js, Express.js, Tailwind CSS, Node.js, MongoDB, JWT, RESTful API</p>
+    <p class="tech"><strong>Stack:</strong> React.js, Express.js, Tailwind CSS, Node.js, MongoDB, JWT, RESTful API</p>
+    <p>Intuitive productivity application for organized daily workflow tracking, priorities, and status updates.</p>
   </article>
 <article class="project">
     <div class="project-title"><h3>CyberLS - Cybersecurity Platform</h3><div class="project-links"><a href="https://cyberls.com/" rel="noopener noreferrer">Live ↗</a></div></div>
-    <p>Developed a responsive frontend using Next.js and Tailwind CSS. Integrated backend APIs, fetched and displayed data from AWS S3 buckets, and implemented interactive data visualizations using Recharts. Focused on reusable components, responsive layouts, and seamless user experience across devices.</p><p class="tech"><strong>Stack:</strong> Next.js, React.js, Tailwind CSS, REST APIs, AWS S3, Recharts</p>
+    <p class="tech"><strong>Stack:</strong> Next.js, React.js, Tailwind CSS, REST APIs, AWS S3, Recharts</p>
+    <p>Developed a responsive frontend using Next.js and Tailwind CSS. Integrated backend APIs, fetched and displayed data from AWS S3 buckets, and implemented interactive data visualizations using Recharts. Focused on reusable components, responsive layouts, and seamless user experience across devices.</p>
   </article>
 <article class="project">
     <div class="project-title"><h3>Converse2K24</h3><div class="project-links"><a href="https://github.com/utsavvachhani/converse2k24" rel="noopener noreferrer">GitHub ↗</a><a href="https://utsavvachhani.github.io/converse2k24/" rel="noopener noreferrer">Live ↗</a></div></div>
-    <p>Full-stack fest registration portal featuring real-time synchronization with Google Sheets API and Firebase.</p><p class="tech"><strong>Stack:</strong> React.js, Firebase Auth, Tailwind CSS, Google Sheets API</p>
+    <p class="tech"><strong>Stack:</strong> React.js, Firebase Auth, Tailwind CSS, Google Sheets API</p>
+    <p>Full-stack fest registration portal featuring real-time synchronization with Google Sheets API and Firebase.</p>
   </article>
 <article class="project">
     <div class="project-title"><h3>Finance Dashboard UI</h3><div class="project-links"><a href="https://github.com/utsavvachhani/finance-dashboard-ui" rel="noopener noreferrer">GitHub ↗</a><a href="https://finance-dashboard-ui-psi-ten.vercel.app/" rel="noopener noreferrer">Live ↗</a></div></div>
-    <p>Modern financial analytics telemetry dashboard featuring responsive charts, KPI widgets, and fluid micro-animations.</p><p class="tech"><strong>Stack:</strong> React.js, framer-motion, lucide-react, Tailwind CSS, Recharts</p>
+    <p class="tech"><strong>Stack:</strong> React.js, framer-motion, lucide-react, Tailwind CSS, Recharts</p>
+    <p>Modern financial analytics telemetry dashboard featuring responsive charts, KPI widgets, and fluid micro-animations.</p>
   </article>
 <article class="project">
     <div class="project-title"><h3>Memories Social App</h3><div class="project-links"><a href="https://github.com/utsavvachhani/memories" rel="noopener noreferrer">GitHub ↗</a><a href="https://memories-app-omega.vercel.app/" rel="noopener noreferrer">Live ↗</a></div></div>
-    <p>Full-stack MERN social journal for sharing personal milestones, images, and user interactions with JWT auth.</p><p class="tech"><strong>Stack:</strong> MongoDB, Express.js, React.js, Node.js, Redux Toolkit, JWT</p>
+    <p class="tech"><strong>Stack:</strong> MongoDB, Express.js, React.js, Node.js, Redux Toolkit, JWT</p>
+    <p>Full-stack MERN social journal for sharing personal milestones, images, and user interactions with JWT auth.</p>
   </article>
 <article class="project">
     <div class="project-title"><h3>uvMart</h3><div class="project-links"><a href="https://github.com/utsavvachhani/uvMart" rel="noopener noreferrer">GitHub ↗</a></div></div>
-    <p>Developed an e-commerce style platform with basic product management and email notification features.</p><p class="tech"><strong>Stack:</strong> MERN Stack, Nodemailer</p>
+    <p class="tech"><strong>Stack:</strong> MERN Stack, Nodemailer</p>
+    <p>Developed an e-commerce style platform with basic product management and email notification features.</p>
   </article>
 </div></div></section>
 
