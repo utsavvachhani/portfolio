@@ -41,7 +41,8 @@ assert(
   "Print must use HTML iframe and exclude application navbar",
 );
 assert(
-  portfolio.includes("useState('overview')"),
+  portfolio.includes("useState('overview')") ||
+    portfolio.includes('useState("overview")'),
   "Project modal must start on Overview",
 );
 assert(

@@ -123,41 +123,76 @@
    color: #45652f;
 }
 
-@media (max-width: 700px) {
+.resume-page .resume-btn-label {
+   display: inline;
+}
+
+@media (max-width: 768px) {
+   .resume-preview-wrap {
+      width: 100%;
+      margin: 0;
+   }
+
+   .resume-page {
+      padding-bottom: 25px;
+   }
+
    .resume-page .resume-nav-inner {
-      min-height: 72px;
+      min-height: 52px;
+      padding: 8px 12px;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 8px;
+   }
+
+   .resume-page .resume-btn-label {
+      display: none !important;
+   }
+
+   .resume-page .resume-back {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1c2333;
+      border: 1px solid #3d4756;
+      border-radius: 6px;
    }
 
    .resume-page .resume-toolbar-actions {
       gap: 6px;
+      flex-wrap: nowrap;
    }
 
-   .resume-page .resume-print {
-      font-size: 10px;
-   }
-
+   .resume-page .resume-print,
+   .resume-page .resume-download-html,
    .resume-page .resume-download {
-      font-size: 10px;
-      padding: 8px;
-   }
-}
-
-@media (max-width: 420px) {
-   .resume-page .resume-back {
-      letter-spacing: 0;
-      font-size: 9px;
-   }
-
-   .resume-page .resume-print {
-      font-size: 0;
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      min-height: 36px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
    }
 
-   .resume-page .resume-print svg {
-      width: 17px;
+   .resume-page .resume-print svg,
+   .resume-page .resume-download-html svg,
+   .resume-page .resume-download svg {
+      margin: 0;
    }
 
-   .resume-page .resume-download {
-      gap: 5px;
+   .resume-page .resume-bottom-actions {
+      padding: 16px 14px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
    }
 }
 

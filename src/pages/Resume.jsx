@@ -38,37 +38,45 @@ const downloadFile = async (url, filename) => {
 // Resume content is edited only in public/resume/resume.html.
 export default function Resume() {
   const previewRef = useRef(null);
-  const [height, setHeight] = useState(1320);
+  const [height, setHeight] = useState(1050);
 
   useEffect(() => {
     document.title = "Resume — Utsav Vachhani";
     window.scrollTo(0, 0);
     const update = () => {
       const doc = previewRef.current?.contentDocument;
-      if (doc)
-        setHeight(
-          Math.max(
-            doc.documentElement.scrollHeight,
-            doc.body?.scrollHeight || 0,
-          ) + 4,
+      if (doc) {
+        const docHeight = Math.max(
+          doc.documentElement.scrollHeight,
+          doc.body?.scrollHeight || 0,
         );
+        if (docHeight > 100) setHeight(docHeight + 8);
+      }
     };
     window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    const timer1 = setTimeout(update, 200);
+    const timer2 = setTimeout(update, 600);
+    return () => {
+      window.removeEventListener("resize", update);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
   }, []);
 
   const onPreviewLoad = () => {
     const frame = previewRef.current;
     if (!frame?.contentDocument) return;
-    const update = () =>
-      setHeight(
-        Math.max(
-          frame.contentDocument.documentElement.scrollHeight,
-          frame.contentDocument.body.scrollHeight,
-        ) + 4,
+    const update = () => {
+      const docHeight = Math.max(
+        frame.contentDocument.documentElement.scrollHeight,
+        frame.contentDocument.body.scrollHeight,
       );
+      if (docHeight > 100) setHeight(docHeight + 8);
+    };
     update();
     frame.contentDocument.fonts?.ready.then(update);
+    setTimeout(update, 150);
+    setTimeout(update, 500);
   };
 
   const printResume = () => previewRef.current?.contentWindow?.print();
@@ -77,17 +85,20 @@ export default function Resume() {
     <div className="resume-page">
       <nav className="resume-nav" aria-label="Resume toolbar">
         <div className="resume-nav-inner shell">
-          <a href="/#home" className="resume-back">
-            <ArrowLeft size={17} /> BACK TO PORTFOLIO
+          <a href="/#home" className="resume-back" title="Back to Portfolio">
+            <ArrowLeft size={17} />
+            <span className="resume-btn-label">BACK TO PORTFOLIO</span>
           </a>
           <div className="resume-toolbar-actions">
             <button
               type="button"
               className="resume-print"
               onClick={printResume}
-              title="Print or Save as PDF via browser dialog"
+              title="Print or Save as PDF"
+              aria-label="Print or Save as PDF"
             >
-              <Printer size={16} /> Print / Save as PDF
+              <Printer size={16} />
+              <span className="resume-btn-label">Print / Save as PDF</span>
             </button>
             <a
               href={HTML}
@@ -98,8 +109,10 @@ export default function Resume() {
                 downloadFile(HTML, "Utsav_Vachhani_Resume.html");
               }}
               title="Download standalone HTML resume"
+              aria-label="Download standalone HTML resume"
             >
-              <FileCode2 size={16} /> Download HTML
+              <FileCode2 size={16} />
+              <span className="resume-btn-label">Download HTML</span>
             </a>
             <a
               href={PDF}
@@ -110,8 +123,10 @@ export default function Resume() {
                 downloadFile(PDF, "Utsav_Vachhani_Resume.pdf");
               }}
               title="Download generated A4 PDF resume"
+              aria-label="Download generated A4 PDF resume"
             >
-              <Download size={16} /> Download A4 PDF
+              <Download size={16} />
+              <span className="resume-btn-label">Download A4 PDF</span>
             </a>
           </div>
         </div>

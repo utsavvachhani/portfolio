@@ -13,89 +13,80 @@
   html,body {margin:0;padding:0;background:#eae9e3;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   a {color:#416329;text-decoration:none;overflow-wrap:anywhere}
   a:hover {text-decoration:underline;color:#284216}
-  .sheet {width:min(210mm,100%);padding:14mm 16mm 15mm;margin:22px auto 36px;background:#fff;box-shadow:0 12px 40px #17221a14;min-height:297mm}
-  .topline {display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:9px;font-size:8.5px;font-weight:700;letter-spacing:.16em;color:#748060}
-  header {display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:18px 0 16px}
-  .eyebrow {font-size:9.5px;letter-spacing:.16em;font-weight:700;color:var(--accent);margin:0 0 3px;text-transform:uppercase;text-align:center}
-  h1 {font-size:36px;letter-spacing:-.04em;line-height:1;margin:0;font-weight:700;color:#182026;text-align:center}
+  .sheet {width:min(210mm,100%);padding:11mm 15mm 10mm;margin:20px auto 30px;background:#fff;box-shadow:0 12px 40px #17221a14;min-height:297mm;box-sizing:border-box}
+  .topline {display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:7px;font-size:8.6px;font-weight:700;letter-spacing:.16em;color:#748060}
+  header {display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px;padding:13px 0 11px}
+  .eyebrow {font-size:9.5px;letter-spacing:.16em;font-weight:700;color:var(--accent);margin:0 0 2px;text-transform:uppercase;text-align:center}
+  h1 {font-size:34px;letter-spacing:-.04em;line-height:1;margin:0;font-weight:700;color:#182026;text-align:center}
   h1 em {font-style:normal;color:#6f8c47}
-  .contact {display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;gap:0;font-size:8px;letter-spacing:-.015em;line-height:1.4;white-space:nowrap;width:100%}
+  .contact {display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;gap:0;font-size:7.9px;letter-spacing:-.015em;line-height:1.4;white-space:nowrap;width:100%}
   .contact a {color:#424c54;transition:color .15s;white-space:nowrap;display:inline-flex;align-items:center}
   .contact a:hover {color:var(--accent)}
   .contact span {color:#6b7680;white-space:nowrap;display:inline-flex;align-items:center}
-  .contact > *:not(:last-child)::after {content:"•";margin:0 6px;color:#96a683;font-size:7px}
-  .line {border-top:1px solid var(--line);padding:13px 0;display:grid;grid-template-columns:116px 1fr;gap:18px}
-  .line h2 {margin:0;font-size:11.5px;letter-spacing:-.01em;font-weight:700;color:#1f282f}
-  .line h2 span {display:inline-block;padding:1px 5px;border-radius:3px;background:var(--badge-bg);color:var(--badge-text);font-size:8.5px;font-weight:700;margin-right:6px}
-  .line p,.line li {font-size:9.8px;line-height:1.52;color:#3f4951;margin:0}
-  .line ul {margin:6px 0 0;padding-left:15px}
-  .line li {margin:0 0 2.5px}
+  .contact > *:not(:last-child)::after {content:"•";margin:0 5.2px;color:#96a683;font-size:6.5px}
+  .line {border-top:1px solid var(--line);padding:9.5px 0;display:grid;grid-template-columns:110px 1fr;gap:15px}
+  .line h2 {margin:0;font-size:11px;letter-spacing:-.01em;font-weight:700;color:#1f282f}
+  .line h2 span {display:inline-block;padding:1px 5px;border-radius:3px;background:var(--badge-bg);color:var(--badge-text);font-size:8.6px;font-weight:700;margin-right:5px}
+  .line p,.line li {font-size:9.2px;line-height:1.46;color:#3f4951;margin:0}
+  .line ul {margin:3.5px 0 0;padding-left:14px}
+  .line li {margin:0 0 2px}
   .entry {break-inside:avoid;page-break-inside:avoid}
-  .entry-title {display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-size:10px}
+  .entry-title {display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-size:9.8px}
   .entry-title strong {font-weight:700;color:#1a2228}
-  .entry-title small {color:#626f78;font-size:8.8px;white-space:nowrap}
-  .entry-sub {color:#5d6a71;font-size:8.8px;margin-top:2px}
-  .projects {display:grid;grid-template-columns:1fr;gap:0}
-  .project {padding:7px 0 8px;border-bottom:1px solid var(--line-subtle);break-inside:avoid;page-break-inside:avoid}
-  .project:last-child {border:0}
-  .project-title {display:flex;justify-content:space-between;gap:10px;align-items:baseline}
-  .project h3 {margin:0 0 2px;font-size:10px;font-weight:700;color:#1d252b}
-  .project-links {display:flex;gap:10px;flex-shrink:0;font-size:8.8px;font-weight:700}.project-links a{white-space:nowrap;color:#496a30}
+  .entry-title small {color:#626f78;font-size:8.6px;white-space:nowrap}
+  .entry-sub {color:#5d6a71;font-size:8.6px;margin-top:1.5px}
+  .projects-line {display:grid;grid-template-columns:110px 1fr;gap:15px}
+  .projects {display:grid;grid-template-columns:repeat(2, 1fr);gap:5px 12px}
+  .project {padding:4.5px 0 5px;border-bottom:1px solid var(--line-subtle);break-inside:avoid;page-break-inside:avoid}
+  .project-title {display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+  .project h3 {margin:0;font-size:9.6px;font-weight:700;color:#1d252b}
+  .project-links {display:flex;gap:7px;flex-shrink:0;font-size:8.3px;font-weight:700}.project-links a{white-space:nowrap;color:#496a30}
   .project-links a:hover {color:#264115}
-  .project .tech {font-size:8.8px;color:#5a6850;margin:2px 0 2.5px}
-  .project p {margin:0;font-size:9.3px;line-height:1.45;color:#3e474f}
-  .skills p {margin:0 0 4.5px;font-size:9.6px;line-height:1.5}
-  .bottom {border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;padding-top:10px;color:#7a8370;font-size:8px;font-weight:700;letter-spacing:.14em}
+  .project .tech {font-size:8.2px;color:#5a6850;margin:1.5px 0 2px;line-height:1.35}
+  .project p {margin:0;font-size:8.7px;line-height:1.38;color:#3e474f}
+  .skills p {margin:0 0 3.2px;font-size:9.2px;line-height:1.44}
+  .bottom {border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;padding-top:9px;margin-top:12px;color:#7a8370;font-size:8.2px;font-weight:700;letter-spacing:.14em}
   @page { size: A4; margin: 0; }
   @media print {
-    html,body {background:#fff!important}
-    .sheet {width:210mm;min-height:0;margin:0;padding:12mm 16mm 14mm;box-shadow:none}
-    .line {break-inside:avoid-page;page-break-inside:avoid}
-    .projects-line {
-      display: block !important;
-      break-inside: auto !important;
-      page-break-inside: auto !important;
-      padding-top: 13px;
-    }
-    .projects-line > h2 {
-      float: left;
-      width: 116px;
-      margin: 0;
-      break-after: avoid;
-    }
-    .projects-line > div {
-      margin-left: 134px;
-    }
-    .projects {
-      display: block;
-    }
-    .project {
-      padding: 6px 0 7px;
-      border-bottom: 1px solid var(--line-subtle);
-      break-inside: avoid;
-      page-break-inside: avoid;
-    }
-    .project .tech {font-size:8.6px;color:#5a6850;margin:1.5px 0 2px}
-    .project p {font-size:9.2px;line-height:1.42}
-    .bottom {
-      break-inside: avoid;
-      page-break-inside: avoid;
-      margin-top: 12px;
-      clear: both;
-    }
-    header {padding:12px 0 10px;gap:5px;align-items:center;text-align:center}
-    h1 {font-size:34px}
-    .contact {font-size:7.8px;letter-spacing:-.015em;flex-wrap:nowrap;justify-content:center}
-    .contact > *:not(:last-child)::after {margin:0 5px;color:#96a683;font-size:6.5px}
+    html,body {background:#fff!important;height:100%!important}
+    .sheet {width:210mm!important;min-height:297mm!important;margin:0!important;padding:11mm 15mm 10mm!important;box-shadow:none!important;box-sizing:border-box!important;page-break-inside:avoid!important;page-break-after:avoid!important;break-inside:avoid!important;break-after:avoid!important}
+    .topline {padding-bottom:7px;font-size:8.6px}
+    header {padding:13px 0 11px;gap:5px;align-items:center;text-align:center}
+    .eyebrow {font-size:9.5px;margin:0 0 2px}
+    h1 {font-size:34px;line-height:1}
+    .contact {font-size:7.9px;letter-spacing:-.015em;flex-wrap:nowrap;justify-content:center}
+    .contact > *:not(:last-child)::after {margin:0 5.2px;color:#96a683;font-size:6.5px}
+    .line {border-top:1px solid var(--line);padding:9.5px 0;gap:15px;grid-template-columns:110px 1fr;break-inside:avoid;page-break-inside:avoid}
+    .line h2 {font-size:11px}
+    .line h2 span {font-size:8.6px;padding:1px 5px;margin-right:5px}
+    .line p,.line li {font-size:9.2px;line-height:1.46}
+    .line ul {margin:3.5px 0 0;padding-left:14px}
+    .line li {margin:0 0 2px}
+    .entry-title {font-size:9.8px}
+    .entry-title small {font-size:8.6px}
+    .entry-sub {font-size:8.6px;margin-top:1.5px}
+    .projects-line {display:grid!important;grid-template-columns:110px 1fr!important;gap:15px!important;padding-top:9.5px}
+    .projects {display:grid!important;grid-template-columns:repeat(2, 1fr)!important;gap:5px 12px!important}
+    .project {padding:4.5px 0 5px;border-bottom:1px solid var(--line-subtle);break-inside:avoid;page-break-inside:avoid}
+    .project h3 {font-size:9.6px}
+    .project-links {font-size:8.3px;gap:7px}
+    .project .tech {font-size:8.2px;margin:1.5px 0 2px;line-height:1.35}
+    .project p {font-size:8.7px;line-height:1.38}
+    .skills p {margin:0 0 3.2px;font-size:9.2px;line-height:1.44}
+    .bottom {border-top:1px solid var(--line);padding-top:9px;margin-top:12px;font-size:8.2px;clear:both;break-inside:avoid;page-break-inside:avoid}
     h2 {break-after:avoid}
     a {text-decoration:none}
   }
   @media (max-width:650px) {
-    .sheet {width:100%;padding:22px 18px;min-height:0;margin:0;box-shadow:none}
-    header {display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}h1{font-size:30px}.contact{flex-wrap:wrap;justify-content:center;gap:4px 6px;font-size:8.5px}
+    .sheet {width:100%;padding:16px 14px 20px;min-height:0;margin:0;box-shadow:none}
+    header {display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:12px 0 10px}
+    h1 {font-size:26px}
+    .contact {flex-wrap:wrap;justify-content:center;gap:3px 6px;font-size:8px}
     .contact > *:not(:last-child)::after {margin:0 4px}
-    .line{grid-template-columns:1fr;gap:8px;padding:14px 0}
-    .entry-title,.project-title{align-items:flex-start;flex-wrap:wrap}
+    .line {grid-template-columns:1fr;gap:6px;padding:9px 0}
+    .line h2 {margin-bottom:2px}
+    .projects {grid-template-columns:1fr!important;gap:7px!important}
+    .entry-title,.project-title {align-items:flex-start;flex-wrap:wrap}
   }
 </style>
 </head>
