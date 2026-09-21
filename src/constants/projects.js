@@ -5,6 +5,7 @@ import whatsappweb from "../assets/optimized/whatsapp-web-js.webp";
 import financialDakbord from "../assets/optimized/financialDakbord.webp";
 import taskmanger from "../assets/optimized/taskmanger.webp";
 import Memories from "../assets/optimized/memories.webp";
+import Cyberls from "../assets/optimized/cyberls.png"
 import ReactJSStudt from "../assets/optimized/React-JS-Study.webp";
 import SoftwareEngineering from "../assets/optimized/SoftwareEngineering.webp";
 import JSLOGO from "../assets/optimized/JSLOGO.webp";
@@ -95,6 +96,22 @@ export const PROJECTS = [
     ],
   },
   {
+    id: "cyberls",
+    title: "CyberLS - Cybersecurity Platform",
+    live: "https://cyberls.com/",
+    description:
+      "Developed a responsive frontend using Next.js and Tailwind CSS. Integrated backend APIs, fetched and displayed data from AWS S3 buckets, and implemented interactive data visualizations using Recharts. Focused on reusable components, responsive layouts, and seamless user experience across devices.",
+    image: Cyberls,
+    techStack: [
+      "Next.js",
+      "React.js",
+      "Tailwind CSS",
+      "REST APIs",
+      "AWS S3",
+      "Recharts"
+    ],
+  },
+  {
     id: "converse2k24",
     title: "Converse2K24",
     repo: "https://github.com/utsavvachhani/converse2k24",
@@ -142,16 +159,16 @@ export const PROJECTS = [
       "JWT",
     ],
   },
-  {
-    id: "software-engineering",
-    title: "URKJ Fitness House (Gym Management)",
-    repo: "https://github.com/utsavvachhani/Software-Engineering",
-    live: "https://utsavvachhani.github.io/Software-Engineering/Home.html",
-    description:
-      "Software engineering course project: Gym management system simplifying membership records, workouts, and schedules.",
-    image: SoftwareEngineering,
-    techStack: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL"],
-  },
+  // {
+  //   id: "software-engineering",
+  //   title: "URKJ Fitness House (Gym Management)",
+  //   repo: "https://github.com/utsavvachhani/Software-Engineering",
+  //   live: "https://utsavvachhani.github.io/Software-Engineering/Home.html",
+  //   description:
+  //     "Software engineering course project: Gym management system simplifying membership records, workouts, and schedules.",
+  //   image: SoftwareEngineering,
+  //   techStack: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL"],
+  // },
   // {
   //   id: "wt-lab",
   //   title: "Web Technologies Lab Suite",
@@ -162,22 +179,22 @@ export const PROJECTS = [
   //   image: WT_LAB,
   //   techStack: ["HTML5", "CSS3", "JavaScript", "XML Schemas", "Java Servlets"],
   // },
-  {
-    id: "codsoft-portfolio",
-    title: "CodSoft Portfolio Showcase",
-    repo: "https://github.com/utsavvachhani/CODSOFT_PROTFOLIO",
-    live: "https://utsavvachhani.github.io/CODSOFT_PROTFOLIO/",
-    description:
-      "Personal web developer portfolio crafted with vanilla HTML5, CSS3, and modern CSS transitions.",
-    image: codesoftportfolie,
-    techStack: [
-      "HTML5",
-      "CSS3",
-      "Vanilla JS",
-      "Responsive Design",
-      "Micro-Animations",
-    ],
-  },
+  // {
+  //   id: "codsoft-portfolio",
+  //   title: "CodSoft Portfolio Showcase",
+  //   repo: "https://github.com/utsavvachhani/CODSOFT_PROTFOLIO",
+  //   live: "https://utsavvachhani.github.io/CODSOFT_PROTFOLIO/",
+  //   description:
+  //     "Personal web developer portfolio crafted with vanilla HTML5, CSS3, and modern CSS transitions.",
+  //   image: codesoftportfolie,
+  //   techStack: [
+  //     "HTML5",
+  //     "CSS3",
+  //     "Vanilla JS",
+  //     "Responsive Design",
+  //     "Micro-Animations",
+  //   ],
+  // },
   // {
   //   id: "codsoft-landing",
   //   title: "CodSoft Landing Page",
