@@ -52,6 +52,30 @@ const PINNED = FEATURE_IDS.map((id) =>
 const REPO_COUNT = PROJECTS.filter((project) => Boolean(project.repo)).length;
 const DEMO_COUNT = PROJECTS.filter((project) => Boolean(project.live)).length;
 const RESUME = "/resume/utsav-vachhani-resume.pdf";
+const HTML_RESUME = "/resume/resume.html";
+
+const downloadFile = async (url, filename) => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Network error fetching file");
+    const blob = await response.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = blobUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(blobUrl);
+  } catch {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+};
 const NAVIGATION = [
   { id: "overview", label: "Overview", icon: BookOpen },
   {
@@ -270,13 +294,14 @@ function Header({
     }
   };
   return (
-    <>
-      <header className="gh-header" id="home">
-        <div className="gh-header-inner">
+    <header className="gh-header" id="home">
+      {/* Tier 1: Name displayed first */}
+      <div className="gh-header-top">
+        <div className="gh-header-brand-wrap">
           <a
             className="gh-brand"
             href="#overview"
-            aria-label="Utsav portfolio, go to overview"
+            aria-label="Utsav Vachhani portfolio, go to overview"
           >
             <span className="gh-brand-mark">
               <img
@@ -285,265 +310,327 @@ function Header({
                 className="gh-brand-logo-img"
               />
             </span>
-            <span>
-              utsav<span className="gh-brand-accent">.</span>dev
+            <span className="gh-brand-info">
+              <span className="gh-brand-name">{PERSONAL_INFO.name}</span>
+              <span className="gh-brand-sub">Full-Stack Developer</span>
             </span>
           </a>
-          <span className="gh-header-divider" aria-hidden="true" />
-          <div className="gh-header-label">
-            Developer portfolio{" "}
-            <span className="gh-hidden-sm">/ GitHub-inspired edition</span>
-          </div>
-          <div className="gh-header-right">
-            <div className="gh-search-wrapper" ref={searchRef}>
-              <form
-                className="gh-global-search"
-                role="search"
-                onSubmit={submit}
-              >
-                <Search size={16} aria-hidden="true" />
-                <label className="gh-sr-only" htmlFor="site-project-search">
-                  Search projects, skills and sections
-                </label>
-                <input
-                  id="site-project-search"
-                  ref={inputRef}
-                  type="search"
-                  value={search}
-                  onFocus={() => setSearchOpen(true)}
-                  onChange={(event) => {
-                    setSearch(event.target.value);
-                    setHighlight(0);
-                    setSearchOpen(true);
-                  }}
-                  onKeyDown={(event) => {
-                    if (event.key === "ArrowDown" && results.length) {
-                      event.preventDefault();
-                      setHighlight((value) => (value + 1) % results.length);
-                    }
-                    if (event.key === "ArrowUp" && results.length) {
-                      event.preventDefault();
-                      setHighlight(
-                        (value) =>
-                          (value - 1 + results.length) % results.length,
-                      );
-                    }
-                  }}
-                  placeholder="Search projects..."
-                  autoComplete="off"
-                  role="combobox"
-                  aria-autocomplete="list"
-                  aria-expanded={Boolean(searchOpen && search.trim())}
-                  aria-controls="gh-search-results"
-                  aria-activedescendant={
-                    searchOpen && results.length
-                      ? `gh-search-result-${highlight}`
-                      : undefined
-                  }
-                />
-                {search ? (
-                  <button
-                    type="button"
-                    className="gh-search-clear"
-                    onClick={() => {
-                      setSearch("");
-                      setHighlight(0);
-                      inputRef.current?.focus();
-                    }}
-                    aria-label="Clear search"
-                  >
-                    <X size={14} />
-                  </button>
-                ) : (
-                  <kbd aria-hidden="true">/</kbd>
-                )}
-              </form>
-              {searchOpen && search.trim() && (
-                <div
-                  className="gh-search-results"
-                  id="gh-search-results"
-                  role="listbox"
-                  aria-label="Search results"
-                >
-                  {results.length ? (
-                    results.map((result, index) => (
-                      <button
-                        type="button"
-                        id={`gh-search-result-${index}`}
-                        role="option"
-                        aria-selected={highlight === index}
-                        className={`gh-search-result ${highlight === index ? "gh-search-result-active" : ""}`}
-                        key={`${result.type}-${result.id}-${result.name}`}
-                        onMouseEnter={() => setHighlight(index)}
-                        onClick={() => choose(result)}
-                      >
-                        <Search size={15} />
-                        <span>
-                          <strong>{result.name}</strong>
-                          <small>
-                            {result.type} · {result.description}
-                          </small>
-                        </span>
-                        <ArrowUpRight size={15} />
-                      </button>
-                    ))
-                  ) : (
-                    <div className="gh-search-empty">
-                      No matching projects, skills or sections. Try a different
-                      keyword.
-                    </div>
-                  )}
-                  <div className="gh-search-hint">
-                    ↑ ↓ Navigate · Enter Open · Esc Close
-                  </div>
-                </div>
-              )}
-            </div>
-            <a
-              className="gh-header-link"
-              href="/creative"
-              title="View the original creative portfolio"
+        </div>
+
+        <div className="gh-header-right">
+          <div className="gh-search-wrapper" ref={searchRef}>
+            <form
+              className="gh-global-search"
+              role="search"
+              onSubmit={submit}
             >
-              <Sparkles size={16} />
-              <span>Creative view</span>
-            </a>
-            <a className="gh-header-link gh-resume-top" href="/resume">
-              <Download size={16} />
-              <span>Resume</span>
-            </a>
-            <div className="gh-profile-menu-wrap" ref={profileRef}>
-              <button
-                type="button"
-                className="gh-header-avatar"
-                aria-label="Open profile and appearance settings"
-                aria-haspopup="dialog"
-                aria-expanded={profileOpen}
-                onClick={() => setProfileOpen((current) => !current)}
-              >
-                <img src={portrait} alt="" />
-              </button>
-              {profileOpen && (
-                <div
-                  className="gh-profile-menu"
-                  role="dialog"
-                  aria-label="Profile and appearance settings"
+              <Search size={15} aria-hidden="true" />
+              <label className="gh-sr-only" htmlFor="site-project-search">
+                Search projects, skills and sections
+              </label>
+              <input
+                id="site-project-search"
+                ref={inputRef}
+                type="search"
+                value={search}
+                onFocus={() => setSearchOpen(true)}
+                onChange={(event) => {
+                  setSearch(event.target.value);
+                  setHighlight(0);
+                  setSearchOpen(true);
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "ArrowDown" && results.length) {
+                    event.preventDefault();
+                    setHighlight((value) => (value + 1) % results.length);
+                  }
+                  if (event.key === "ArrowUp" && results.length) {
+                    event.preventDefault();
+                    setHighlight(
+                      (value) =>
+                        (value - 1 + results.length) % results.length,
+                    );
+                  }
+                }}
+                placeholder="Search projects..."
+                autoComplete="off"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-expanded={Boolean(searchOpen && search.trim())}
+                aria-controls="gh-search-results"
+                aria-activedescendant={
+                  searchOpen && results.length
+                    ? `gh-search-result-${highlight}`
+                    : undefined
+                }
+              />
+              {search ? (
+                <button
+                  type="button"
+                  className="gh-search-clear"
+                  onClick={() => {
+                    setSearch("");
+                    setHighlight(0);
+                    inputRef.current?.focus();
+                  }}
+                  aria-label="Clear search"
                 >
-                  <div className="gh-profile-menu-user">
-                    <img src={portrait} alt="" />
-                    <span>
-                      <strong>{PERSONAL_INFO.name}</strong>
-                      <small>@utsavvachhani</small>
-                    </span>
-                  </div>
-                  <div className="gh-profile-menu-divider" />
-                  <p className="gh-profile-menu-title">Appearance</p>
-                  <div
-                    className="gh-theme-switch"
-                    role="group"
-                    aria-label="Select portfolio theme"
-                  >
-                    <button
-                      type="button"
-                      className={theme === "light" ? "gh-theme-active" : ""}
-                      aria-pressed={theme === "light"}
-                      onClick={() => setTheme("light")}
-                    >
-                      <Sun size={16} /> Light{" "}
-                      {theme === "light" && <Check size={14} />}
-                    </button>
-                    <button
-                      type="button"
-                      className={theme === "dark" ? "gh-theme-active" : ""}
-                      aria-pressed={theme === "dark"}
-                      onClick={() => setTheme("dark")}
-                    >
-                      <Moon size={16} /> Dark{" "}
-                      {theme === "dark" && <Check size={14} />}
-                    </button>
-                  </div>
-                  <div className="gh-profile-menu-divider" />
-                  <a href="/resume">
-                    <Download size={16} /> View Resume{" "}
-                    <ArrowUpRight size={13} />
-                  </a>
-                  <a href="/creative">
-                    <Sparkles size={16} /> Creative portfolio{" "}
-                    <ArrowUpRight size={13} />
-                  </a>
-                  <External
-                    href={PERSONAL_INFO.github}
-                    className="gh-profile-menu-link"
-                  >
-                    <Github size={16} /> GitHub profile{" "}
-                    <ArrowUpRight size={13} />
-                  </External>
-                </div>
+                  <X size={14} />
+                </button>
+              ) : (
+                <kbd aria-hidden="true">/</kbd>
               )}
-            </div>
+            </form>
+            {searchOpen && search.trim() && (
+              <div
+                className="gh-search-results"
+                id="gh-search-results"
+                role="listbox"
+                aria-label="Search results"
+              >
+                {results.length ? (
+                  results.map((result, index) => (
+                    <button
+                      type="button"
+                      id={`gh-search-result-${index}`}
+                      role="option"
+                      aria-selected={highlight === index}
+                      className={`gh-search-result ${highlight === index ? "gh-search-result-active" : ""}`}
+                      key={`${result.type}-${result.id}-${result.name}`}
+                      onMouseEnter={() => setHighlight(index)}
+                      onClick={() => choose(result)}
+                    >
+                      <Search size={15} />
+                      <span>
+                        <strong>{result.name}</strong>
+                        <small>
+                          {result.type} · {result.description}
+                        </small>
+                      </span>
+                      <ArrowUpRight size={15} />
+                    </button>
+                  ))
+                ) : (
+                  <div className="gh-search-empty">
+                    No matching projects, skills or sections.
+                  </div>
+                )}
+                <div className="gh-search-hint">
+                  ↑ ↓ Navigate · Enter Open · Esc Close
+                </div>
+              </div>
+            )}
+          </div>
+
+
+          <a
+            className="gh-header-link"
+            href="/creative"
+            title="View the original creative portfolio"
+          >
+            <Sparkles size={15} />
+            <span>Creative view</span>
+          </a>
+
+          <div className="gh-profile-menu-wrap" ref={profileRef}>
             <button
               type="button"
-              className="gh-menu-toggle"
-              onClick={() => setMenu((previous) => !previous)}
-              aria-label={menu ? "Close menu" : "Open menu"}
-              aria-expanded={menu}
+              className="gh-header-avatar"
+              aria-label="Open profile and appearance settings"
+              aria-haspopup="dialog"
+              aria-expanded={profileOpen}
+              onClick={() => setProfileOpen((current) => !current)}
             >
-              <Menu size={22} />
+              <img src={portrait} alt="" />
+            </button>
+            {profileOpen && (
+              <div
+                className="gh-profile-menu"
+                role="dialog"
+                aria-label="Profile and appearance settings"
+              >
+                <div className="gh-profile-menu-user">
+                  <img src={portrait} alt="" />
+                  <span>
+                    <strong>{PERSONAL_INFO.name}</strong>
+                    <small>@utsavvachhani</small>
+                  </span>
+                </div>
+                <div className="gh-profile-menu-divider" />
+                <p className="gh-profile-menu-title">Appearance</p>
+                <div
+                  className="gh-theme-switch"
+                  role="group"
+                  aria-label="Select portfolio theme"
+                >
+                  <button
+                    type="button"
+                    className={theme === "light" ? "gh-theme-active" : ""}
+                    aria-pressed={theme === "light"}
+                    onClick={() => setTheme("light")}
+                  >
+                    <Sun size={15} /> Light{" "}
+                    {theme === "light" && <Check size={13} />}
+                  </button>
+                  <button
+                    type="button"
+                    className={theme === "dark" ? "gh-theme-active" : ""}
+                    aria-pressed={theme === "dark"}
+                    onClick={() => setTheme("dark")}
+                  >
+                    <Moon size={15} /> Dark{" "}
+                    {theme === "dark" && <Check size={13} />}
+                  </button>
+                </div>
+                <div className="gh-profile-menu-divider" />
+                <button
+                  type="button"
+                  className="gh-profile-menu-action"
+                  onClick={() => downloadFile(RESUME, "Utsav_Vachhani_Resume.pdf")}
+                >
+                  <Download size={15} /> Download PDF Resume
+                </button>
+                <button
+                  type="button"
+                  className="gh-profile-menu-action"
+                  onClick={() => downloadFile(HTML_RESUME, "Utsav_Vachhani_Resume.html")}
+                >
+                  <FileCode2 size={15} /> Download HTML Resume
+                </button>
+                <a href="/resume">
+                  <FileCode2 size={15} /> View Resume Page{" "}
+                  <ArrowUpRight size={13} />
+                </a>
+                <a href="/creative">
+                  <Sparkles size={15} /> Creative portfolio{" "}
+                  <ArrowUpRight size={13} />
+                </a>
+                <External
+                  href={PERSONAL_INFO.github}
+                  className="gh-profile-menu-link"
+                >
+                  <Github size={15} /> GitHub profile{" "}
+                  <ArrowUpRight size={13} />
+                </External>
+              </div>
+            )}
+          </div>
+
+          <button
+            type="button"
+            className="gh-menu-toggle"
+            onClick={() => setMenu((previous) => !previous)}
+            aria-label={menu ? "Close menu" : "Open menu"}
+            aria-expanded={menu}
+          >
+            <Menu size={20} />
+          </button>
+        </div>
+      </div>
+
+      {/* Tier 2: All navigation AND social links in a single horizontal row below name */}
+      <div className="gh-header-nav-row">
+        <div className="gh-header-nav-inner">
+          <nav className="gh-tabs-strip" aria-label="Portfolio sections">
+            {NAVIGATION.map(({ id, icon: Icon, label, count }) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className={id === activeTab ? "gh-tab gh-tab-active" : "gh-tab"}
+                aria-current={id === activeTab ? "location" : undefined}
+                onClick={() => setActiveTab(id)}
+              >
+                <Icon size={15} strokeWidth={1.8} />
+                <span>{label}</span>
+                {count !== undefined && <span className="gh-count">{count}</span>}
+              </a>
+            ))}
+            <a className="gh-tab" href="/resume">
+              <FileCode2 size={15} />
+              <span>Resume</span>
+            </a>
+          </nav>
+
+          <span className="gh-nav-row-separator" aria-hidden="true" />
+
+          <div className="gh-socials-strip" aria-label="Social and contact links">
+            {SOCIALS.map(({ label, href }) => {
+              const Icon = SOCIAL_ICONS[label];
+              return (
+                <External
+                  key={label}
+                  href={href}
+                  className="gh-social-strip-link"
+                  title={label}
+                >
+                  {Icon ? <Icon size={14} /> : <span>𝕏</span>}
+                  <span>{label}</span>
+                </External>
+              );
+            })}
+            <a
+              href={`mailto:${PERSONAL_INFO.email}`}
+              className="gh-social-strip-link"
+              title="Email Utsav Vachhani"
+            >
+              <Mail size={14} />
+              <span>Email</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {menu && (
+        <div className="gh-mobile-menu">
+          <div className="gh-mobile-theme">
+            <span>Appearance</span>
+            <button
+              type="button"
+              aria-pressed={theme === "light"}
+              onClick={() => setTheme("light")}
+            >
+              <Sun size={15} /> Light
+            </button>
+            <button
+              type="button"
+              aria-pressed={theme === "dark"}
+              onClick={() => setTheme("dark")}
+            >
+              <Moon size={15} /> Dark
             </button>
           </div>
-        </div>
-        {menu && (
-          <div className="gh-mobile-menu">
-            <div className="gh-mobile-theme">
-              <span>Appearance</span>
-              <button
-                type="button"
-                aria-pressed={theme === "light"}
-                onClick={() => setTheme("light")}
-              >
-                <Sun size={16} /> Light
-              </button>
-              <button
-                type="button"
-                aria-pressed={theme === "dark"}
-                onClick={() => setTheme("dark")}
-              >
-                <Moon size={16} /> Dark
-              </button>
-            </div>
-            <a href="/creative" onClick={() => setMenu(false)}>
-              Creative portfolio <ArrowUpRight size={15} />
-            </a>
-            <a href="/resume" onClick={() => setMenu(false)}>
-              View Resume <ArrowUpRight size={15} />
-            </a>
-            <External href={PERSONAL_INFO.github}>
-              GitHub profile <ArrowUpRight size={15} />
-            </External>
-          </div>
-        )}
-      </header>
-      <nav className="gh-tabs" aria-label="Portfolio sections">
-        <div className="gh-tabs-inner">
-          {NAVIGATION.map(({ id, icon: Icon, label, count }) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              className={id === activeTab ? "gh-tab gh-tab-active" : "gh-tab"}
-              aria-current={id === activeTab ? "location" : undefined}
-              onClick={() => setActiveTab(id)}
-            >
-              <Icon size={16} strokeWidth={1.8} />
-              <span>{label}</span>
-              {count !== undefined && <span className="gh-count">{count}</span>}
-            </a>
-          ))}
-          <a className="gh-tab gh-tab-resume" href="/resume">
-            <Download size={16} />
-            <span>Resume</span>
+          <button
+            type="button"
+            className="gh-mobile-menu-link"
+            onClick={() => {
+              downloadFile(RESUME, "Utsav_Vachhani_Resume.pdf");
+              setMenu(false);
+            }}
+          >
+            <Download size={15} /> Download PDF Resume
+          </button>
+          <button
+            type="button"
+            className="gh-mobile-menu-link"
+            onClick={() => {
+              downloadFile(HTML_RESUME, "Utsav_Vachhani_Resume.html");
+              setMenu(false);
+            }}
+          >
+            <FileCode2 size={15} /> Download HTML Resume
+          </button>
+          <a href="/resume" onClick={() => setMenu(false)}>
+            View Resume <ArrowUpRight size={15} />
           </a>
+          <a href="/creative" onClick={() => setMenu(false)}>
+            Creative portfolio <ArrowUpRight size={15} />
+          </a>
+          <External href={PERSONAL_INFO.github}>
+            GitHub profile <ArrowUpRight size={15} />
+          </External>
         </div>
-      </nav>
-    </>
+      )}
+    </header>
   );
 }
 
@@ -646,13 +733,22 @@ function ProfileSidebar({ ghStats }) {
       <a href="/resume" className="gh-side-link">
         <FileCode2 size={17} /> Interactive Resume <ArrowUpRight size={14} />
       </a>
-      <a
-        href={RESUME}
-        download="Utsav_Vachhani_Resume.pdf"
-        className="gh-side-link"
+      <button
+        type="button"
+        onClick={() => downloadFile(RESUME, "Utsav_Vachhani_Resume.pdf")}
+        className="gh-side-link gh-side-download-btn"
+        title="Download PDF Resume"
       >
-        <Download size={17} /> Download PDF Resume <ArrowUpRight size={14} />
-      </a>
+        <Download size={16} /> Download PDF Resume <ArrowUpRight size={13} />
+      </button>
+      <button
+        type="button"
+        onClick={() => downloadFile(HTML_RESUME, "Utsav_Vachhani_Resume.html")}
+        className="gh-side-link gh-side-download-btn"
+        title="Download HTML Resume"
+      >
+        <FileCode2 size={16} /> Download HTML Resume <ArrowUpRight size={13} />
+      </button>
     </aside>
   );
 }
@@ -704,11 +800,19 @@ function OverviewReadme() {
             products people enjoy using.
           </p>
           <div className="gh-hero-actions">
-            <a className="gh-button gh-button-blue" href="#contact">
-              <Mail size={16} /> Let’s connect <ArrowRight size={15} />
-            </a>
+            <button
+              type="button"
+              className="gh-button gh-button-blue"
+              onClick={() => downloadFile(RESUME, "Utsav_Vachhani_Resume.pdf")}
+              title="Download PDF Resume"
+            >
+              <Download size={15} /> Download Resume
+            </button>
             <a className="gh-button gh-button-muted" href="#projects">
-              <FolderGit2 size={16} /> Explore my work
+              <FolderGit2 size={15} /> Explore work
+            </a>
+            <a className="gh-button gh-button-muted" href="#contact">
+              <Mail size={15} /> Let’s connect
             </a>
           </div>
         </div>
@@ -1542,7 +1646,6 @@ export default function GitHubPortfolio() {
         <ProfileSidebar ghStats={ghStats} />
         <main className="gh-main" id="main">
           <OverviewReadme />
-          <Socials />
           <Skills />
           <PinnedProjects onOpen={open} />
           <Stats ghStats={ghStats} />

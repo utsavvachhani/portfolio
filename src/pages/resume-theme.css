@@ -48,12 +48,59 @@
    color: #10131e;
    background: #c6f477;
    border-color: #c6f477;
-   min-height: 40px;
+   min-height: 38px;
+   padding: 0 14px;
    border-radius: 4px;
+   cursor: pointer;
+   display: inline-flex;
+   align-items: center;
+   gap: 7px;
+   font-size: 11px;
+   font-weight: 700;
 }
 
 .resume-page .resume-download:hover {
    background: #d9ff9a;
+}
+
+.resume-page .resume-download-html {
+   color: #e5edf5;
+   border: 1px solid #4a5568;
+   background: #1c2333;
+   min-height: 38px;
+   padding: 0 13px;
+   border-radius: 4px;
+   cursor: pointer;
+   display: inline-flex;
+   align-items: center;
+   gap: 7px;
+   font-size: 11px;
+   font-weight: 600;
+   transition: background .2s, border-color .2s;
+}
+
+.resume-page .resume-download-html:hover {
+   background: #28334a;
+   border-color: #718096;
+   color: #fff;
+}
+
+.resume-page .resume-bottom-link-btn {
+   background: none;
+   border: none;
+   padding: 0;
+   font: inherit;
+   color: #45652f;
+   cursor: pointer;
+   display: inline-flex;
+   align-items: center;
+   gap: 6px;
+   text-decoration: underline;
+   font-weight: 600;
+}
+
+.resume-page .resume-bottom-link-btn:hover {
+   color: #274015;
 }
 
 .resume-preview-wrap {
