@@ -14,8 +14,7 @@ export const PERSONAL_INFO = {
   email: "vachhaniutsav2@gmail.com",
   phone: "9512655868",
   location: "Surat, Gujarat, India",
-  cvLink:
-    "https://drive.google.com/file/d/1zGjqP97eWmsi4EpYrL9FZXMl4KveP65P/view?usp=drive_link",
+  cvLink: "/resume/utsav-vachhani-resume.pdf",
   github: "https://github.com/utsavvachhani",
   linkedin: "https://www.linkedin.com/in/vachhani-utsav-21ut75/",
   bioGreeting: "Hi, I'm Utsav Vachhani 👋",
@@ -29,7 +28,7 @@ export const PERSONAL_INFO = {
 
 export const STATS = [
   { value: "9+", label: "Finished Projects" },
-  { value: "2", label: "Completed Internships" },
+  { value: "2+", label: "Completed Internships" },
   { value: "MERN", label: "Core Stack Specialization" },
   { value: "SCET", label: "IT Undergraduate @ Surat" },
 ];

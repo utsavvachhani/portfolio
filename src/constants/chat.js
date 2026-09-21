@@ -45,7 +45,7 @@ export const getBotResponse = (userText) => {
     lower.includes("intern")
   ) {
     botText =
-      "👤 Utsav Vachhani is a Full-Stack Developer and B.Tech Information Technology student at SCET, Surat (2022–2026). He worked as a Web Development Intern at Cybersecurity Umbrella from January to April 2026, building Next.js dashboards, Node.js/Express services, API integrations, and PostgreSQL functionality.";
+      "👤 Utsav Vachhani is a Full-Stack Developer and B.Tech Information Technology student at SCET, Surat (2022–2026). He worked as a Full Stack Developer Intern at Cirkle Studio Pvt. Ltd. (April–September 2026) focusing on React, Next.js, Node.js, Express.js, and REST APIs, and previously as a Web Development Intern at Cybersecurity Umbrella (January–April 2026).";
     followUpOptions = [
       { id: "projects", label: "💻 View Projects" },
       { id: "skills", label: "🛠️ Technical Skills" },
