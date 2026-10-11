@@ -15,7 +15,7 @@ export const PORTFOLIO_PROJECTS = [
 ];
 export const FEATURE_IDS = [
   "converse2k25",
-  "cybershield",
+  "cyberls",
   "memories",
   "cyberls",
 ];
@@ -34,10 +34,19 @@ export const PROJECT_FEATURES = {
     "User reporting and PDF downloads",
     "Email certificates",
   ],
+  cyberls: [
+    "Google Workspace backup and restore",
+    "AWS S3 cloud data management",
+    "Google OAuth & reCAPTCHA secure login",
+    "Multi-tenant access control for organizations",
+    "Interactive analytics charts using Recharts",
+  ],
   whatsappweb: [
-    "Headless WhatsApp automation client",
-    "Webhook server",
-    "WebSocket connectivity",
+    "Headless WhatsApp automation client (whatsapp-web.js & Puppeteer)",
+    "Real-time QR code session pairing with Socket.io",
+    "PDF and document parsing (pdf-parse / pdfjs-dist)",
+    "PostgreSQL persistence with secure JWT & cookie auth",
+    "Responsive Vite, Tailwind & Redux frontend dashboard",
   ],
   taskmanager: ["Daily workflow tracking", "Task priorities", "Status updates"],
   converse2k24: [
@@ -60,9 +69,10 @@ export const PROJECT_FEATURES = {
     "Mobile-friendly and responsive layouts",
   ],
   memories: [
-    "Create memories with images and tags",
-    "View shared posts",
-    "Edit and delete own entries",
+    "Create and share memories with rich images & tags",
+    "Secure JWT & Google OAuth authentication",
+    "Interactive like system and tag-based filtering",
+    "Full CRUD management for personal journal entries",
   ],
   'react-js-study': [
     "Custom React hooks",
@@ -168,4 +178,35 @@ export function getProjectNeighbors(id, projects = PORTFOLIO_PROJECTS) {
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
   return { prev, next, index, total: projects.length };
+}
+
+export function groupTechStack(techStack = []) {
+  if (!Array.isArray(techStack)) return { frontend: [], backend: [] };
+
+  const FRONTEND_REGEX =
+    /\b(?:react(?:\.js)?|next(?:\.js)?|vite(?:\.js)?|vue|svelte|html5?|css3?|tailwind(?:\s*css)?|bootstrap|redux(?:\s*toolkit)?|react\s*router(?:\s*dom)?|framer-motion|recharts|lucide-react|javascript|dom(?:\s*api)?|responsive\s*design|custom\s*hooks|context\s*api|es6\+?|ui)\b/i;
+
+  const BACKEND_REGEX =
+    /\b(?:node(?:\.js)?|express(?:\.js)?|mongodb|postgresql|postgres|mysql|sql|firebase(?:\s*auth)?|google\s*sheets\s*api|socket\.io|jwt|bcryptjs|restful\s*api|rest\s*api|whatsapp-web\.js|puppeteer|qrcode|pdf\s*parse|pdfjs-dist|aws\s*s3|google\s*oauth|recaptcha|stripe|nodemailer|axios|php|c\b|pointers|dynamic\s*memory\s*management|cookie-parser|cors|dotenv)\b/i;
+
+  const frontend = [];
+  const backend = [];
+
+  techStack.forEach((tech) => {
+    const trimmed = String(tech).trim();
+    if (FRONTEND_REGEX.test(trimmed) && !BACKEND_REGEX.test(trimmed)) {
+      frontend.push(trimmed);
+    } else if (BACKEND_REGEX.test(trimmed) && !FRONTEND_REGEX.test(trimmed)) {
+      backend.push(trimmed);
+    } else if (/mern/i.test(trimmed)) {
+      frontend.push("React (MERN)");
+      backend.push("Node / MongoDB (MERN)");
+    } else if (FRONTEND_REGEX.test(trimmed)) {
+      frontend.push(trimmed);
+    } else {
+      backend.push(trimmed);
+    }
+  });
+
+  return { frontend, backend };
 }

@@ -281,6 +281,13 @@
   background: #f6f8fa;
 }
 
+.gh-page[data-theme="light"] .gh-pinned-card:hover>p,
+.gh-page[data-theme="light"] .gh-pinned-card:hover .gh-pinned-desc,
+.gh-page[data-theme="light"] .gh-repo:hover .gh-repo-main>p,
+.gh-page[data-theme="light"] .gh-repo:hover .gh-repo-desc {
+  color: #1f2328;
+}
+
 .gh-page[data-theme="light"] .gh-readme-file,
 .gh-page[data-theme="light"] .gh-readme-file strong,
 .gh-page[data-theme="light"] .gh-intro>p,

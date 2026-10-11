@@ -37,6 +37,7 @@ import {
   getProjectDetails,
   getProjectById,
   categoryOf,
+  groupTechStack,
 } from "../constants/projectDetails.js";
 import PortfolioAssistant from "../components/PortfolioAssistant.jsx";
 import RepositoryViewer from "../components/github/RepositoryViewer.jsx";
@@ -922,7 +923,9 @@ function PinnedProjects({ onOpen }) {
               </div>
               <span className="gh-pin-public">Portfolio</span>
             </div>
-            <p>{project.description}</p>
+            <p className="gh-pinned-desc" title={project.description}>
+              {project.description}
+            </p>
             <div className="gh-pin-footer">
               <span
                 className="gh-tech-dot"
@@ -1150,7 +1153,9 @@ function Repositories({ query, setQuery, onOpen }) {
                   </button>
                   <span className="gh-repo-public">Project</span>
                 </div>
-                <p>{project.description}</p>
+                <p className="gh-repo-desc" title={project.description}>
+                  {project.description}
+                </p>
                 <div className="gh-repo-meta">
                   <span className="gh-repo-category">
                     <span className="gh-tech-dot" aria-hidden="true" />
@@ -1314,7 +1319,11 @@ function ProjectModal({ project, onClose }) {
   const ref = useRef(null);
   const closeButton = useRef(null);
   const details = getProjectDetails(project);
-  const [tab, setTab] = useState("overview");
+  const [tab, setTab] = useState('overview');
+  const techGroups = useMemo(
+    () => groupTechStack(project.techStack),
+    [project.techStack],
+  );
   const index = PROJECTS.findIndex((item) => item.id === project.id);
   const move = (direction) =>
     PROJECTS[(index + direction + PROJECTS.length) % PROJECTS.length];
@@ -1458,78 +1467,113 @@ function ProjectModal({ project, onClose }) {
             ) : tab === "readme" ? (
               <RepositoryViewer project={project} readmeOnly />
             ) : (
-              <div className="gh-modal-overview">
-                {details.images.length > 0 && (
-                  <div className="gh-modal-image">
-                    <img
-                      src={details.images[0].src}
-                      alt={details.images[0].alt}
-                    />
-                  </div>
-                )}
-                <div className="gh-modal-body">
-                  <div>
-                    <h3>Overview</h3>
-                    <p>{details.description}</p>
-                    {details.features.length > 0 && (
-                      <>
-                        <h3>Key features</h3>
-                        <ul>
-                          {details.features.map((feature) => (
-                            <li key={feature}>{feature}</li>
+            <div className="gh-modal-overview">
+              {details.images.length > 0 && (
+                <div className="gh-modal-image">
+                  <img
+                    src={details.images[0].src}
+                    alt={details.images[0].alt}
+                  />
+                </div>
+              )}
+              <div className="gh-modal-body">
+                <div>
+                  <h3>Overview</h3>
+                  <p>{details.description}</p>
+                  {details.features.length > 0 && (
+                    <>
+                      <h3>Key features</h3>
+                      <ul>
+                        {details.features.map((feature) => (
+                          <li key={feature}>{feature}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </div>
+                <aside>
+                  <h3>Tech stack</h3>
+                  <div className="gh-tech-stack-container">
+                    {techGroups.frontend.length > 0 && (
+                      <div className="gh-tech-group">
+                        <div className="gh-tech-group-header">
+                          <span className="gh-tech-dot gh-tech-dot-frontend" />
+                          <span>Frontend</span>
+                        </div>
+                        <div className="gh-modal-tags">
+                          {techGroups.frontend.map((tech) => (
+                            <span key={tech} className="gh-tag-frontend">
+                              {tech}
+                            </span>
                           ))}
-                        </ul>
-                      </>
+                        </div>
+                      </div>
+                    )}
+                    {techGroups.backend.length > 0 && (
+                      <div className="gh-tech-group">
+                        <div className="gh-tech-group-header">
+                          <span className="gh-tech-dot gh-tech-dot-backend" />
+                          <span>Backend &amp; Services</span>
+                        </div>
+                        <div className="gh-modal-tags">
+                          {techGroups.backend.map((tech) => (
+                            <span key={tech} className="gh-tag-backend">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {techGroups.frontend.length === 0 &&
+                      techGroups.backend.length === 0 && (
+                        <div className="gh-modal-tags">
+                          {project.techStack.map((tech) => (
+                            <span key={tech}>{tech}</span>
+                          ))}
+                        </div>
+                      )}
+                  </div>
+                  <h3>Explore</h3>
+                  <div className="gh-modal-links">
+                    {project.repo && (
+                      <button
+                        type="button"
+                        className="gh-button gh-button-blue"
+                        onClick={() => setTab("code")}
+                      >
+                        <Code2 size={15} /> View source code{" "}
+                        <ArrowRight size={14} />
+                      </button>
+                    )}
+                    {project.repo && (
+                      <External
+                        href={project.repo}
+                        className="gh-button gh-button-blue"
+                      >
+                        <Github size={15} /> Source code{" "}
+                        <ArrowUpRight size={14} />
+                      </External>
+                    )}
+                    {project.live && (
+                      <External
+                        href={project.live}
+                        className="gh-button gh-button-muted"
+                      >
+                        <ExternalLink size={15} /> Live demo{" "}
+                        <ArrowUpRight size={14} />
+                      </External>
+                    )}
+                    {!project.repo && !project.live && (
+                      <p>No public source or demo link was supplied.</p>
                     )}
                   </div>
-                  <aside>
-                    <h3>Tech stack</h3>
-                    <div className="gh-modal-tags">
-                      {project.techStack.map((tech) => (
-                        <span key={tech}>{tech}</span>
-                      ))}
-                    </div>
-                    <h3>Explore</h3>
-                    <div className="gh-modal-links">
-                      {project.repo && (
-                        <button
-                          type="button"
-                          className="gh-button gh-button-blue"
-                          onClick={() => setTab("code")}
-                        >
-                          <Code2 size={15} /> View source code{" "}
-                          <ArrowRight size={14} />
-                        </button>
-                      )}
-                      {project.repo && (
-                        <External
-                          href={project.repo}
-                          className="gh-button gh-button-blue"
-                        >
-                          <Github size={15} /> Source code{" "}
-                          <ArrowUpRight size={14} />
-                        </External>
-                      )}
-                      {project.live && (
-                        <External
-                          href={project.live}
-                          className="gh-button gh-button-muted"
-                        >
-                          <ExternalLink size={15} /> Live demo{" "}
-                          <ArrowUpRight size={14} />
-                        </External>
-                      )}
-                      {!project.repo && !project.live && (
-                        <p>No public source or demo link was supplied.</p>
-                      )}
-                    </div>
-                  </aside>
-                </div>
+                </aside>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
-        <footer className="gh-modal-bottom">
+      </div>
+      <footer className="gh-modal-bottom">
           <button type="button" onClick={() => onClose(move(-1).id)}>
             <ArrowLeft size={16} /> Previous project
           </button>

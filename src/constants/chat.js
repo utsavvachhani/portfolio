@@ -28,10 +28,11 @@ export const getBotResponse = (userText) => {
     lower.includes("work") ||
     lower.includes("repo") ||
     lower.includes("converse") ||
-    lower.includes("cybershield")
+    lower.includes("cybershield") ||
+    lower.includes("cyberls")
   ) {
     botText =
-      "🚀 Utsav has built flagship full-stack products:\n• Converse2K25: MERN college fest registration platform\n• Cyber Shield: Email awareness & threat analytics system\n• WhatsApp Automation Tool: Node.js & WebSockets service\n• Finance Dashboard: React & Framer Motion telemetry UI";
+      "🚀 Utsav has built flagship full-stack products:\n• Converse2K25: MERN college fest registration platform\n• CyberLS: India's Google Workspace Backup system\n• Cyber Shield: Email awareness & threat analytics system\n• WhatsApp Automation Tool: Node.js & WebSockets service\n• Finance Dashboard: React & Framer Motion telemetry UI";
     followUpOptions = [
       { id: "skills", label: "🛠️ View Tech Stack" },
       { id: "contact", label: "📬 Contact Utsav" },
