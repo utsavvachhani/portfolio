@@ -949,24 +949,30 @@
 .gh-pinned-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 14px;
+  align-items: start;
 }
 
 .gh-pinned-card {
   border: 1px solid var(--gh-border);
   background: linear-gradient(135deg, #151c24, #121820);
   border-radius: 8px;
-  padding: 16px 17px 13px;
+  padding: 16px 17px 14px;
   min-height: 168px;
   display: flex;
   flex-direction: column;
-  transition: border-color .18s, transform .18s, background .18s;
+  transition: border-color .2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform .2s cubic-bezier(0.16, 1, 0.3, 1),
+              background .2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow .2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
 .gh-pinned-card:hover {
   border-color: #557395;
   transform: translateY(-2px);
   background: #192331;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
 }
 
 .gh-pin-header {
@@ -1049,12 +1055,27 @@
   margin-left: auto;
 }
 
-.gh-pinned-card>p {
-  margin: 13px 0;
+.gh-pinned-card>p,
+.gh-pinned-desc {
+  margin: 12px 0;
   font-size: 12px;
-  line-height: 1.72;
+  line-height: 1.65;
   color: #a4b2c3;
-  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  transition: color 0.2s ease;
+}
+
+.gh-pinned-card:hover>p,
+.gh-pinned-card:hover .gh-pinned-desc {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+  color: #d2dee9;
 }
 
 .gh-pin-footer {
@@ -1064,6 +1085,8 @@
   min-width: 0;
   font-size: 11px;
   color: #91a1b4;
+  margin-top: auto;
+  padding-top: 8px;
 }
 
 .gh-tech-dot {
@@ -1442,12 +1465,28 @@
   text-decoration: underline;
 }
 
-.gh-repo-main>p {
+.gh-repo-main>p,
+.gh-repo-desc {
   color: #9caabb;
   font-size: 12px;
   line-height: 1.7;
-  max-width: 640px;
+  max-width: 680px;
   margin: 8px 0 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  transition: color 0.2s ease;
+}
+
+.gh-repo:hover .gh-repo-main>p,
+.gh-repo:hover .gh-repo-desc {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+  color: #c9d7e6;
 }
 
 .gh-repo-meta {
@@ -1861,6 +1900,47 @@
   margin: 0;
 }
 
+.gh-tech-stack-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gh-tech-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.gh-tech-group-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #9aa8b9;
+}
+
+.gh-tech-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.gh-tech-dot-frontend {
+  background: #58a6ff;
+  box-shadow: 0 0 8px rgba(88, 166, 255, 0.7);
+}
+
+.gh-tech-dot-backend {
+  background: #3fb950;
+  box-shadow: 0 0 8px rgba(63, 185, 80, 0.7);
+}
+
 .gh-modal-tags {
   display: flex;
   gap: 7px;
@@ -1868,12 +1948,71 @@
 }
 
 .gh-modal-tags span {
-  font-size: 10px;
-  padding: 4px 8px;
-  border-radius: 50px;
-  background: #1d3150;
-  color: #a8d2ff;
-  border: 1px solid #305179;
+  font-size: 11.5px;
+  font-weight: 550;
+  line-height: 1.4;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+/* Frontend Badge Styling - Vibrant Cyan / Blue */
+.gh-modal-tags span.gh-tag-frontend {
+  background: rgba(56, 139, 253, 0.15);
+  color: #79c0ff;
+  border: 1px solid rgba(88, 166, 255, 0.4);
+}
+
+.gh-modal-tags span.gh-tag-frontend:hover {
+  background: rgba(56, 139, 253, 0.28);
+  border-color: #58a6ff;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Backend Badge Styling - Vibrant Emerald / Green */
+.gh-modal-tags span.gh-tag-backend {
+  background: rgba(46, 160, 67, 0.15);
+  color: #7ee787;
+  border: 1px solid rgba(63, 185, 80, 0.4);
+}
+
+.gh-modal-tags span.gh-tag-backend:hover {
+  background: rgba(46, 160, 67, 0.28);
+  border-color: #3fb950;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Default / Neutral Badge fallback */
+.gh-modal-tags span:not(.gh-tag-frontend):not(.gh-tag-backend) {
+  background: #1f2733;
+  color: #d1dce7;
+  border: 1px solid #364253;
+}
+
+/* Light Theme High-Contrast Support */
+[data-theme="light"] .gh-tech-group-header {
+  color: #57606a;
+}
+
+[data-theme="light"] .gh-modal-tags span.gh-tag-frontend {
+  background: #ddf4ff;
+  color: #0969da;
+  border: 1px solid #54aeff;
+}
+
+[data-theme="light"] .gh-modal-tags span.gh-tag-backend {
+  background: #dafbe1;
+  color: #1a7f37;
+  border: 1px solid #4ac26b;
+}
+
+[data-theme="light"] .gh-modal-tags span:not(.gh-tag-frontend):not(.gh-tag-backend) {
+  background: #f6f8fa;
+  color: #24292f;
+  border: 1px solid #d0d7de;
 }
 
 .gh-modal-links {

@@ -18,20 +18,20 @@ export function extractProjects() {
   while ((match = regex.exec(code)) !== null) {
     const block = match[0];
     const id = match[1];
-    const titleMatch = block.match(/title:\s*['"]([^'"]+)['"]/);
-    const repoMatch = block.match(/repo:\s*['"]([^'"]+)['"]/);
-    const liveMatch = block.match(/live:\s*['"]([^'"]+)['"]/);
-    const descMatch = block.match(/description:\s*['"]([^'"]+)['"]/);
+    const titleMatch = block.match(/title:\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/);
+    const repoMatch = block.match(/repo:\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/);
+    const liveMatch = block.match(/live:\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/);
+    const descMatch = block.match(/description:\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/);
     const stackMatches = [...match[2].matchAll(/['"]([^'"]+)['"]/g)].map(
       (m) => m[1],
     );
 
     projectBlocks.push({
       id,
-      title: titleMatch ? titleMatch[1] : id,
-      repo: repoMatch ? repoMatch[1] : "",
-      live: liveMatch ? liveMatch[1] : "",
-      description: descMatch ? descMatch[1] : "",
+      title: titleMatch ? (titleMatch[1] ?? titleMatch[2]) : id,
+      repo: repoMatch ? (repoMatch[1] ?? repoMatch[2]) : "",
+      live: liveMatch ? (liveMatch[1] ?? liveMatch[2]) : "",
+      description: descMatch ? (descMatch[1] ?? descMatch[2]) : "",
       techStack: stackMatches,
     });
   }
@@ -45,22 +45,22 @@ export function extractProjects() {
       );
       if (uvmartMatch) {
         const block = uvmartMatch[0];
-        const titleMatch = block.match(/title:\s*['"]([^'"]+)['"]/);
-        const repoMatch = block.match(/repo:\s*['"]([^'"]+)['"]/);
-        const liveMatch = block.match(/live:\s*['"]([^'"]+)['"]/);
-        const descMatch = block.match(/description:\s*['"]([^'"]+)['"]/);
+        const titleMatch = block.match(/title:\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/);
+        const repoMatch = block.match(/repo:\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/);
+        const liveMatch = block.match(/live:\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/);
+        const descMatch = block.match(/description:\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/);
         const stackMatches = [
           ...uvmartMatch[1].matchAll(/['"]([^'"]+)['"]/g),
         ].map((m) => m[1]);
         projectBlocks.push({
           id: "uvmart",
-          title: titleMatch ? titleMatch[1] : "uvMart",
+          title: titleMatch ? (titleMatch[1] ?? titleMatch[2]) : "uvMart",
           repo: repoMatch
-            ? repoMatch[1]
+            ? (repoMatch[1] ?? repoMatch[2])
             : "https://github.com/utsavvachhani/uvMart",
-          live: liveMatch ? liveMatch[1] : "",
+          live: liveMatch ? (liveMatch[1] ?? liveMatch[2]) : "",
           description: descMatch
-            ? descMatch[1]
+            ? (descMatch[1] ?? descMatch[2])
             : "E-commerce platform with basic product management and email notification features.",
           techStack: stackMatches.length
             ? stackMatches

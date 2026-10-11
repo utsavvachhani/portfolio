@@ -37,6 +37,7 @@ import {
   getProjectDetails,
   getProjectById,
   categoryOf,
+  groupTechStack,
 } from "../constants/projectDetails.js";
 import PortfolioAssistant from "../components/PortfolioAssistant.jsx";
 import RepositoryViewer from "../components/github/RepositoryViewer.jsx";
@@ -813,7 +814,9 @@ function PinnedProjects({ onOpen }) {
               </div>
               <span className="gh-pin-public">Portfolio</span>
             </div>
-            <p>{project.description}</p>
+            <p className="gh-pinned-desc" title={project.description}>
+              {project.description}
+            </p>
             <div className="gh-pin-footer">
               <span
                 className="gh-tech-dot"
@@ -1040,7 +1043,9 @@ function Repositories({ query, setQuery, onOpen }) {
                   </button>
                   <span className="gh-repo-public">Project</span>
                 </div>
-                <p>{project.description}</p>
+                <p className="gh-repo-desc" title={project.description}>
+                  {project.description}
+                </p>
                 <div className="gh-repo-meta">
                   <span className="gh-repo-category">
                     <span className="gh-tech-dot" aria-hidden="true" />
@@ -1205,6 +1210,10 @@ function ProjectModal({ project, onClose }) {
   const closeButton = useRef(null);
   const details = getProjectDetails(project);
   const [tab, setTab] = useState('overview');
+  const techGroups = useMemo(
+    () => groupTechStack(project.techStack),
+    [project.techStack],
+  );
   const index = PROJECTS.findIndex((item) => item.id === project.id);
   const move = (direction) =>
     PROJECTS[(index + direction + PROJECTS.length) % PROJECTS.length];
@@ -1374,10 +1383,45 @@ function ProjectModal({ project, onClose }) {
                 </div>
                 <aside>
                   <h3>Tech stack</h3>
-                  <div className="gh-modal-tags">
-                    {project.techStack.map((tech) => (
-                      <span key={tech}>{tech}</span>
-                    ))}
+                  <div className="gh-tech-stack-container">
+                    {techGroups.frontend.length > 0 && (
+                      <div className="gh-tech-group">
+                        <div className="gh-tech-group-header">
+                          <span className="gh-tech-dot gh-tech-dot-frontend" />
+                          <span>Frontend</span>
+                        </div>
+                        <div className="gh-modal-tags">
+                          {techGroups.frontend.map((tech) => (
+                            <span key={tech} className="gh-tag-frontend">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {techGroups.backend.length > 0 && (
+                      <div className="gh-tech-group">
+                        <div className="gh-tech-group-header">
+                          <span className="gh-tech-dot gh-tech-dot-backend" />
+                          <span>Backend &amp; Services</span>
+                        </div>
+                        <div className="gh-modal-tags">
+                          {techGroups.backend.map((tech) => (
+                            <span key={tech} className="gh-tag-backend">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {techGroups.frontend.length === 0 &&
+                      techGroups.backend.length === 0 && (
+                        <div className="gh-modal-tags">
+                          {project.techStack.map((tech) => (
+                            <span key={tech}>{tech}</span>
+                          ))}
+                        </div>
+                      )}
                   </div>
                   <h3>Explore</h3>
                   <div className="gh-modal-links">
