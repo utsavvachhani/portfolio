@@ -1,5 +1,11 @@
 export const MILESTONES = [
   {
+    title: "Internship at Cirkle Studio Pvt. Ltd.",
+    year: "April - September 2026",
+    description:
+      "Worked as a Full Stack Developer Intern at Cirkle Studio Pvt. Ltd., gaining hands-on experience in designing, developing, and maintaining modern web applications. Utilized React.js, Next.js, Node.js, and Express.js to build responsive user interfaces, develop RESTful APIs, and integrate frontend and backend systems. Strengthened my problem-solving abilities, debugging skills, and understanding of real-world software development workflows.",
+  },
+  {
     title: "Internship at CyberSecurity Umbrella",
     year: "January - April 2026",
     description:

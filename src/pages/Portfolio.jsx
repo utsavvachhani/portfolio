@@ -54,6 +54,29 @@ const SOCIALS = SOCIAL_LINKS.filter((item) => item.label !== "View CV");
 const ALL_PROJECTS = PORTFOLIO_PROJECTS;
 const FILTERS = ["All", "Full stack", "Frontend", "Tools"];
 
+const downloadFile = async (url, filename) => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Network response was not ok");
+    const blob = await response.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = blobUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(blobUrl);
+  } catch {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+};
+
 function SocialIcon({ name, size = 16 }) {
   const Icon = SOCIAL_ICONS[name];
   return Icon ? (
@@ -156,8 +179,9 @@ function Header({ active }) {
     return () => window.removeEventListener("keydown", close);
   }, [menuOpen]);
   return (
-    <header className="site-header">
-      <div className="header-inner shell">
+    <header className="site-header site-header-2tier">
+      {/* Tier 1: Name displayed first */}
+      <div className="header-top-tier shell">
         <a
           className="brand"
           href="#home"
@@ -168,39 +192,27 @@ function Header({ active }) {
             u<span>.</span>
           </span>
           <span className="brand-name">
-            utsav<span className="accent-dot">.</span>
+            {PERSONAL_INFO.name}<span className="accent-dot">.</span>
           </span>
+          <span className="brand-role-chip">{PERSONAL_INFO.role}</span>
         </a>
-        <nav className="desktop-nav" aria-label="Main navigation">
-          {NAV.map(([id, title]) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              className={active === id ? "nav-active" : ""}
-              aria-current={active === id ? "location" : undefined}
-            >
-              {title}
-            </a>
-          ))}
-        </nav>
-        <div className="header-right">
-          <div className="header-socials" aria-label="Social links">
-            {SOCIALS.map((s) => (
-              <a
-                key={s.label}
-                className={`social-icon ${s.label === "GitHub" || s.label === "LinkedIn" ? "social-priority" : ""}`}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                title={s.label}
-              >
-                <SocialIcon name={s.label} />
-              </a>
-            ))}
-          </div>
-          <a className="header-resume" href="/resume">
-            Resume <ArrowUpRight size={14} />
+
+        <div className="header-top-actions">
+          <button
+            type="button"
+            className="creative-download-btn"
+            onClick={() =>
+              downloadFile(
+                "/resume/utsav-vachhani-resume.pdf",
+                "Utsav_Vachhani_Resume.pdf",
+              )
+            }
+            title="Download PDF Resume"
+          >
+            <Download size={14} /> Download Resume
+          </button>
+          <a className="creative-gh-link" href="/" title="Switch to GitHub Edition">
+            GitHub View <ArrowUpRight size={13} />
           </a>
           <button
             className="menu-toggle"
@@ -209,10 +221,51 @@ function Header({ active }) {
             aria-controls="mobile-nav"
             onClick={() => setMenuOpen((old) => !old)}
           >
-            {menuOpen ? <X size={23} /> : <Menu size={23} />}
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
+
+      {/* Tier 2: All navigation AND social links arranged in a single horizontal row below it */}
+      <div className="header-bottom-tier">
+        <div className="header-bottom-inner shell">
+          <nav className="desktop-nav-strip" aria-label="Main navigation">
+            {NAV.map(([id, title]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className={active === id ? "nav-active" : ""}
+                aria-current={active === id ? "location" : undefined}
+              >
+                {title}
+              </a>
+            ))}
+            <a href="/resume" className="nav-resume-item">
+              Resume <ArrowUpRight size={13} />
+            </a>
+          </nav>
+
+          <span className="creative-nav-divider" aria-hidden="true" />
+
+          <div className="creative-socials-strip" aria-label="Social links">
+            {SOCIALS.map((s) => (
+              <a
+                key={s.label}
+                className="creative-social-link"
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                title={s.label}
+              >
+                <SocialIcon name={s.label} size={14} />
+                <span>{s.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {menuOpen && (
         <nav
           id="mobile-nav"
@@ -228,6 +281,19 @@ function Header({ active }) {
           <a href="/resume" onClick={() => setMenuOpen(false)}>
             View Resume <ArrowUpRight size={18} />
           </a>
+          <button
+            type="button"
+            className="mobile-download-btn"
+            onClick={() => {
+              downloadFile(
+                "/resume/utsav-vachhani-resume.pdf",
+                "Utsav_Vachhani_Resume.pdf",
+              );
+              setMenuOpen(false);
+            }}
+          >
+            <Download size={16} /> Download Resume
+          </button>
           <div className="mobile-socials">
             {SOCIALS.map((s) => (
               <a
@@ -308,13 +374,19 @@ function Hero() {
             <MagneticLink href="#contact" className="button button-ghost">
               Let's connect <ArrowUpRight size={18} />
             </MagneticLink>
-            <a
-              href="/resume/utsav-vachhani-resume.pdf"
-              download="Utsav_Vachhani_Resume.pdf"
+            <button
+              type="button"
+              onClick={() =>
+                downloadFile(
+                  "/resume/utsav-vachhani-resume.pdf",
+                  "Utsav_Vachhani_Resume.pdf",
+                )
+              }
               className="button button-resume"
+              style={{ cursor: "pointer" }}
             >
               <Download size={16} /> Download Resume
-            </a>
+            </button>
           </div>
           <div className="hero-bottom">
             <a href="#about" className="scroll-cue">

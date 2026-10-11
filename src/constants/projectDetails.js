@@ -17,7 +17,7 @@ export const FEATURE_IDS = [
   "converse2k25",
   "cyberls",
   "memories",
-  "finance-dashboard",
+  "cyberls",
 ];
 
 // Only capabilities described by the supplied portfolio and PDF.
@@ -58,6 +58,15 @@ export const PROJECT_FEATURES = {
     "Responsive financial charts",
     "KPI widgets",
     "Interface micro-animations",
+  ],
+  cyberls: [
+    "Responsive frontend development using Next.js",
+    "Modern UI design with Tailwind CSS",
+    "Backend API integration",
+    "AWS S3 bucket data fetching",
+    "Interactive charts and data visualization using Recharts",
+    "Reusable React components",
+    "Mobile-friendly and responsive layouts",
   ],
   memories: [
     "Create and share memories with rich images & tags",
@@ -112,12 +121,12 @@ export function getProjectDetails(project) {
       ? project.images.filter((image) => image && image.src)
       : project.image
         ? [
-            {
-              src: project.image,
-              alt: `${project.title} — supplied portfolio visual`,
-              caption: "Project visual",
-            },
-          ]
+          {
+            src: project.image,
+            alt: `${project.title} — supplied portfolio visual`,
+            caption: "Project visual",
+          },
+        ]
         : [];
   const challenges = (project.challenges || []).filter(
     (item) => item.challenge?.trim() && item.solution?.trim(),
