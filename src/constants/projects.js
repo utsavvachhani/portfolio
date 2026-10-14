@@ -46,7 +46,7 @@ export const PROJECTS = [
     live: "https://cyberls.com/",
     description:
       "Developed a responsive web application using Next.js and Tailwind CSS. Integrated and tested backend APIs, managed AWS S3 data, and implemented interactive charts using Recharts. Integrated Google OAuth login and reCAPTCHA for secure authentication, managed authentication tokens, and implemented multi-tenant access control to support secure user and organization management. Focused on reusable components, API performance, responsive design, and a seamless user experience.",
-    image: cyberShield,
+    image: Cyberls,
     techStack: [
       "Next.js",
       "Tailwind CSS",
@@ -120,22 +120,6 @@ export const PROJECTS = [
       "MongoDB",
       "JWT",
       "RESTful API",
-    ],
-  },
-  {
-    id: "cyberls",
-    title: "CyberLS - Cybersecurity Platform",
-    live: "https://cyberls.com/",
-    description:
-      "Developed a responsive frontend using Next.js and Tailwind CSS. Integrated backend APIs, fetched and displayed data from AWS S3 buckets, and implemented interactive data visualizations using Recharts. Focused on reusable components, responsive layouts, and seamless user experience across devices.",
-    image: Cyberls,
-    techStack: [
-      "Next.js",
-      "React.js",
-      "Tailwind CSS",
-      "REST APIs",
-      "AWS S3",
-      "Recharts"
     ],
   },
   {

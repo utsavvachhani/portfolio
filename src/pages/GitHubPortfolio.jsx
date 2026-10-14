@@ -157,13 +157,10 @@ function useGitHubProfile() {
   const [stats, setStats] = useState(null);
   useEffect(() => {
     const controller = new AbortController();
-    fetch(
-      `https://api.github.com/users/${encodeURIComponent("utsavvachhani")}`,
-      {
-        headers: { Accept: "application/vnd.github+json" },
-        signal: controller.signal,
-      },
-    )
+    fetch(`https://api.github.com/users/${encodeURIComponent("utsavvachhani")}`, {
+      headers: { Accept: "application/vnd.github+json" },
+      signal: controller.signal,
+    })
       .then((response) => {
         if (!response.ok) throw new Error("GitHub unavailable");
         return response.json();
@@ -1463,7 +1460,7 @@ function ProjectModal({ project, onClose }) {
             aria-labelledby={`gh-project-tab-${tab}`}
           >
             {tab === "code" ? (
-              <RepositoryViewer project={project} />
+              <RepositoryViewer project={project}/>
             ) : tab === "readme" ? (
               <RepositoryViewer project={project} readmeOnly />
             ) : (
